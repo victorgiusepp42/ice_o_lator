@@ -424,6 +424,266 @@
     @media (max-width: 1020px) { .ft-grid { grid-template-columns: 1fr 1fr; } .cat-grid { grid-template-columns: repeat(3, 1fr); } }
     @media (max-width: 900px) { nav.desk { display: none; } .hdr-search { max-width: 200px; } .hbg { display: flex; } .sobre-grid { grid-template-columns: 1fr; gap: 44px; } .arte-layout { grid-template-columns: 1fr; gap: 42px; } .ev-layout { grid-template-columns: 1fr; } .ct-layout { grid-template-columns: 1fr; } }
     @media (max-width: 640px) { :root { --ah: 32px; } section { padding: 60px 0; } h1.htitle { font-size: clamp(2.9rem, 13vw, 5rem); } .hero-acts { flex-direction: column; } .hero-acts .btn { justify-content: center; } .cat-grid { grid-template-columns: repeat(2, 1fr); } .ft-grid { grid-template-columns: 1fr; } .ft-bottom { flex-direction: column; text-align: center; } .nl-form { flex-direction: column; } .hdr-search { display: none; } #fw .wa-lbl { display: none; } #fw { padding: 13px; border-radius: 50%; max-width: unset; } }
+
+    /* ═══ CARRINHO ══════════════════════════════════════════ */
+
+    /* Badge no header */
+    .cart-btn {
+      position: relative;
+      display: flex; align-items: center; gap: 7px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 9px; padding: 7px 14px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .88rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: var(--text);
+      cursor: pointer; transition: border-color .2s, background .2s;
+      flex-shrink: 0;
+    }
+    .cart-btn:hover { border-color: var(--ice); color: var(--ice-l); background: rgba(0,180,216,.07); }
+    .cart-btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .cart-badge {
+      position: absolute; top: -6px; right: -6px;
+      min-width: 18px; height: 18px; padding: 0 4px;
+      border-radius: 100px;
+      background: var(--ice); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: .72rem;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: scale(.6);
+      transition: opacity .25s, transform .25s cubic-bezier(.34,1.56,.64,1);
+    }
+    .cart-badge.show { opacity: 1; transform: scale(1); }
+
+    /* Overlay */
+    #cart-overlay {
+      position: fixed; inset: 0; z-index: 900;
+      background: rgba(0,0,0,.6);
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    #cart-overlay.open { opacity: 1; pointer-events: auto; }
+
+    /* Drawer */
+    #cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0;
+      z-index: 901; width: 100%; max-width: 420px;
+      background: var(--bg-2, #0d0d0d);
+      border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.4,0,.2,1);
+    }
+    #cart-drawer.open { transform: none; }
+
+    .cart-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 22px; border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cart-header h2 {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem;
+      letter-spacing: .05em; color: #fff; line-height: 1;
+    }
+    .cart-close {
+      width: 36px; height: 36px; border-radius: 8px;
+      background: var(--surface); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background .2s, border-color .2s;
+    }
+    .cart-close:hover { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); }
+    .cart-close svg { width: 16px; height: 16px; color: var(--text-2); }
+    .cart-close:hover svg { color: #fca5a5; }
+
+    /* Items list */
+    #cart-items {
+      flex: 1; overflow-y: auto; padding: 16px 22px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    #cart-items::-webkit-scrollbar { width: 4px; }
+    #cart-items::-webkit-scrollbar-track { background: transparent; }
+    #cart-items::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .cart-empty {
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 14px;
+      text-align: center; padding: 40px 20px;
+    }
+    .cart-empty svg { width: 48px; height: 48px; color: var(--text-m, #555); opacity: .5; }
+    .cart-empty p { font-family: 'Lora', serif; font-size: .9rem; color: var(--text-2); }
+
+    .cart-item {
+      display: flex; gap: 12px; align-items: flex-start;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 12px;
+      animation: ci-in .25s cubic-bezier(.34,1.56,.64,1);
+    }
+    @keyframes ci-in { from { opacity:0; transform: translateX(16px); } to { opacity:1; transform: none; } }
+    .ci-img {
+      width: 56px; height: 56px; border-radius: 8px;
+      background: var(--surface-2, #1f1f1f);
+      flex-shrink: 0; overflow: hidden;
+    }
+    .ci-img img { width: 100%; height: 100%; object-fit: cover; }
+    .ci-body { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+    .ci-name {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .88rem;
+      font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #fff;
+      line-height: 1.2;
+    }
+    .ci-price {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.1rem;
+      color: var(--ice-l, #90e0ef); letter-spacing: .03em;
+    }
+    .ci-qty {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ci-qty-btn {
+      width: 24px; height: 24px; border-radius: 6px;
+      background: var(--surface-2, #1f1f1f); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; font-family: 'Bebas Neue', sans-serif;
+      font-size: .9rem; color: var(--text-2); line-height: 1;
+      transition: background .2s, border-color .2s, color .2s;
+    }
+    .ci-qty-btn:hover { background: var(--ice); border-color: var(--ice); color: #fff; }
+    .ci-qty-num {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .88rem;
+      font-weight: 700; color: #fff; min-width: 16px; text-align: center;
+    }
+    .ci-remove {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .65rem;
+      font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-m); cursor: pointer; background: none; border: none;
+      transition: color .2s;
+    }
+    .ci-remove:hover { color: #fca5a5; }
+
+    /* Footer do drawer */
+    .cart-footer {
+      padding: 18px 22px; border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 14px; flex-shrink: 0;
+    }
+    .cart-subtotal {
+      display: flex; justify-content: space-between; align-items: baseline;
+    }
+    .cart-subtotal span:first-child {
+      font-family: 'Barlow Condensed', sans-serif; font-size: .78rem;
+      font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-2);
+    }
+    .cart-subtotal .cart-total-val {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem;
+      color: var(--ice-l, #90e0ef); letter-spacing: .03em; line-height: 1;
+    }
+    .cart-pix-note {
+      display: flex; align-items: center; gap: 7px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .72rem;
+      font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+      color: #39ff14;
+    }
+    .cart-pix-note svg { width: 12px; height: 12px; }
+    .btn-checkout {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 15px; border-radius: 10px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; color: #fff; cursor: pointer; border: none;
+      background: linear-gradient(135deg, var(--ice), var(--ice-d, #0077b6));
+      box-shadow: 0 4px 20px rgba(0,180,216,.3);
+      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
+    }
+    .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,180,216,.5); }
+    .btn-checkout svg { width: 18px; height: 18px; }
+    .btn-checkout:disabled {
+      opacity: .45; cursor: not-allowed; transform: none !important;
+    }
+    .cart-wa-alt {
+      text-align: center; font-size: .74rem; color: var(--text-m);
+      font-family: 'Lora', serif;
+    }
+    .cart-wa-alt a { color: #25d366; }
+    .cart-wa-alt a:hover { text-decoration: underline; }
+
+    /* Add-to-cart button variant */
+    .btn-add-cart {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 10px 14px; border-radius: 8px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; cursor: pointer; border: none;
+      background: rgba(0,180,216,.1); border: 1px solid rgba(0,180,216,.25);
+      color: var(--ice-l, #90e0ef);
+      transition: background .2s, border-color .2s, transform .2s;
+    }
+    .btn-add-cart:hover { background: var(--ice); border-color: var(--ice); color: #fff; transform: translateY(-1px); }
+    .btn-add-cart:active { transform: scale(.97); }
+    .btn-add-cart svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .btn-add-cart.added { background: rgba(57,255,20,.12); border-color: rgba(57,255,20,.3); color: #39ff14; }
+
+    /* Checkout page "em construção" */
+    #checkout-page {
+      display: none;
+      position: fixed; inset: 0; z-index: 950;
+      background: var(--bg, #080808);
+      flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 32px;
+    }
+    #checkout-page.open { display: flex; }
+    .ck-back {
+      position: absolute; top: 24px; left: 24px;
+      display: flex; align-items: center; gap: 7px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .88rem;
+      font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-2); cursor: pointer; background: none; border: none;
+      transition: color .2s;
+    }
+    .ck-back:hover { color: var(--ice-l); }
+    .ck-back svg { width: 15px; height: 15px; }
+    .ck-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: linear-gradient(135deg, rgba(0,180,216,.2), rgba(0,119,182,.1));
+      border: 1px solid rgba(0,180,216,.25);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+    }
+    .ck-icon svg { width: 32px; height: 32px; color: var(--ice-l, #90e0ef); }
+    #checkout-page h2 {
+      font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem,5vw,3.2rem);
+      letter-spacing: .03em; color: #fff; margin-bottom: 12px;
+    }
+    #checkout-page h2 span { color: var(--ice-l, #90e0ef); }
+    #checkout-page p {
+      font-family: 'Lora', serif; font-size: .97rem;
+      color: var(--text-2); max-width: 420px; line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .ck-summary {
+      background: var(--surface, #181818); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 24px; max-width: 380px; width: 100%;
+      margin-bottom: 24px;
+    }
+    .ck-summary-row {
+      display: flex; justify-content: space-between; align-items: center;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .82rem;
+      font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+      color: var(--text-2); padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .ck-summary-row:last-child { border-bottom: none; }
+    .ck-summary-row.total { color: #fff; font-size: 1rem; }
+    .ck-summary-row.total span:last-child {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem;
+      color: var(--ice-l); letter-spacing: .03em;
+    }
+    .ck-wip {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(244,185,66,.1); border: 1px solid rgba(244,185,66,.25);
+      border-radius: 100px; padding: 7px 18px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .78rem;
+      font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+      color: #f4b942; margin-bottom: 20px;
+    }
+    .ck-wip-dot { width: 6px; height: 6px; border-radius: 50%; background: #f4b942; animation: blink 1.6s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
   </style>
 </head>
 <body>
@@ -488,6 +748,12 @@
         <a href="#faq"           class="nl">FAQ</a>
         <a href="#contato"       class="nl cta">Contato</a>
       </nav>
+
+      <button class="cart-btn" id="cart-toggle-btn" aria-label="Abrir carrinho" onclick="openCart()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        Carrinho
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
 
       <button class="hbg" id="hbg" aria-label="Abrir menu" aria-expanded="false" aria-controls="mob">
         <span></span><span></span><span></span>
@@ -668,7 +934,14 @@
             <span style="font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:1;letter-spacing:.03em;color:var(--ice-l,#90e0ef);">R$ 85,00</span>
             <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(57,255,20,.07);border:1px solid rgba(57,255,20,.2);color:#39ff14;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;align-self:flex-start;">PIX disponível</span>
           </div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+a+Tabaqueira+Papelito+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:10px;">Comprar via WhatsApp</a>
+          <button class="btn-add-cart" style="margin-top:10px;"
+            onclick="addToCart(this)"
+            data-name="Tabaqueira Papelito"
+            data-price="85.00"
+            data-img="https://i.ibb.co/DPBtCT7w/Whats-App-Image-2026-04-10-at-17-17-31.jpg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar ao Carrinho
+          </button>
         </div>
       </article>
 
@@ -747,7 +1020,14 @@
             <span style="font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:1;letter-spacing:.03em;color:var(--ice-l,#90e0ef);">R$ 70,00</span>
             <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(57,255,20,.07);border:1px solid rgba(57,255,20,.2);color:#39ff14;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;align-self:flex-start;">PIX disponível</span>
           </div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+Cases+Pequenas+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:10px;">Comprar via WhatsApp</a>
+          <button class="btn-add-cart" style="margin-top:10px;"
+            onclick="addToCart(this)"
+            data-name="Cases Pequenas"
+            data-price="70.00"
+            data-img="https://i.ibb.co/7xnrJc4g/c7b48329-acf3-4a3f-a29e-e110df458a93.jpg">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar ao Carrinho
+          </button>
         </div>
       </article>
 
@@ -784,7 +1064,14 @@
             <span style="font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:1;letter-spacing:.03em;color:var(--ice-l,#90e0ef);">R$ 30,00</span>
             <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(57,255,20,.07);border:1px solid rgba(57,255,20,.2);color:#39ff14;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;align-self:flex-start;">PIX disponível</span>
           </div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Container+de+Silicone+17ml+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:10px;">Comprar via WhatsApp</a>
+          <button class="btn-add-cart" style="margin-top:10px;"
+            onclick="addToCart(this)"
+            data-name="Container de Silicone 17ml"
+            data-price="30.00"
+            data-img="https://i.ibb.co/JWXXTMJB/Captura-de-tela-2026-04-10-180040.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar ao Carrinho
+          </button>
         </div>
       </article>
 
@@ -809,7 +1096,14 @@
             <span style="font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:1;letter-spacing:.03em;color:var(--ice-l,#90e0ef);">R$ 80,00</span>
             <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(57,255,20,.07);border:1px solid rgba(57,255,20,.2);color:#39ff14;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;align-self:flex-start;">PIX disponível</span>
           </div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Pipe+Cogumelo+%F0%9F%8D%84%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:10px;">Comprar via WhatsApp</a>
+          <button class="btn-add-cart" style="margin-top:10px;"
+            onclick="addToCart(this)"
+            data-name="Pipe Cogumelo 🍄"
+            data-price="80.00"
+            data-img="https://i.ibb.co/7JgM5j6P/Captura-de-tela-2026-04-10-180421.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar ao Carrinho
+          </button>
         </div>
       </article>
 
@@ -1330,6 +1624,85 @@
   secs.forEach(function(s){sObs.observe(s);});
 }());
 </script>
+<!-- ══ OVERLAY ══ -->
+<div id="cart-overlay" onclick="closeCart()" aria-hidden="true"></div>
+
+<!-- ══ CART DRAWER ══ -->
+<div id="cart-drawer" role="dialog" aria-label="Carrinho de compras" aria-modal="true">
+  <div class="cart-header">
+    <h2>Seu Carrinho</h2>
+    <button class="cart-close" onclick="closeCart()" aria-label="Fechar carrinho">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <div id="cart-items">
+    <!-- preenchido pelo JS -->
+  </div>
+
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span>Total</span>
+      <span class="cart-total-val" id="cart-total-val">R$ 0,00</span>
+    </div>
+    <div class="cart-pix-note">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      PIX com desconto disponível no checkout
+    </div>
+    <button class="btn-checkout" id="btn-checkout" onclick="openCheckout()" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Ir para o Pagamento
+    </button>
+    <p class="cart-wa-alt">
+      Prefere pelo WhatsApp?
+      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+fazer+um+pedido+%F0%9F%8C%BF" target="_blank" rel="noopener">Falar agora</a>
+    </p>
+  </div>
+</div>
+
+<!-- ══ CHECKOUT "EM CONSTRUÇÃO" ══ -->
+<div id="checkout-page" role="dialog" aria-label="Checkout em construção" aria-modal="true">
+  <button class="ck-back" onclick="closeCheckout()" aria-label="Voltar ao carrinho">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar ao carrinho
+  </button>
+
+  <div class="ck-icon">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+  </div>
+
+  <h2>Pagamento online <span>em breve</span></h2>
+
+  <div class="ck-wip">
+    <span class="ck-wip-dot" aria-hidden="true"></span>
+    Em Implementação
+  </div>
+
+  <p>
+    Estamos integrando o sistema de pagamento com cartão e PIX.
+    Em breve você poderá pagar diretamente aqui no site.<br/><br/>
+    Por enquanto, finalize seu pedido pelo <strong style="color:#25d366;">WhatsApp</strong> — é rápido e a gente responde na hora!
+  </p>
+
+  <div class="ck-summary" id="ck-summary">
+    <!-- preenchido pelo JS -->
+  </div>
+
+  <a id="ck-wa-btn"
+     href="https://wa.me/5564999421040"
+     target="_blank" rel="noopener"
+     style="display:inline-flex;align-items:center;gap:9px;padding:15px 28px;border-radius:10px;background:#25d366;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 4px 20px rgba(37,211,102,.35);transition:transform .25s,box-shadow .25s;"
+     onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(37,211,102,.5)'"
+     onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(37,211,102,.35)'">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:19px;height:19px;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    Finalizar pedido pelo WhatsApp
+  </a>
+
+  <p style="font-size:.72rem;color:var(--text-m,#555);margin-top:14px;">
+    A gente recebe seu carrinho por mensagem e combina pagamento na hora.
+  </p>
+</div>
+
 <!-- Carrossel Container — 2 variações -->
 <script>
 (function(){
@@ -1392,6 +1765,180 @@
       if (Math.abs(dx) > 40) caseSlide(dx < 0 ? 1 : -1);
     }, {passive:true});
   }
+}());
+</script>
+<!-- ══ CART JAVASCRIPT ══ -->
+<script>
+(function(){
+  'use strict';
+
+  // ── State ───────────────────────────────────────────────
+  var cart = JSON.parse(localStorage.getItem('ice_cart') || '[]');
+
+  function save() {
+    localStorage.setItem('ice_cart', JSON.stringify(cart));
+  }
+
+  // ── Formatação ──────────────────────────────────────────
+  function fmt(val) {
+    return 'R$ ' + val.toFixed(2).replace('.', ',');
+  }
+
+  // ── Calcular total ──────────────────────────────────────
+  function total() {
+    return cart.reduce(function(s, i){ return s + i.price * i.qty; }, 0);
+  }
+
+  // ── Atualizar badge ─────────────────────────────────────
+  function updateBadge() {
+    var qty = cart.reduce(function(s,i){ return s + i.qty; }, 0);
+    var badge = document.getElementById('cart-badge');
+    if (!badge) return;
+    badge.textContent = qty;
+    badge.classList.toggle('show', qty > 0);
+  }
+
+  // ── Atualizar total no drawer ───────────────────────────
+  function updateTotal() {
+    var el = document.getElementById('cart-total-val');
+    if (el) el.textContent = fmt(total());
+    var btn = document.getElementById('btn-checkout');
+    if (btn) btn.disabled = cart.length === 0;
+  }
+
+  // ── Renderizar itens no drawer ──────────────────────────
+  function renderItems() {
+    var container = document.getElementById('cart-items');
+    if (!container) return;
+
+    if (cart.length === 0) {
+      container.innerHTML =
+        '<div class="cart-empty">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>' +
+          '<p>Seu carrinho está vazio.<br/>Adicione produtos para continuar.</p>' +
+        '</div>';
+      return;
+    }
+
+    container.innerHTML = cart.map(function(item, idx) {
+      return '<div class="cart-item" data-idx="' + idx + '">' +
+        '<div class="ci-img">' +
+          (item.img ? '<img src="' + item.img + '" alt="' + item.name + '" loading="lazy"/>' : '') +
+        '</div>' +
+        '<div class="ci-body">' +
+          '<div class="ci-name">' + item.name + '</div>' +
+          '<div class="ci-price">' + fmt(item.price * item.qty) + '</div>' +
+          '<div class="ci-qty">' +
+            '<button class="ci-qty-btn" onclick="changeQty(' + idx + ',-1)" aria-label="Diminuir">−</button>' +
+            '<span class="ci-qty-num">' + item.qty + '</span>' +
+            '<button class="ci-qty-btn" onclick="changeQty(' + idx + ',1)" aria-label="Aumentar">+</button>' +
+            '<button class="ci-remove" onclick="removeItem(' + idx + ')">Remover</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function refresh() {
+    renderItems();
+    updateTotal();
+    updateBadge();
+    save();
+  }
+
+  // ── API pública ─────────────────────────────────────────
+  window.addToCart = function(btn) {
+    var name  = btn.getAttribute('data-name');
+    var price = parseFloat(btn.getAttribute('data-price'));
+    var img   = btn.getAttribute('data-img') || '';
+
+    var existing = cart.find(function(i){ return i.name === name; });
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ name: name, price: price, img: img, qty: 1 });
+    }
+
+    // Feedback no botão
+    var orig = btn.innerHTML;
+    btn.classList.add('added');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Adicionado!';
+    btn.disabled = true;
+    setTimeout(function(){
+      btn.innerHTML = orig;
+      btn.classList.remove('added');
+      btn.disabled = false;
+    }, 1800);
+
+    refresh();
+    openCart();
+  };
+
+  window.changeQty = function(idx, dir) {
+    cart[idx].qty += dir;
+    if (cart[idx].qty < 1) { cart.splice(idx, 1); }
+    refresh();
+  };
+
+  window.removeItem = function(idx) {
+    cart.splice(idx, 1);
+    refresh();
+  };
+
+  window.openCart = function() {
+    document.getElementById('cart-drawer').classList.add('open');
+    document.getElementById('cart-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderItems();
+    updateTotal();
+  };
+
+  window.closeCart = function() {
+    document.getElementById('cart-drawer').classList.remove('open');
+    document.getElementById('cart-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+
+  window.openCheckout = function() {
+    closeCart();
+    // Monta resumo do checkout
+    var summary = document.getElementById('ck-summary');
+    if (summary) {
+      var rows = cart.map(function(i){
+        return '<div class="ck-summary-row"><span>' + i.name + ' × ' + i.qty + '</span><span>' + fmt(i.price * i.qty) + '</span></div>';
+      }).join('');
+      rows += '<div class="ck-summary-row total"><span>Total</span><span>' + fmt(total()) + '</span></div>';
+      summary.innerHTML = rows;
+    }
+    // Atualiza link WhatsApp com itens do carrinho
+    var waBtn = document.getElementById('ck-wa-btn');
+    if (waBtn) {
+      var msg = 'Oi! Quero finalizar meu pedido 🌿\n\n';
+      cart.forEach(function(i){ msg += '• ' + i.name + ' × ' + i.qty + ' = ' + fmt(i.price * i.qty) + '\n'; });
+      msg += '\nTotal: ' + fmt(total());
+      waBtn.href = 'https://wa.me/5564999421040?text=' + encodeURIComponent(msg);
+    }
+    document.getElementById('checkout-page').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+
+  window.closeCheckout = function() {
+    document.getElementById('checkout-page').classList.remove('open');
+    document.body.style.overflow = '';
+    openCart();
+  };
+
+  // Fechar carrinho com Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      var ckPage = document.getElementById('checkout-page');
+      if (ckPage && ckPage.classList.contains('open')) { closeCheckout(); return; }
+      closeCart();
+    }
+  });
+
+  // Init
+  refresh();
 }());
 </script>
 </body>
