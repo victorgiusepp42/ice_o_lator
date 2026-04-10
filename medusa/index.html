@@ -151,6 +151,14 @@
 <body>
 
   <canvas id="cv" aria-hidden="true"></canvas>
+
+  <!-- Watermark logo Medusa no fundo -->
+  <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png"
+       aria-hidden="true"
+       style="position:fixed;bottom:-30px;right:-40px;width:460px;height:auto;
+              object-fit:contain;opacity:.04;pointer-events:none;z-index:1;
+              filter:blur(3px) brightness(2);user-select:none;" />
+
   <div class="orbs" aria-hidden="true">
     <div class="orb o1"></div>
     <div class="orb o2"></div>
@@ -161,7 +169,13 @@
   <header>
     <div class="hdr-inner">
       <div>
-        <div class="logo-med">MEDUSA ARTE</div>
+        <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png"
+             alt="Medusa Arte | Mandalas"
+             style="height:40px;width:auto;object-fit:contain;filter:drop-shadow(0 0 12px rgba(155,93,229,.6));transition:filter .3s;"
+             onmouseover="this.style.filter='drop-shadow(0 0 22px rgba(155,93,229,.9))'"
+             onmouseout="this.style.filter='drop-shadow(0 0 12px rgba(155,93,229,.6))'"
+             onerror="this.style.display='none';document.getElementById('med-logo-fb').style.display='block';" />
+        <div id="med-logo-fb" style="display:none;" class="logo-med">MEDUSA ARTE</div>
         <span class="logo-sub">Mandalas &amp; Artesanato</span>
       </div>
       <a href="../" class="back-link" aria-label="Voltar à página inicial">
