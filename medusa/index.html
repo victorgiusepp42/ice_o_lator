@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#080808" />
+  <title>Medusa Arte | Mandalas — Em Breve</title>
+  <meta name="description" content="Medusa Arte | Mandalas — site em construção. Arte artesanal exclusiva: mandalas, brincos, decoração e boas energias. Em breve em Catalão, GO." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Lora:ital,wght@0,400;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --med:    #9b5de5;
+      --med-l:  #c77dff;
+      --med-d:  #6a0dad;
+      --med-g:  rgba(155,93,229,.28);
+      --ice:    #00b4d8;
+      --neon:   #39ff14;
+      --bg:     #080808;
+      --bg2:    #0d0d0d;
+      --s1:     #181818;
+      --b0:     rgba(155,93,229,.13);
+      --t1:     #f0f0f0;
+      --t2:     #aaa;
+      --tm:     #555;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--t1); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* noise */
+    body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .022; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px; }
+
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
+
+    /* ── HEADER ── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px;
+      background: rgba(8,8,8,.88);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border-bottom: 1px solid var(--b0);
+      display: flex; align-items: center;
+    }
+    .hdr-inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .logo-med { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: .06em; color: var(--med-l); text-shadow: 0 0 16px var(--med-g); line-height: 1; }
+    .logo-sub  { font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--tm); display: block; margin-top: 1px; }
+    .back-link { display: flex; align-items: center; gap: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: .88rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--t2); transition: color .2s; }
+    .back-link:hover { color: var(--med-l); }
+    .back-link svg { width: 14px; height: 14px; }
+
+    /* ── CANVAS ── */
+    #cv { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+
+    /* ── ORBS ── */
+    .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .16; animation: orb-d 16s ease-in-out infinite; }
+    .o1 { width: 480px; height: 480px; background: var(--med-d); top: -120px; right: -120px; animation-delay: 0s; }
+    .o2 { width: 360px; height: 360px; background: var(--med); bottom: -80px; left: -80px; animation-delay: -7s; }
+    .o3 { width: 220px; height: 220px; background: rgba(0,180,216,.5); top: 40%; left: 50%; animation-delay: -12s; }
+    @keyframes orb-d { 0%,100%{transform:translate(0,0) scale(1);} 40%{transform:translate(24px,-18px) scale(1.04);} 70%{transform:translate(-16px,22px) scale(.96);} }
+
+    /* ── MAIN ── */
+    main { flex: 1; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 100px 24px 60px; text-align: center; }
+
+    /* Mandala decoration */
+    .mandala-wrap { position: relative; width: 220px; height: 220px; margin: 0 auto 40px; display: flex; align-items: center; justify-content: center; }
+    .m-glow { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(155,93,229,.22), transparent 70%); animation: m-g 4s ease-in-out infinite; }
+    @keyframes m-g { 0%,100%{opacity:.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.08);} }
+    .m-svg { width: 200px; height: 200px; animation: spin-s 44s linear infinite; }
+    @keyframes spin-s { to { transform: rotate(360deg); } }
+
+    /* Construction badge */
+    .const-badge {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: rgba(155,93,229,.1); border: 1px solid rgba(155,93,229,.25);
+      border-radius: 100px; padding: 6px 18px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .78rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase; color: var(--med-l);
+      margin-bottom: 24px;
+    }
+    .dot-pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--neon); animation: pulse-dot 1.8s ease infinite; flex-shrink: 0; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1);} 50%{opacity:.3;transform:scale(.7);} }
+
+    h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 8vw, 6rem); letter-spacing: .03em; color: #fff; line-height: 1; margin-bottom: 16px; }
+    h1 .med-c { color: var(--med-l); }
+    h1 .neon-c { color: var(--neon); }
+
+    .tagline { font-family: 'Lora', serif; font-size: clamp(.96rem, 2vw, 1.12rem); font-style: italic; color: var(--med-l); margin-bottom: 14px; }
+
+    .desc { font-family: 'Lora', serif; font-size: clamp(.9rem, 1.8vw, 1.02rem); color: var(--t2); line-height: 1.85; max-width: 520px; margin: 0 auto 36px; }
+
+    /* Countdown-style text */
+    .coming-soon-box {
+      background: linear-gradient(135deg, rgba(155,93,229,.12), rgba(106,13,173,.06));
+      border: 1px solid rgba(155,93,229,.22);
+      border-radius: 18px; padding: 28px 36px; margin-bottom: 36px;
+      display: inline-flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .cs-title { font-family: 'Bebas Neue', sans-serif; font-size: 2.8rem; letter-spacing: .04em; color: var(--med-l); line-height: 1; }
+    .cs-sub { font-family: 'Barlow Condensed', sans-serif; font-size: .8rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--tm); }
+
+    /* Preview items */
+    .preview-grid { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 36px; }
+    .preview-item {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(155,93,229,.08); border: 1px solid rgba(155,93,229,.18);
+      border-radius: 100px; padding: 7px 16px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .82rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--med-l);
+    }
+    .preview-item svg { width: 14px; height: 14px; }
+
+    /* CTA buttons */
+    .cta-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 9px; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: transform .28s cubic-bezier(.34,1.56,.64,1), box-shadow .28s; }
+    .btn:active { transform: scale(.97) !important; }
+    .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+    .btn-med { background: linear-gradient(135deg, var(--med), var(--med-d)); color: #fff; box-shadow: 0 4px 18px var(--med-g); }
+    .btn-med:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(155,93,229,.5); }
+    .btn-ghost { background: rgba(255,255,255,.04); color: var(--t1); border: 1px solid rgba(255,255,255,.1); }
+    .btn-ghost:hover { border-color: var(--med); color: var(--med-l); transform: translateY(-2px); }
+
+    /* Social links */
+    .social-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 16px; }
+    .soc-btn { width: 42px; height: 42px; border-radius: 10px; background: var(--s1); border: 1px solid var(--b0); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s, transform .2s cubic-bezier(.34,1.56,.64,1); }
+    .soc-btn:hover { border-color: var(--med); background: rgba(155,93,229,.1); transform: translateY(-3px); }
+    .soc-btn svg { width: 18px; height: 18px; color: var(--tm); transition: color .2s; }
+    .soc-btn:hover svg { color: var(--med-l); }
+
+    .social-label { font-family: 'Barlow Condensed', sans-serif; font-size: .72rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--tm); margin-bottom: 4px; }
+
+    /* ── FOOTER ── */
+    footer { position: relative; z-index: 1; border-top: 1px solid var(--b0); padding: 20px 24px; text-align: center; }
+    .ft-bottom { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 16px; }
+    .ft-bottom p { font-size: .72rem; color: var(--tm); }
+    .ft-bottom a { color: var(--med-l); }
+    .ft-bottom a:hover { text-decoration: underline; }
+
+    @media (max-width: 480px) {
+      .cta-group { flex-direction: column; }
+      .cta-group .btn { justify-content: center; }
+      h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="cv" aria-hidden="true"></canvas>
+  <div class="orbs" aria-hidden="true">
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header>
+    <div class="hdr-inner">
+      <div>
+        <div class="logo-med">MEDUSA ARTE</div>
+        <span class="logo-sub">Mandalas &amp; Artesanato</span>
+      </div>
+      <a href="../" class="back-link" aria-label="Voltar à página inicial">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        Página inicial
+      </a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- Mandala animada -->
+    <div class="mandala-wrap" aria-hidden="true">
+      <div class="m-glow"></div>
+      <svg class="m-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="100" cy="100" r="96" stroke="rgba(155,93,229,0.18)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="76" stroke="rgba(155,93,229,0.22)" stroke-width="1"/>
+        <circle cx="100" cy="100" r="56" stroke="rgba(199,125,255,0.3)" stroke-width="1.2"/>
+        <circle cx="100" cy="100" r="36" stroke="rgba(199,125,255,0.38)" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="18" stroke="rgba(155,93,229,0.55)" stroke-width="1.5"/>
+        <circle cx="100" cy="100" r="6"  fill="rgba(199,125,255,0.8)"/>
+        <g stroke="rgba(155,93,229,0.5)" stroke-width="1" fill="none">
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(0 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(30 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(60 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(120 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(150 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(210 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(240 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(300 100 100)"/>
+          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(330 100 100)"/>
+        </g>
+        <g fill="rgba(57,255,20,0.65)">
+          <circle cx="100" cy="5" r="2" transform="rotate(0 100 100)"/>
+          <circle cx="100" cy="5" r="2" transform="rotate(60 100 100)"/>
+          <circle cx="100" cy="5" r="2" transform="rotate(120 100 100)"/>
+          <circle cx="100" cy="5" r="2" transform="rotate(180 100 100)"/>
+          <circle cx="100" cy="5" r="2" transform="rotate(240 100 100)"/>
+          <circle cx="100" cy="5" r="2" transform="rotate(300 100 100)"/>
+        </g>
+        <g stroke="rgba(0,180,216,0.25)" stroke-width="0.8" fill="none">
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(0 100 100)"/>
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(45 100 100)"/>
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(90 100 100)"/>
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(135 100 100)"/>
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(180 100 100)"/>
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(225 100 100)"/>
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(270 100 100)"/>
+          <ellipse cx="100" cy="64" rx="5" ry="12" transform="rotate(315 100 100)"/>
+        </g>
+      </svg>
+    </div>
+
+    <div class="const-badge">
+      <span class="dot-pulse" aria-hidden="true"></span>
+      Em Construção
+    </div>
+
+    <h1>
+      <span class="med-c">Medusa Arte</span><br/>
+      chegando em breve<span class="neon-c">.</span>
+    </h1>
+
+    <p class="tagline">"Mais beleza, cor e boas energias pro seu dia a dia."</p>
+
+    <p class="desc">
+      O site completo da <strong style="color:var(--med-l);">Medusa Arte | Mandalas</strong> está sendo preparado
+      com muito carinho. Em breve você terá acesso ao catálogo completo de mandalas,
+      brincos artesanais, chaveiros e toda a arte exclusiva.
+    </p>
+
+    <div class="coming-soon-box">
+      <span class="cs-title">EM BREVE</span>
+      <span class="cs-sub">Site completo em desenvolvimento</span>
+    </div>
+
+    <div class="preview-grid">
+      <div class="preview-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        Mandalas Decorativas
+      </div>
+      <div class="preview-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        Brincos Exclusivos
+      </div>
+      <div class="preview-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/></svg>
+        Coleção Zodíaco
+      </div>
+      <div class="preview-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+        Presentes Autorais
+      </div>
+      <div class="preview-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/></svg>
+        Chaveiros Artesanais
+      </div>
+    </div>
+
+    <div class="cta-group">
+      <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="btn btn-med">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        Ver @xmedusarte no Instagram
+      </a>
+      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+pe%C3%A7as+da+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-ghost">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+        Pedir pelo WhatsApp
+      </a>
+    </div>
+
+    <p class="social-label">Acompanhe as novidades</p>
+    <div class="social-row">
+      <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram @xmedusarte">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+      </a>
+      <a href="https://wa.me/5564999421040" target="_blank" rel="noopener" class="soc-btn" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="ft-bottom">
+      <p>© 2026 <strong>Medusa Arte | Mandalas</strong> — parte do universo <a href="../headshop/">Ice-o-lator Headshop</a>. Catalão, GO.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function(){
+    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!rm){
+      var cv = document.getElementById('cv');
+      if(cv){
+        var ctx = cv.getContext('2d'), pts = [], MAX = 44, rf;
+        var colors = ['155,93,229','199,125,255','106,13,173','0,180,216','57,255,20'];
+        function rs(){ cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; }
+        function mk(){ return { x:Math.random()*cv.width, y:Math.random()*cv.height, r:Math.random()*1.6+.4, vx:(Math.random()-.5)*.28, vy:(Math.random()-.5)*.28, a:Math.random()*.38+.07, c:colors[Math.floor(Math.random()*colors.length)] }; }
+        rs();
+        for(var i=0;i<MAX;i++) pts.push(mk());
+        var rtmr; window.addEventListener('resize',function(){ clearTimeout(rtmr); rtmr=setTimeout(rs,200); },{passive:true});
+        function draw(){
+          ctx.clearRect(0,0,cv.width,cv.height);
+          pts.forEach(function(p){
+            p.x+=p.vx; p.y+=p.vy;
+            if(p.x<-4) p.x=cv.width+4; if(p.x>cv.width+4) p.x=-4;
+            if(p.y<-4) p.y=cv.height+4; if(p.y>cv.height+4) p.y=-4;
+            ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            ctx.fillStyle='rgba('+p.c+','+p.a+')'; ctx.fill();
+          });
+          rf = requestAnimationFrame(draw);
+        }
+        draw();
+        document.addEventListener('visibilitychange',function(){ if(document.hidden) cancelAnimationFrame(rf); else draw(); });
+      }
+    }
+  }());
+  </script>
+
+</body>
+</html>
