@@ -719,15 +719,26 @@
   <div class="container">
     <div class="hdr-inner">
       <a href="#inicio" class="logo-wrap" aria-label="Ice-o-lator Headshop & Medusa Arte">
-        <div>
-          <div class="logo-ice">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--ice-l);"><path d="M12 2L12 22M2 12L22 12M4.93 4.93L19.07 19.07M19.07 4.93L4.93 19.07"/></svg>
-            ICE-O-LATOR
-          </div>
+        <!-- Logo Ice-o-lator real -->
+        <img src="https://i.ibb.co/bMKb9Khq/logo-ice.png"
+             alt="Ice-o-lator Headshop"
+             style="height:44px;width:auto;object-fit:contain;filter:drop-shadow(0 0 10px rgba(0,180,216,.5));transition:filter .3s;"
+             onmouseover="this.style.filter='drop-shadow(0 0 18px rgba(0,180,216,.8))'"
+             onmouseout="this.style.filter='drop-shadow(0 0 10px rgba(0,180,216,.5))'"
+             onerror="this.style.display='none';document.getElementById('logo-ice-fallback').style.display='flex';" />
+        <div id="logo-ice-fallback" style="display:none;">
+          <div class="logo-ice">ICE-O-LATOR</div>
           <span class="logo-sub">Headshop · Catalão, GO · Desde 2018</span>
         </div>
         <div class="logo-divider" aria-hidden="true"></div>
-        <div>
+        <!-- Logo Medusa Arte real -->
+        <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png"
+             alt="Medusa Arte | Mandalas"
+             style="height:38px;width:auto;object-fit:contain;filter:drop-shadow(0 0 10px rgba(155,93,229,.5));transition:filter .3s;"
+             onmouseover="this.style.filter='drop-shadow(0 0 18px rgba(155,93,229,.8))'"
+             onmouseout="this.style.filter='drop-shadow(0 0 10px rgba(155,93,229,.5))'"
+             onerror="this.style.display='none';document.getElementById('logo-med-fallback').style.display='flex';" />
+        <div id="logo-med-fallback" style="display:none;">
           <div class="logo-med">MEDUSA ARTE</div>
           <span class="logo-sub">Mandalas &amp; Artesanato</span>
         </div>
@@ -780,6 +791,14 @@
 <!-- ── HERO ── -->
 <section id="inicio" aria-label="Apresentação">
   <canvas id="cv" aria-hidden="true"></canvas>
+
+  <!-- Logo watermark de fundo no hero -->
+  <img src="https://i.ibb.co/bMKb9Khq/logo-ice.png"
+       aria-hidden="true"
+       style="position:absolute;bottom:-40px;right:-60px;width:520px;height:auto;
+              object-fit:contain;opacity:.04;pointer-events:none;z-index:1;
+              filter:blur(2px) brightness(2);user-select:none;" />
+
   <div class="orbs" aria-hidden="true">
     <div class="orb o1"></div><div class="orb o2"></div>
     <div class="orb o3"></div><div class="orb o4"></div>
@@ -1503,8 +1522,16 @@
     <div class="ft-grid">
       <div class="ft-brand">
         <div class="ft-brand-title">
-          <div class="ft-ice">ICE-O-LATOR HEADSHOP</div>
-          <div class="ft-med">MEDUSA ARTE | MANDALAS</div>
+          <img src="https://i.ibb.co/bMKb9Khq/logo-ice.png"
+               alt="Ice-o-lator Headshop"
+               style="height:36px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(0,180,216,.4));margin-bottom:4px;"
+               onerror="this.style.display='none';document.getElementById('ft-ice-fb').style.display='block';" />
+          <div id="ft-ice-fb" style="display:none;" class="ft-ice">ICE-O-LATOR HEADSHOP</div>
+          <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png"
+               alt="Medusa Arte | Mandalas"
+               style="height:28px;width:auto;object-fit:contain;filter:drop-shadow(0 0 8px rgba(155,93,229,.4));"
+               onerror="this.style.display='none';document.getElementById('ft-med-fb').style.display='block';" />
+          <div id="ft-med-fb" style="display:none;" class="ft-med">MEDUSA ARTE | MANDALAS</div>
         </div>
         <p>Produtos únicos, arte artesanal e boas energias desde 2018 em Catalão, GO. A família Ice te espera!</p>
         <div class="soc-row">
