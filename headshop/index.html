@@ -748,6 +748,86 @@
         </div>
       </article>
 
+      <!-- Cases Pequenas — carrossel 4 variações -->
+      <article class="prod-card reveal" style="grid-column: span 1;">
+
+        <!-- Carrossel inline -->
+        <div class="prod-img" style="position:relative;overflow:hidden;background:#111;" id="case-wrap">
+
+          <!-- Slides -->
+          <div id="case-slides" style="display:flex;width:400%;transition:transform .35s cubic-bezier(.4,0,.2,1);">
+            <!-- Foto 1 -->
+            <div style="width:25%;flex-shrink:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#111;">
+              <img src="FOTO_CASE_1" alt="Case Pequena — variação 1" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(0,180,216,.18)\' stroke-width=\'1.5\' style=\'width:44px;height:44px;\'><polyline points=\'21 8 21 21 3 21 3 8\'/><rect x=\'1\' y=\'3\' width=\'22\' height=\'5\'/></svg>';" />
+            </div>
+            <!-- Foto 2 -->
+            <div style="width:25%;flex-shrink:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#111;">
+              <img src="FOTO_CASE_2" alt="Case Pequena — variação 2" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(0,180,216,.18)\' stroke-width=\'1.5\' style=\'width:44px;height:44px;\'><polyline points=\'21 8 21 21 3 21 3 8\'/><rect x=\'1\' y=\'3\' width=\'22\' height=\'5\'/></svg>';" />
+            </div>
+            <!-- Foto 3 -->
+            <div style="width:25%;flex-shrink:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#111;">
+              <img src="FOTO_CASE_3" alt="Case Pequena — variação 3" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(0,180,216,.18)\' stroke-width=\'1.5\' style=\'width:44px;height:44px;\'><polyline points=\'21 8 21 21 3 21 3 8\'/><rect x=\'1\' y=\'3\' width=\'22\' height=\'5\'/></svg>';" />
+            </div>
+            <!-- Foto 4 -->
+            <div style="width:25%;flex-shrink:0;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center;background:#111;">
+              <img src="FOTO_CASE_4" alt="Case Pequena — variação 4" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='';this.style.display='none';this.parentElement.innerHTML+='<svg viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'rgba(0,180,216,.18)\' stroke-width=\'1.5\' style=\'width:44px;height:44px;\'><polyline points=\'21 8 21 21 3 21 3 8\'/><rect x=\'1\' y=\'3\' width=\'22\' height=\'5\'/></svg>';" />
+            </div>
+          </div>
+
+          <!-- Seta esquerda -->
+          <button onclick="caseSlide(-1)" aria-label="Variação anterior"
+            style="position:absolute;left:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:background .2s;"
+            onmouseover="this.style.background='rgba(0,180,216,.7)'" onmouseout="this.style.background='rgba(0,0,0,.65)'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+
+          <!-- Seta direita -->
+          <button onclick="caseSlide(1)" aria-label="Próxima variação"
+            style="position:absolute;right:8px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.65);border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:5;transition:background .2s;"
+            onmouseover="this.style.background='rgba(0,180,216,.7)'" onmouseout="this.style.background='rgba(0,0,0,.65)'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+
+          <!-- Indicadores (bolinhas) -->
+          <div id="case-dots" style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px;z-index:5;">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--ice,#00b4d8);transition:background .2s;"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .2s;"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .2s;"></span>
+            <span style="width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.3);transition:background .2s;"></span>
+          </div>
+
+          <!-- Badge -->
+          <span style="position:absolute;top:9px;left:9px;background:var(--ice,#00b4d8);color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:.63rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:4px;z-index:5;">4 variações</span>
+
+          <!-- Contador slide -->
+          <span id="case-counter" style="position:absolute;top:9px;right:9px;background:rgba(0,0,0,.6);color:rgba(255,255,255,.7);font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.06em;padding:3px 8px;border-radius:4px;z-index:5;">1 / 4</span>
+        </div>
+
+        <div class="prod-body">
+          <span class="prod-cat" style="font-family:'Barlow Condensed',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ice-l,#90e0ef);">Acessórios · Case</span>
+          <div class="stars" aria-label="5 estrelas" style="display:flex;gap:2px;">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;color:#f4b942;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;color:#f4b942;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;color:#f4b942;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;color:#f4b942;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:11px;height:11px;color:#f4b942;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <h3>Cases Pequenas — 4 Variações</h3>
+          <p style="font-size:.8rem;color:#aaa;line-height:1.6;flex:1;">Perfeito para guardar seus acessórios com segurança, organizar pequenos itens no dia a dia, levar na mochila ou no bolso sem ocupar espaço — e muito estilo ✨</p>
+          <div style="display:flex;flex-direction:column;gap:4px;margin-top:5px;font-size:.78rem;color:#777;line-height:1.6;">
+            <span>📦 Neoprene resistente e flexível</span>
+            <span>🔒 Zíper de metal durável</span>
+            <span>🗂 Bolso com redinha + elástico interno</span>
+            <span>📐 10 × 4 × 16 cm · Leve e compacto</span>
+          </div>
+          <div class="pricing" style="margin-top:9px;display:flex;flex-direction:column;gap:3px;">
+            <span style="font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:1;letter-spacing:.03em;color:var(--ice-l,#90e0ef);">R$ 70,00</span>
+            <span style="display:inline-flex;align-items:center;gap:4px;background:rgba(57,255,20,.07);border:1px solid rgba(57,255,20,.2);color:#39ff14;border-radius:4px;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 7px;align-self:flex-start;">PIX disponível</span>
+          </div>
+          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+Cases+Pequenas+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:10px;">Comprar via WhatsApp</a>
+        </div>
+      </article>
+
     </div>
 
     <div style="text-align:center;margin-top:40px;" class="reveal">
@@ -1263,6 +1343,36 @@
   var secs=document.querySelectorAll('main section[id]'),nls=document.querySelectorAll('nav.desk .nl');
   var sObs=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var id=e.target.id;nls.forEach(function(l){l.style.color=l.getAttribute('href')==='#'+id?'var(--ice-l)':'';});}});},{threshold:.35});
   secs.forEach(function(s){sObs.observe(s);});
+}());
+</script>
+<!-- Carrossel Cases -->
+<script>
+(function(){
+  var cur = 0;
+  var total = 4;
+  window.caseSlide = function(dir) {
+    cur = (cur + dir + total) % total;
+    var slides = document.getElementById('case-slides');
+    var counter = document.getElementById('case-counter');
+    var dots = document.getElementById('case-dots');
+    if (slides) slides.style.transform = 'translateX(-' + (cur * 25) + '%)';
+    if (counter) counter.textContent = (cur + 1) + ' / ' + total;
+    if (dots) {
+      Array.from(dots.children).forEach(function(d, i) {
+        d.style.background = i === cur ? 'var(--ice, #00b4d8)' : 'rgba(255,255,255,.3)';
+      });
+    }
+  };
+  // Suporte a swipe no mobile
+  var wrap = document.getElementById('case-wrap');
+  if (wrap) {
+    var sx = 0;
+    wrap.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+    wrap.addEventListener('touchend', function(e){
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 40) caseSlide(dx < 0 ? 1 : -1);
+    }, {passive:true});
+  }
 }());
 </script>
 </body>
