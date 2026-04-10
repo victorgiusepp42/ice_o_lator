@@ -3,1239 +3,359 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0a0a0a" />
-  <title>Ice-o-lator Headshop & Medusa Arte | Catalão, GO</title>
-  <meta name="description" content="Ice-o-lator Headshop em Catalão, GO — bongs, dichavadores, pipes, acessórios e arte artesanal Medusa Arte (mandalas, brincos, decoração). Entrega local e envios para o Brasil. (64) 99942-1040." />
-  <meta property="og:title" content="Ice-o-lator Headshop & Medusa Arte | Catalão, GO" />
-  <meta property="og:description" content="Produtos únicos, arte, estilo e boas energias. Entrega local e envios para todo o Brasil." />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="pt_BR" />
-
+  <meta name="theme-color" content="#080808" />
+  <title>Ice-o-lator & Medusa Arte | Catalão, GO</title>
+  <meta name="description" content="Ice-o-lator Headshop e Medusa Arte | Mandalas — dois universos, uma família. Catalão, GO. (64) 99942-1040." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Lora:ital,wght@0,400;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      /* Ice-o-lator: azul gelo + ciano + neon (marca urbana/pop) */
-      --ice:        #00b4d8;
-      --ice-l:      #90e0ef;
-      --ice-d:      #0077b6;
-      --ice-glow:   rgba(0,180,216,.3);
-      --neon:       #39ff14;
-
-      /* Medusa Arte: roxo + lavanda (artesanal/mística) */
-      --med:        #9b5de5;
-      --med-l:      #c77dff;
-      --med-d:      #6a0dad;
-      --med-glow:   rgba(155,93,229,.3);
-
-      /* Fundo escuro premium */
-      --bg:         #080808;
-      --bg-2:       #0d0d0d;
-      --bg-3:       #111;
-      --surface:    #181818;
-      --surface-2:  #1f1f1f;
-      --border:     rgba(0,180,216,.12);
-      --border-h:   rgba(0,180,216,.35);
-      --gold:       #f4b942;
-
-      --text:       #f0f0f0;
-      --text-2:     #aaa;
-      --text-m:     #555;
-
-      --r:    12px;
-      --r-l:  18px;
-      --ease: cubic-bezier(.4,0,.2,1);
-      --spr:  cubic-bezier(.34,1.56,.64,1);
-      --dur:  .28s;
-      --hh:   66px;
-      --ah:   36px;
+      --ice:     #00b4d8;
+      --ice-l:   #90e0ef;
+      --ice-d:   #0077b6;
+      --ice-g:   rgba(0,180,216,.28);
+      --med:     #9b5de5;
+      --med-l:   #c77dff;
+      --med-d:   #6a0dad;
+      --med-g:   rgba(155,93,229,.28);
+      --neon:    #39ff14;
+      --bg:      #080808;
+      --s1:      #181818;
+      --b-ice:   rgba(0,180,216,.16);
+      --b-med:   rgba(155,93,229,.16);
+      --t1:      #f0f0f0;
+      --t2:      #aaa;
+      --tm:      #555;
     }
-
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
-    img { display: block; max-width: 100%; }
-    a  { color: inherit; text-decoration: none; }
-    button { font-family: inherit; cursor: pointer; border: none; background: none; }
-    ::selection { background: var(--ice-d); color: #fff; }
+    body {
+      background: var(--bg);
+      color: var(--t1);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
 
-    body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .022; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px 256px; }
-    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } html { scroll-behavior: auto; } }
+    /* noise */
+    body::after { content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none; opacity: .022; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 256px; }
 
-    .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-    section { padding: 88px 0; }
-    section.compact { padding: 56px 0; }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; } }
 
-    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .58s var(--ease), transform .58s var(--ease); will-change: opacity, transform; }
-    .reveal.visible { opacity: 1; transform: none; }
-    .rl { transform: translateX(-28px); } .rr { transform: translateX(28px); }
-    .rl.visible, .rr.visible { transform: none; }
-    .d1{transition-delay:.07s} .d2{transition-delay:.14s} .d3{transition-delay:.21s}
-    .d4{transition-delay:.28s} .d5{transition-delay:.35s}
+    /* ── CANVAS ── */
+    #cv { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
 
-    /* ── ANNOUNCEMENT BAR ── */
-    #ann { height: var(--ah); background: linear-gradient(90deg, var(--ice-d), var(--ice), var(--med), var(--ice-d)); background-size: 300% auto; animation: ann-s 10s linear infinite; overflow: hidden; display: flex; align-items: center; position: sticky; top: 0; z-index: 601; }
-    @keyframes ann-s { to { background-position: 300% center; } }
-    .ann-track { display: flex; width: max-content; animation: ann-r 36s linear infinite; }
-    @keyframes ann-r { to { transform: translateX(-50%); } }
-    .ann-item { display: inline-flex; align-items: center; gap: 7px; padding: 0 28px; white-space: nowrap; font-family: 'Barlow Condensed', sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.9); border-right: 1px solid rgba(255,255,255,.18); }
-    .ann-item svg { width: 13px; height: 13px; }
-    .ann-hi { color: #fff; font-weight: 800; }
+    /* ── ORBS ── */
+    .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(100px); animation: orb-d 18s ease-in-out infinite; }
+    .o1 { width: 500px; height: 500px; background: var(--ice-d); opacity: .14; top: -100px; left: -120px; }
+    .o2 { width: 400px; height: 400px; background: var(--med-d); opacity: .14; bottom: -80px; right: -100px; animation-delay: -8s; }
+    .o3 { width: 240px; height: 240px; background: rgba(57,255,20,.4); opacity: .06; top: 40%; left: 45%; animation-delay: -14s; }
+    @keyframes orb-d { 0%,100%{transform:translate(0,0) scale(1);} 40%{transform:translate(22px,-16px) scale(1.04);} 70%{transform:translate(-14px,20px) scale(.96);} }
 
     /* ── HEADER ── */
-    #hdr { position: sticky; top: var(--ah); z-index: 600; height: var(--hh); background: rgba(8,8,8,.9); backdrop-filter: blur(18px) saturate(140%); -webkit-backdrop-filter: blur(18px) saturate(140%); border-bottom: 1px solid var(--border); transition: background .3s; }
-    #hdr.scrolled { background: rgba(8,8,8,.97); }
-    .hdr-inner { display: flex; align-items: center; justify-content: space-between; height: var(--hh); gap: 14px; }
+    header { position: relative; z-index: 10; padding: 28px 32px; display: flex; align-items: center; justify-content: center; }
+    .header-tag { display: flex; align-items: center; gap: 10px; }
+    .dot-sep { width: 4px; height: 4px; border-radius: 50%; background: var(--tm); flex-shrink: 0; }
+    .h-brand { font-family: 'Barlow Condensed', sans-serif; font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--tm); }
+    .h-brand.ice-c { color: var(--ice-l); }
+    .h-brand.med-c { color: var(--med-l); }
 
-    /* LOGO — recreated from brand image */
-    .logo-wrap { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-    .logo-ice {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.5rem;
-      letter-spacing: .06em;
-      color: var(--ice);
-      text-shadow: 0 0 14px var(--ice-glow);
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .logo-snowflake { color: var(--ice-l); font-size: 1rem; }
-    .logo-divider { width: 1px; height: 28px; background: var(--border); flex-shrink: 0; }
-    .logo-med { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .05em; color: var(--med-l); text-shadow: 0 0 12px var(--med-glow); line-height: 1; }
-    .logo-sub { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--text-m); margin-top: 1px; }
+    /* ── MAIN ── */
+    main { flex: 1; position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 24px 48px; }
 
-    .hdr-search { flex: 1; max-width: 340px; display: flex; align-items: center; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; transition: border-color .2s; }
-    .hdr-search:focus-within { border-color: var(--ice); }
-    .hdr-search input { flex: 1; background: none; border: none; outline: none; padding: 8px 12px; color: var(--text); font-size: .86rem; font-family: 'Inter', sans-serif; }
-    .hdr-search input::placeholder { color: var(--text-m); }
-    .hdr-search button { padding: 8px 12px; background: var(--ice); transition: background .2s; }
-    .hdr-search button:hover { background: var(--ice-l); }
-    .hdr-search svg { width: 15px; height: 15px; color: #fff; }
-
-    nav.desk { display: flex; align-items: center; gap: 2px; }
-    .nl { font-family: 'Barlow Condensed', sans-serif; font-size: .88rem; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--text-2); padding: 6px 11px; border-radius: 7px; transition: color .2s, background .2s; }
-    .nl:hover { color: var(--ice-l); background: rgba(0,180,216,.09); }
-    .nl.cta { background: var(--ice); color: #fff !important; box-shadow: 0 0 14px var(--ice-glow); }
-    .nl.cta:hover { background: var(--ice-l) !important; }
-
-    .hbg { display: none; flex-direction: column; gap: 5px; padding: 4px; }
-    .hbg span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .3s, opacity .3s; }
-    .hbg.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hbg.open span:nth-child(2) { opacity: 0; }
-    .hbg.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .mob { position: fixed; top: calc(var(--ah) + var(--hh)); inset: auto 0 0; z-index: 499; background: rgba(8,8,8,.98); backdrop-filter: blur(20px); display: flex; flex-direction: column; padding: 8px 0 28px; transform: translateX(100%); transition: transform .32s var(--ease); border-top: 1px solid var(--border); }
-    .mob.open { transform: none; }
-    .mob a { font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-2); padding: 12px 24px; border-bottom: 1px solid var(--border); transition: color .2s, padding-left .2s; }
-    .mob a:hover { color: var(--ice-l); padding-left: 32px; }
-    .mob a:last-child { margin: 16px 24px 0; border: none; border-radius: 10px; background: #25d366; color: #fff !important; text-align: center; }
-
-    /* ── BUTTONS ── */
-    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 22px; border-radius: 8px; font-family: 'Barlow Condensed', sans-serif; font-size: .98rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; transition: transform var(--dur) var(--spr), box-shadow var(--dur), background var(--dur); will-change: transform; }
-    .btn:active { transform: scale(.97) !important; }
-    .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
-    .btn-ice  { background: linear-gradient(135deg, var(--ice), var(--ice-d)); color: #fff; box-shadow: 0 4px 18px var(--ice-glow); }
-    .btn-ice:hover  { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(0,180,216,.5); }
-    .btn-med  { background: linear-gradient(135deg, var(--med), var(--med-d)); color: #fff; box-shadow: 0 4px 18px var(--med-glow); }
-    .btn-med:hover  { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(155,93,229,.5); }
-    .btn-ghost { background: rgba(255,255,255,.04); color: var(--text); border: 1px solid rgba(255,255,255,.1); }
-    .btn-ghost:hover { border-color: var(--ice); color: var(--ice-l); transform: translateY(-2px); }
-    .btn-wa { background: #25d366; color: #fff; box-shadow: 0 4px 16px rgba(37,211,102,.32); }
-    .btn-wa:hover { background: #1eb858; transform: translateY(-2px); box-shadow: 0 8px 22px rgba(37,211,102,.48); }
-    .btn-vip { background: linear-gradient(135deg, #128c7e, #25d366); color: #fff; box-shadow: 0 4px 18px rgba(18,140,126,.35); }
-    .btn-vip:hover { transform: translateY(-3px); box-shadow: 0 8px 26px rgba(18,140,126,.5); }
-    .btn-lg { padding: 14px 28px; font-size: 1.06rem; }
-    .btn-sm { padding: 7px 15px; font-size: .83rem; }
-    .btn-full { width: 100%; justify-content: center; }
-
-    /* ── TYPOGRAPHY ── */
-    .sec-label { display: inline-flex; align-items: center; gap: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ice-l); margin-bottom: 10px; }
-    .sec-label::before { content: ''; display: inline-block; width: 14px; height: 2px; background: var(--ice); border-radius: 2px; }
-    .sec-label.med { color: var(--med-l); }
-    .sec-label.med::before { background: var(--med); }
-    .sec-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.6rem); letter-spacing: .025em; color: #fff; line-height: 1.05; margin-bottom: 12px; }
-    .sec-title .hi  { color: var(--ice-l); }
-    .sec-title .med { color: var(--med-l); }
-    .sec-desc { font-family: 'Lora', serif; font-size: .97rem; color: var(--text-2); line-height: 1.85; max-width: 560px; }
-    .sec-center { text-align: center; }
-    .sec-center .sec-label { justify-content: center; }
-    .sec-center .sec-label::before { display: none; }
-    .sec-center .sec-desc { margin: 0 auto; }
-
-    .pix { display: inline-flex; align-items: center; gap: 4px; background: rgba(57,255,20,.07); border: 1px solid rgba(57,255,20,.2); color: var(--neon); border-radius: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 2px 7px; }
-
-    .div-line { display: flex; justify-content: center; padding: 4px 0; }
-    .div-line svg { display: block; width: 100%; }
-
-    /* ── FLOAT WA + BACK TOP ── */
-    #fw { position: fixed; bottom: 26px; right: 26px; z-index: 8000; display: flex; align-items: center; gap: 8px; background: #25d366; color: #fff; border-radius: 100px; padding: 12px 16px 12px 13px; box-shadow: 0 6px 24px rgba(37,211,102,.42); font-family: 'Barlow Condensed', sans-serif; font-size: .88rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; opacity: 0; transform: translateY(14px) scale(.9); transition: opacity .4s, transform .4s var(--spr), bottom .3s, box-shadow .25s; overflow: hidden; max-width: 200px; }
-    #fw.show { opacity: 1; transform: none; }
-    #fw:hover { box-shadow: 0 10px 32px rgba(37,211,102,.58); transform: translateY(-3px); }
-    #fw svg { width: 19px; height: 19px; flex-shrink: 0; }
-    #fw .pulse { position: absolute; inset: 0; border-radius: inherit; animation: wa-p 2.5s ease-out infinite; }
-    @keyframes wa-p { 0%{box-shadow:0 0 0 0 rgba(37,211,102,.45);} 70%{box-shadow:0 0 0 15px rgba(37,211,102,0);} 100%{box-shadow:0 0 0 0 rgba(37,211,102,0);} }
-    #bt { position: fixed; bottom: 26px; right: 26px; z-index: 7999; width: 42px; height: 42px; border-radius: 9px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity .3s, transform .3s var(--spr), background .2s; }
-    #bt.show { opacity: 1; transform: none; pointer-events: auto; }
-    #bt:hover { background: var(--ice-d); border-color: var(--ice); }
-    #bt svg { width: 16px; height: 16px; color: var(--text-2); }
-    #bt:hover svg { color: #fff; }
-
-    /* ── HERO ── */
-    #inicio { position: relative; min-height: 93vh; display: flex; align-items: center; overflow: hidden; background: var(--bg); }
-    #cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-    .orbs { position: absolute; inset: 0; pointer-events: none; }
-    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .15; animation: orb-d 16s ease-in-out infinite; }
-    .o1 { width: 500px; height: 500px; background: var(--ice-d); top: -120px; left: -160px; animation-delay: 0s; }
-    .o2 { width: 340px; height: 340px; background: var(--ice); top: 30%; right: -80px; animation-delay: -5s; }
-    .o3 { width: 260px; height: 260px; background: var(--med-d); bottom: -60px; left: 25%; animation-delay: -10s; }
-    .o4 { width: 200px; height: 200px; background: var(--neon); opacity: .08; top: 15%; right: 28%; animation-delay: -14s; }
-    @keyframes orb-d { 0%,100%{transform:translate(0,0) scale(1);} 40%{transform:translate(26px,-16px) scale(1.04);} 70%{transform:translate(-14px,24px) scale(.96);} }
-
-    .hero-body { position: relative; z-index: 2; padding: 70px 0 60px; width: 100%; max-width: 820px; }
-    .hero-eye { display: inline-flex; align-items: center; gap: 9px; background: rgba(0,180,216,.1); border: 1px solid rgba(0,180,216,.24); border-radius: 100px; padding: 5px 14px; font-family: 'Barlow Condensed', sans-serif; font-size: .75rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--ice-l); margin-bottom: 18px; }
+    /* Top intro */
+    .intro { text-align: center; margin-bottom: 52px; }
+    .intro-eye { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 100px; padding: 5px 14px; font-family: 'Barlow Condensed', sans-serif; font-size: .74rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--t2); margin-bottom: 18px; }
     .dot-live { width: 6px; height: 6px; border-radius: 50%; background: var(--neon); flex-shrink: 0; animation: blink 2s ease infinite; }
     @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
+    .intro h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.6rem, 7vw, 5.5rem); letter-spacing: .025em; color: #fff; line-height: 1; margin-bottom: 14px; }
+    .intro h1 .ice-c { color: var(--ice-l); }
+    .intro h1 .med-c { color: var(--med-l); }
+    .intro p { font-family: 'Lora', serif; font-size: clamp(.9rem, 1.8vw, 1rem); color: var(--t2); line-height: 1.8; max-width: 460px; margin: 0 auto; }
 
-    h1.htitle { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3.4rem, 9vw, 7.2rem); letter-spacing: .02em; color: #fff; line-height: .96; margin-bottom: 20px; }
-    .h-grad { background: linear-gradient(90deg, var(--ice-l), var(--neon) 45%, var(--med-l) 75%, var(--ice-l)); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shine 5s linear infinite; }
-    @keyframes shine { to { background-position: 200% center; } }
+    /* Prompt */
+    .prompt { font-family: 'Barlow Condensed', sans-serif; font-size: .82rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--tm); margin-bottom: 20px; text-align: center; }
 
-    .hero-sub { font-family: 'Lora', serif; font-size: clamp(.92rem, 1.9vw, 1.1rem); color: var(--text-2); line-height: 1.84; max-width: 560px; margin-bottom: 32px; }
-    .hero-sub strong { color: var(--ice-l); }
-    .hero-sub em { color: var(--med-l); font-style: italic; }
+    /* ── CHOICE CARDS ── */
+    .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 860px; width: 100%; }
 
-    .hero-acts { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 36px; }
+    .choice-card {
+      display: flex; flex-direction: column;
+      border-radius: 22px; overflow: hidden;
+      border: 1.5px solid transparent;
+      position: relative;
+      cursor: pointer;
+      transition: transform .32s cubic-bezier(.34,1.56,.64,1), box-shadow .32s;
+      text-decoration: none;
+    }
+    .choice-card:hover { transform: translateY(-8px) scale(1.015); }
 
-    .hero-ship { display: flex; flex-wrap: wrap; gap: 16px; background: rgba(255,255,255,.03); border: 1px solid var(--border); border-radius: 10px; padding: 12px 18px; }
-    .hs-it { display: flex; align-items: center; gap: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: .78rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--text-2); }
-    .hs-it svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--ice-l); }
-    .hs-it strong { color: var(--text); }
+    /* Ice card */
+    .card-ice {
+      background: linear-gradient(160deg, #0a1520, #070f1a);
+      border-color: var(--b-ice);
+    }
+    .card-ice:hover { box-shadow: 0 20px 60px rgba(0,180,216,.22), 0 0 0 1px rgba(0,180,216,.35); }
 
-    .hero-scroll { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 4px; font-family: 'Barlow Condensed', sans-serif; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: var(--text-m); z-index: 2; animation: bounce 2s ease infinite; }
-    .hero-scroll svg { width: 17px; height: 17px; }
-    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0);} 50%{transform:translateX(-50%) translateY(7px);} }
+    /* Medusa card */
+    .card-med {
+      background: linear-gradient(160deg, #10091a, #090612);
+      border-color: var(--b-med);
+    }
+    .card-med:hover { box-shadow: 0 20px 60px rgba(155,93,229,.22), 0 0 0 1px rgba(155,93,229,.35); }
 
-    /* ── CATEGORIAS ── */
-    #categorias { background: var(--bg-2); padding: 60px 0; }
-    .cat-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
-    .cat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-l); padding: 22px 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; transition: border-color var(--dur), transform var(--dur) var(--spr), box-shadow var(--dur); }
-    .cat-card:hover { border-color: var(--border-h); transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,180,216,.12); }
-    .cat-card.med-c:hover { border-color: rgba(155,93,229,.36); box-shadow: 0 10px 28px rgba(155,93,229,.1); }
-    .cat-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
-    .cat-icon.ice-bg { background: linear-gradient(135deg, rgba(0,180,216,.18), rgba(0,119,182,.26)); border: 1px solid rgba(0,180,216,.15); }
-    .cat-icon.med-bg { background: linear-gradient(135deg, rgba(155,93,229,.18), rgba(106,13,173,.26)); border: 1px solid rgba(155,93,229,.15); }
-    .cat-icon svg { width: 24px; height: 24px; }
-    .cat-icon.ice-bg svg { color: var(--ice-l); }
-    .cat-icon.med-bg svg { color: var(--med-l); }
-    .cat-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: .92rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; line-height: 1.2; }
-    .cat-arrow { font-family: 'Barlow Condensed', sans-serif; font-size: .66rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ice-l); }
-    .cat-card.med-c .cat-arrow { color: var(--med-l); }
+    /* Card top band */
+    .card-band {
+      height: 6px;
+      flex-shrink: 0;
+    }
+    .ice-band  { background: linear-gradient(90deg, var(--ice-d), var(--ice), var(--neon)); }
+    .med-band  { background: linear-gradient(90deg, var(--med-d), var(--med), var(--med-l)); }
 
-    /* ── PRODUCTS ── */
-    .prod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 18px; }
-    .prod-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-l); overflow: hidden; display: flex; flex-direction: column; transition: border-color var(--dur), transform var(--dur) var(--spr), box-shadow var(--dur); }
-    .prod-card:hover { border-color: var(--border-h); transform: translateY(-5px); box-shadow: 0 12px 34px rgba(0,180,216,.12); }
-    .prod-card.med-card:hover { border-color: rgba(155,93,229,.36); box-shadow: 0 12px 34px rgba(155,93,229,.1); }
-    .prod-img { aspect-ratio: 1/1; background: var(--surface-2); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    .prod-img-placeholder { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
-    .prod-img-placeholder svg { width: 44px; height: 44px; opacity: .18; }
-    .prod-img-placeholder.ice-ph svg { color: var(--ice); }
-    .prod-img-placeholder.med-ph svg { color: var(--med); }
-    .prod-badge { position: absolute; top: 9px; left: 9px; font-family: 'Barlow Condensed', sans-serif; font-size: .64rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; border-radius: 4px; }
-    .badge-ice { background: var(--ice); color: #fff; }
-    .badge-med { background: var(--med); color: #fff; }
-    .badge-sal { background: #e53e3e; color: #fff; }
-    .badge-new { background: var(--neon); color: #000; }
-    .prod-body { padding: 14px 14px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .prod-cat { font-family: 'Barlow Condensed', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--ice-l); }
-    .prod-cat.med-c { color: var(--med-l); }
-    .stars { display: flex; gap: 2px; }
-    .stars svg { width: 11px; height: 11px; color: var(--gold); }
-    .prod-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #fff; line-height: 1.2; }
-    .prod-card p { font-size: .78rem; color: var(--text-2); line-height: 1.55; flex: 1; }
-    .pricing { display: flex; flex-direction: column; gap: 2px; margin-top: 2px; }
-    .price { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; line-height: 1; letter-spacing: .03em; color: var(--ice-l); }
-    .price.med-c { color: var(--med-l); }
-    .price-old { font-size: .74rem; color: var(--text-m); text-decoration: line-through; }
+    /* Card inner */
+    .card-inner { padding: 36px 32px 32px; display: flex; flex-direction: column; gap: 20px; flex: 1; }
 
-    /* ── SOBRE ── */
-    #sobre { background: var(--bg-3); }
-    .sobre-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 64px; align-items: start; }
-    .sobre-left p { font-family: 'Lora', serif; font-size: .95rem; color: var(--text-2); line-height: 1.9; margin-bottom: 12px; }
-    .sobre-left p strong { color: var(--text); }
-    .pilares { display: flex; flex-direction: column; gap: 11px; margin-top: 24px; }
-    .pilar { display: flex; align-items: flex-start; gap: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; transition: border-color .2s, transform .2s var(--spr); }
-    .pilar:hover { border-color: var(--border-h); transform: translateX(4px); }
-    .pilar-i { width: 38px; height: 38px; border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .pilar-i.ice-bg { background: linear-gradient(135deg, var(--ice-d), var(--ice)); }
-    .pilar-i.med-bg { background: linear-gradient(135deg, var(--med-d), var(--med)); }
-    .pilar-i svg { width: 18px; height: 18px; color: #fff; }
-    .pilar h4 { font-family: 'Barlow Condensed', sans-serif; font-size: .9rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 2px; color: var(--ice-l); }
-    .pilar h4.med-c { color: var(--med-l); }
-    .pilar p { font-size: .79rem; color: var(--text-2); line-height: 1.6; }
-    .ctrs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .ctr { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 18px 14px; text-align: center; transition: border-color .2s, transform .2s var(--spr); }
-    .ctr:hover { border-color: var(--border-h); transform: translateY(-3px); }
-    .ctr-n { font-family: 'Bebas Neue', sans-serif; font-size: 2.6rem; line-height: 1; display: block; margin-bottom: 3px; color: var(--ice-l); }
-    .ctr-n.med-c { color: var(--med-l); }
-    .ctr-l { font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--text-m); }
-    .sobre-quote { background: linear-gradient(135deg, rgba(0,180,216,.08), rgba(155,93,229,.05)); border-left: 3px solid var(--ice); border-radius: 0 var(--r) var(--r) 0; padding: 16px 18px; }
-    .sobre-quote blockquote { font-family: 'Lora', serif; font-size: .93rem; font-style: italic; color: var(--text); line-height: 1.76; }
-    .sobre-quote cite { display: block; margin-top: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; color: var(--ice-l); font-style: normal; }
+    /* Icon circle */
+    .card-icon-wrap { display: flex; align-items: center; justify-content: center; width: 68px; height: 68px; border-radius: 50%; margin-bottom: 4px; }
+    .card-icon-wrap.ice-icon { background: linear-gradient(135deg, var(--ice-d), var(--ice)); box-shadow: 0 0 28px rgba(0,180,216,.35); }
+    .card-icon-wrap.med-icon { background: linear-gradient(135deg, var(--med-d), var(--med)); box-shadow: 0 0 28px rgba(155,93,229,.35); }
+    .card-icon-wrap svg { width: 32px; height: 32px; color: #fff; }
 
-    /* ── MEDUSA ARTE ── */
-    #arte { background: var(--bg); position: relative; overflow: hidden; }
-    #arte::before { content: ''; position: absolute; top: -60px; right: -110px; width: 380px; height: 380px; border-radius: 50%; background: radial-gradient(circle, rgba(155,93,229,.1), transparent 70%); pointer-events: none; }
-    .arte-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .mandala-wrap { display: flex; justify-content: center; align-items: center; position: relative; }
-    .m-glow { position: absolute; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(155,93,229,.2), transparent 70%); animation: m-g 4s ease-in-out infinite; }
-    @keyframes m-g { 0%,100%{opacity:.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.07);} }
-    .m-svg { width: 260px; height: 260px; animation: spin-s 44s linear infinite; }
-    @keyframes spin-s { to { transform: rotate(360deg); } }
-    .arte-items-list { display: flex; flex-direction: column; gap: 9px; margin-top: 18px; }
-    .arte-item { display: flex; align-items: center; gap: 11px; padding: 9px 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; transition: border-color .2s, transform .2s var(--spr); }
-    .arte-item:hover { border-color: rgba(155,93,229,.3); transform: translateX(4px); }
-    .a-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--med); flex-shrink: 0; }
-    .arte-item span { font-family: 'Barlow Condensed', sans-serif; font-size: .87rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--text-2); }
-    .arte-showcase { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-    .arte-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 16px 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: border-color .2s, transform .22s var(--spr); }
-    .arte-box:hover { border-color: rgba(155,93,229,.35); transform: translateY(-4px); }
-    .arte-box h4 { font-family: 'Barlow Condensed', sans-serif; font-size: .84rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--med-l); }
-    .arte-box p { font-size: .7rem; color: var(--text-m); }
+    /* Card title */
+    .card-title { font-family: 'Bebas Neue', sans-serif; letter-spacing: .04em; line-height: 1; }
+    .card-title .big { display: block; font-size: clamp(2rem, 3.8vw, 3rem); }
+    .card-title .small { display: block; font-size: clamp(1rem, 2vw, 1.4rem); letter-spacing: .08em; margin-top: 2px; }
+    .ice-title .big, .ice-title .small { color: var(--ice-l); }
+    .med-title .big, .med-title .small { color: var(--med-l); }
 
-    /* ── VIP ── */
-    #vip { background: var(--bg-2); }
-    .vip-box { background: linear-gradient(135deg, rgba(18,140,126,.12), rgba(37,211,102,.06)); border: 1px solid rgba(37,211,102,.2); border-radius: var(--r-l); padding: 52px 48px; text-align: center; position: relative; overflow: hidden; }
-    .vip-box::before { content: ''; position: absolute; top: -50px; left: -50px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(37,211,102,.08), transparent 70%); }
-    .vip-box::after  { content: ''; position: absolute; bottom: -40px; right: -40px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle, rgba(0,180,216,.06), transparent 70%); }
-    .vip-icon { width: 56px; height: 56px; border-radius: 50%; background: linear-gradient(135deg, #128c7e, #25d366); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 24px rgba(37,211,102,.3); position: relative; }
-    .vip-icon svg { width: 28px; height: 28px; color: #fff; }
-    .vip-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2rem, 4vw, 3.2rem); color: #fff; margin-bottom: 10px; position: relative; }
-    .vip-box h2 span { color: var(--neon); }
-    .vip-box .desc { font-family: 'Lora', serif; font-size: .95rem; color: var(--text-2); line-height: 1.8; max-width: 580px; margin: 0 auto 28px; position: relative; }
-    .vip-perks { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; position: relative; }
-    .vip-perk { display: flex; align-items: center; gap: 7px; background: rgba(37,211,102,.08); border: 1px solid rgba(37,211,102,.18); border-radius: 8px; padding: 8px 14px; font-family: 'Barlow Condensed', sans-serif; font-size: .8rem; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #d9f7d9; }
-    .vip-perk svg { width: 15px; height: 15px; color: var(--neon); flex-shrink: 0; }
+    /* Card desc */
+    .card-desc { font-family: 'Lora', serif; font-size: .9rem; color: var(--t2); line-height: 1.78; flex: 1; }
 
-    /* ── REDUCAO DANOS ── */
-    #reducao { background: var(--bg-3); }
-    .rd-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(272px, 1fr)); gap: 15px; }
-    .rd-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 22px 18px; position: relative; overflow: hidden; transition: border-color .2s, transform .2s var(--spr); }
-    .rd-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--ice), var(--neon)); }
-    .rd-card:hover { border-color: var(--border-h); transform: translateY(-3px); }
-    .rd-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(0,180,216,.1); display: flex; align-items: center; justify-content: center; margin-bottom: 13px; }
-    .rd-icon svg { width: 20px; height: 20px; color: var(--ice-l); }
-    .rd-card h3 { font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; margin-bottom: 7px; }
-    .rd-card p { font-size: .81rem; color: var(--text-2); line-height: 1.7; }
+    /* Card tags */
+    .card-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .card-tag { font-family: 'Barlow Condensed', sans-serif; font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: 3px 9px; border-radius: 4px; }
+    .ice-tag { background: rgba(0,180,216,.12); border: 1px solid rgba(0,180,216,.2); color: var(--ice-l); }
+    .med-tag { background: rgba(155,93,229,.12); border: 1px solid rgba(155,93,229,.2); color: var(--med-l); }
+    .wip-tag { background: rgba(244,185,66,.1); border: 1px solid rgba(244,185,66,.2); color: #f4b942; }
 
-    /* ── DEPOIMENTOS ── */
-    #depoimentos { background: var(--bg); }
-    .dep-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
-    .dep-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 20px 18px; display: flex; flex-direction: column; gap: 12px; transition: border-color .2s, transform .2s var(--spr); }
-    .dep-card:hover { border-color: var(--border-h); transform: translateY(-3px); }
-    .dep-text { font-family: 'Lora', serif; font-size: .87rem; font-style: italic; color: var(--text-2); line-height: 1.74; flex: 1; }
-    .dep-author { display: flex; align-items: center; gap: 10px; }
-    .dep-av { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--ice-d), var(--ice)); display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue', sans-serif; font-size: .85rem; color: #fff; flex-shrink: 0; }
-    .dep-av.med-bg { background: linear-gradient(135deg, var(--med-d), var(--med)); }
-    .dep-name { font-family: 'Barlow Condensed', sans-serif; font-size: .86rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #fff; }
-    .dep-city { font-size: .7rem; color: var(--text-m); }
+    /* Card CTA button */
+    .card-cta {
+      display: flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 13px; border-radius: 10px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700;
+      letter-spacing: .09em; text-transform: uppercase;
+      transition: opacity .2s;
+    }
+    .card-cta svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .ice-cta { background: linear-gradient(135deg, var(--ice-d), var(--ice)); color: #fff; }
+    .med-cta { background: linear-gradient(135deg, var(--med-d), var(--med)); color: #fff; }
+    .card-card:hover .card-cta { opacity: .9; }
 
-    /* ── FAQ ── */
-    #faq { background: var(--bg-2); }
-    .faq-list { display: flex; flex-direction: column; gap: 8px; max-width: 780px; margin: 0 auto; }
-    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: border-color .2s; }
-    .faq-item.open { border-color: var(--ice); }
-    .faq-q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 15px 17px; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-size: .98rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #fff; user-select: none; }
-    .faq-q svg { width: 16px; height: 16px; color: var(--ice-l); flex-shrink: 0; transition: transform .3s; }
-    .faq-item.open .faq-q svg { transform: rotate(45deg); }
-    .faq-a { max-height: 0; overflow: hidden; transition: max-height .36s var(--ease), padding .36s; font-family: 'Lora', serif; font-size: .87rem; color: var(--text-2); line-height: 1.8; }
-    .faq-item.open .faq-a { max-height: 260px; padding: 0 17px 15px; }
+    /* WIP overlay badge */
+    .wip-badge {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(244,185,66,.15); border: 1px solid rgba(244,185,66,.3);
+      color: #f4b942; border-radius: 100px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .65rem; font-weight: 700;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 3px 10px; display: flex; align-items: center; gap: 5px;
+    }
+    .wip-dot { width: 5px; height: 5px; border-radius: 50%; background: #f4b942; animation: blink 1.6s ease infinite; flex-shrink: 0; }
 
-    /* ── EVENTOS ── */
-    #eventos { background: var(--bg-3); }
-    .ev-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
-    .ev-feat { background: linear-gradient(135deg, rgba(0,180,216,.1), rgba(0,119,182,.05)); border: 1px solid var(--border); border-radius: var(--r-l); padding: 32px 26px; }
-    .ev-feat h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; color: #fff; margin-bottom: 10px; }
-    .ev-feat p { font-family: 'Lora', serif; font-size: .9rem; color: var(--text-2); line-height: 1.8; margin-bottom: 8px; }
-    .ev-list { display: flex; flex-direction: column; gap: 11px; }
-    .ev-item { display: flex; gap: 12px; align-items: flex-start; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; transition: border-color .2s, transform .2s var(--spr); }
-    .ev-item:hover { border-color: var(--border-h); transform: translateX(4px); }
-    .ev-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--ice); flex-shrink: 0; margin-top: 5px; box-shadow: 0 0 9px var(--ice); }
-    .ev-item h4 { font-family: 'Barlow Condensed', sans-serif; font-size: .9rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #fff; margin-bottom: 2px; }
-    .ev-item p { font-size: .78rem; color: var(--text-m); }
-
-    /* ── NEWSLETTER ── */
-    #newsletter { background: var(--bg); }
-    .nl-box { background: linear-gradient(135deg, rgba(0,180,216,.1), rgba(155,93,229,.06)); border: 1px solid var(--border); border-radius: var(--r-l); padding: 48px 44px; text-align: center; position: relative; overflow: hidden; }
-    .nl-box::before { content: ''; position: absolute; top: -50px; left: -50px; width: 180px; height: 180px; border-radius: 50%; background: radial-gradient(circle, rgba(0,180,216,.08), transparent 70%); }
-    .nl-box h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.9rem, 3.6vw, 2.8rem); color: #fff; margin-bottom: 9px; position: relative; }
-    .nl-box p { font-family: 'Lora', serif; font-size: .93rem; color: var(--text-2); margin-bottom: 24px; position: relative; }
-    .nl-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; position: relative; }
-    .nl-form input { flex: 1; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 11px 14px; color: var(--text); font-size: .87rem; font-family: 'Inter', sans-serif; outline: none; transition: border-color .2s; }
-    .nl-form input::placeholder { color: var(--text-m); }
-    .nl-form input:focus { border-color: var(--ice); }
-    .nl-note { margin-top: 9px; font-size: .69rem; color: var(--text-m); position: relative; }
-
-    /* ── CONTATO ── */
-    #contato { background: var(--bg-2); }
-    .ct-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; }
-    .ci { display: flex; align-items: center; gap: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r); padding: 14px 16px; transition: border-color .2s, transform .2s var(--spr); }
-    .ci:hover { border-color: var(--border-h); transform: translateX(4px); }
-    .ci-icon { width: 40px; height: 40px; border-radius: 9px; background: rgba(0,180,216,.1); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .ci-icon svg { width: 19px; height: 19px; color: var(--ice-l); }
-    .ci-lbl { display: block; font-family: 'Barlow Condensed', sans-serif; font-size: .65rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ice-l); margin-bottom: 1px; }
-    .ci-val { font-size: .85rem; color: var(--text-2); }
-    .ct-box { background: linear-gradient(135deg, rgba(0,180,216,.1), rgba(155,93,229,.05)); border: 1px solid var(--border); border-radius: var(--r-l); padding: 34px 26px; display: flex; flex-direction: column; gap: 15px; }
-    .ct-box h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.9rem; color: #fff; line-height: 1.05; }
-    .ct-box p { font-family: 'Lora', serif; font-size: .89rem; color: var(--text-2); line-height: 1.8; }
-    .ct-box .hint { font-size: .73rem; color: var(--text-m); font-style: italic; margin-top: -5px; }
+    /* ── BOTTOM ── */
+    .bottom-links { margin-top: 36px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; justify-content: center; }
+    .bl-item { display: flex; align-items: center; gap: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: .8rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--tm); transition: color .2s; }
+    .bl-item:hover { color: var(--t2); }
+    .bl-item svg { width: 15px; height: 15px; }
+    .bl-sep { width: 1px; height: 14px; background: rgba(255,255,255,.08); }
 
     /* ── FOOTER ── */
-    footer { background: var(--bg-3); border-top: 1px solid var(--border); padding: 60px 0 22px; }
-    .ft-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-    .ft-brand-title { display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
-    .ft-ice { font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem; letter-spacing: .06em; color: var(--ice); text-shadow: 0 0 12px var(--ice-glow); line-height: 1; }
-    .ft-med { font-family: 'Bebas Neue', sans-serif; font-size: 1rem; letter-spacing: .05em; color: var(--med-l); text-shadow: 0 0 10px var(--med-glow); line-height: 1; }
-    .ft-brand p { font-family: 'Lora', serif; font-size: .83rem; color: var(--text-m); line-height: 1.8; max-width: 250px; margin-bottom: 14px; }
-    .soc-row { display: flex; gap: 7px; margin-bottom: 12px; }
-    .soc-btn { width: 36px; height: 36px; border-radius: 8px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s, transform .2s var(--spr); }
-    .soc-btn:hover { border-color: var(--ice); background: rgba(0,180,216,.1); transform: translateY(-2px); }
-    .soc-btn svg { width: 15px; height: 15px; color: var(--text-m); transition: color .2s; }
-    .soc-btn:hover svg { color: var(--ice-l); }
-    .pay-row { display: flex; gap: 5px; flex-wrap: wrap; }
-    .pay-ic { background: var(--surface); border: 1px solid var(--border); border-radius: 4px; padding: 3px 7px; font-family: 'Barlow Condensed', sans-serif; font-size: .62rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--text-m); }
-    .ft-col h4 { font-family: 'Barlow Condensed', sans-serif; font-size: .7rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ice-l); margin-bottom: 13px; }
-    .ft-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
-    .ft-col ul li a { font-size: .82rem; color: var(--text-m); display: flex; align-items: center; gap: 6px; transition: color .2s, gap .2s; }
-    .ft-col ul li a::before { content: ''; display: inline-block; width: 3px; height: 3px; border-radius: 50%; background: var(--border); flex-shrink: 0; transition: background .2s; }
-    .ft-col ul li a:hover { color: var(--ice-l); gap: 10px; }
-    .ft-col ul li a:hover::before { background: var(--ice); }
-    .ft-trust { border-top: 1px solid var(--border); padding: 20px 0; display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin-bottom: 16px; }
-    .ft-ti { display: flex; align-items: center; gap: 7px; font-family: 'Barlow Condensed', sans-serif; font-size: .76rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase; color: var(--text-m); }
-    .ft-ti svg { width: 15px; height: 15px; color: var(--ice-l); flex-shrink: 0; }
-    .ft-bottom { border-top: 1px solid var(--border); padding-top: 18px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 9px; }
-    .ft-bottom p { font-size: .73rem; color: var(--text-m); }
-    .ft-bottom a { color: var(--ice-l); }
-    .ft-bottom a:hover { text-decoration: underline; }
+    footer { position: relative; z-index: 1; padding: 18px 24px; border-top: 1px solid rgba(255,255,255,.05); text-align: center; }
+    footer p { font-size: .72rem; color: var(--tm); }
+    footer a { color: var(--t2); }
+    footer a:hover { color: var(--ice-l); }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 1020px) { .ft-grid { grid-template-columns: 1fr 1fr; } .cat-grid { grid-template-columns: repeat(3, 1fr); } }
-    @media (max-width: 900px) { nav.desk { display: none; } .hdr-search { max-width: 200px; } .hbg { display: flex; } .sobre-grid { grid-template-columns: 1fr; gap: 44px; } .arte-layout { grid-template-columns: 1fr; gap: 42px; } .ev-layout { grid-template-columns: 1fr; } .ct-layout { grid-template-columns: 1fr; } }
-    @media (max-width: 640px) { :root { --ah: 32px; } section { padding: 60px 0; } h1.htitle { font-size: clamp(2.9rem, 13vw, 5rem); } .hero-acts { flex-direction: column; } .hero-acts .btn { justify-content: center; } .cat-grid { grid-template-columns: repeat(2, 1fr); } .ft-grid { grid-template-columns: 1fr; } .ft-bottom { flex-direction: column; text-align: center; } .nl-form { flex-direction: column; } .hdr-search { display: none; } #fw .wa-lbl { display: none; } #fw { padding: 13px; border-radius: 50%; max-width: unset; } }
+    @media (max-width: 660px) {
+      .choices { grid-template-columns: 1fr; max-width: 420px; }
+      .card-inner { padding: 28px 24px 26px; }
+      .intro h1 { font-size: clamp(2.2rem, 10vw, 3.4rem); }
+    }
   </style>
 </head>
 <body>
 
-<!-- ── FLOAT WA ── -->
-<a id="fw" href="https://wa.me/5564999421040?text=Oi%21+Vi+o+site+da+Ice-o-lator+e+quero+saber+mais+%F0%9F%8C%BF" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
-  <span class="pulse" aria-hidden="true"></span>
-  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-  <span class="wa-lbl">Falar agora</span>
-</a>
-<button id="bt" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg>
-</button>
-
-<!-- ── ANNOUNCEMENT BAR ── -->
-<div id="ann" aria-label="Promoções e informações">
-  <div class="ann-track" aria-hidden="true">
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Funcionamento: <span class="ann-hi">14h às 19h</span></div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entregas em Catalão e envios para o Brasil</div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>PIX, Dinheiro e Cartão</div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rua Dezessete, 17 — Setor Universitário, <span class="ann-hi">Catalão GO</span></div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Grupo VIP — <span class="ann-hi">descontos exclusivos</span></div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Funcionamento: <span class="ann-hi">14h às 19h</span></div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entregas em Catalão e envios para o Brasil</div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>PIX, Dinheiro e Cartão</div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rua Dezessete, 17 — Setor Universitário, <span class="ann-hi">Catalão GO</span></div>
-    <div class="ann-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Grupo VIP — <span class="ann-hi">descontos exclusivos</span></div>
-  </div>
-</div>
-
-<!-- ── HEADER ── -->
-<header id="hdr" role="banner">
-  <div class="container">
-    <div class="hdr-inner">
-      <a href="#inicio" class="logo-wrap" aria-label="Ice-o-lator Headshop & Medusa Arte">
-        <div>
-          <div class="logo-ice">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="color:var(--ice-l);"><path d="M12 2L12 22M2 12L22 12M4.93 4.93L19.07 19.07M19.07 4.93L4.93 19.07"/></svg>
-            ICE-O-LATOR
-          </div>
-          <span class="logo-sub">Headshop · Catalão, GO · Desde 2018</span>
-        </div>
-        <div class="logo-divider" aria-hidden="true"></div>
-        <div>
-          <div class="logo-med">MEDUSA ARTE</div>
-          <span class="logo-sub">Mandalas &amp; Artesanato</span>
-        </div>
-      </a>
-
-      <div class="hdr-search" role="search">
-        <input type="search" placeholder="Buscar produtos…" aria-label="Buscar produtos" />
-        <button aria-label="Pesquisar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        </button>
-      </div>
-
-      <nav class="desk" aria-label="Navegação principal">
-        <a href="#categorias"    class="nl">Categorias</a>
-        <a href="#mais-vendidos" class="nl">Produtos</a>
-        <a href="#arte"          class="nl">Medusa Arte</a>
-        <a href="#vip"           class="nl">Grupo VIP</a>
-        <a href="#faq"           class="nl">FAQ</a>
-        <a href="#contato"       class="nl cta">Contato</a>
-      </nav>
-
-      <button class="hbg" id="hbg" aria-label="Abrir menu" aria-expanded="false" aria-controls="mob">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-  <nav class="mob" id="mob" aria-label="Menu mobile">
-    <a href="#categorias"    onclick="cm()">Categorias</a>
-    <a href="#mais-vendidos" onclick="cm()">Produtos</a>
-    <a href="#arte"          onclick="cm()">Medusa Arte</a>
-    <a href="#vip"           onclick="cm()">Grupo VIP</a>
-    <a href="#reducao"       onclick="cm()">Redução de Danos</a>
-    <a href="#eventos"       onclick="cm()">Eventos</a>
-    <a href="#faq"           onclick="cm()">FAQ</a>
-    <a href="#contato"       onclick="cm()">Contato</a>
-    <a href="https://wa.me/5564999421040?text=Oi%21+%F0%9F%8C%BF" target="_blank" rel="noopener" onclick="cm()">
-      WhatsApp (64) 99942-1040
-    </a>
-  </nav>
-</header>
-
-<main>
-
-<!-- ── HERO ── -->
-<section id="inicio" aria-label="Apresentação">
   <canvas id="cv" aria-hidden="true"></canvas>
   <div class="orbs" aria-hidden="true">
-    <div class="orb o1"></div><div class="orb o2"></div>
-    <div class="orb o3"></div><div class="orb o4"></div>
+    <div class="orb o1"></div>
+    <div class="orb o2"></div>
+    <div class="orb o3"></div>
   </div>
-  <div class="container">
-    <div class="hero-body">
 
-      <div class="hero-eye reveal">
+  <!-- HEADER -->
+  <header>
+    <div class="header-tag">
+      <span class="h-brand ice-c">Ice-o-lator</span>
+      <span class="dot-sep" aria-hidden="true"></span>
+      <span class="h-brand">Catalão, GO · Desde 2018</span>
+      <span class="dot-sep" aria-hidden="true"></span>
+      <span class="h-brand med-c">Medusa Arte</span>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <div class="intro">
+      <div class="intro-eye">
         <span class="dot-live" aria-hidden="true"></span>
-        Catalão, GO · Desde 2018 · Aberto 14h–19h
+        Dois universos, uma família
       </div>
-
-      <h1 class="htitle reveal d1">
-        Produtos<br/>
-        <span class="h-grad">únicos,</span><br/>
-        arte e boas energias.
+      <h1>
+        Bem-vindo à<br/>
+        <span class="ice-c">Ice</span> &amp; <span class="med-c">Medusa</span>
       </h1>
-
-      <p class="hero-sub reveal d2">
-        <strong>Ice-o-lator Headshop</strong> — acessórios com curadoria, bongs, dichavadores, pipes e muito mais.
-        + <em>Medusa Arte</em> — mandalas, brincos exclusivos e arte artesanal.
-        Loja física no Setor Universitário em Catalão, entregas e envios para todo o Brasil.
-      </p>
-
-      <div class="hero-acts reveal d3">
-        <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+os+produtos+da+Ice-o-lator+%F0%9F%8C%BF"
-           target="_blank" rel="noopener" class="btn btn-ice btn-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-          Falar no WhatsApp
-        </a>
-        <a href="https://www.instagram.com/iceolatorheadshop" target="_blank" rel="noopener" class="btn btn-ghost btn-lg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          @iceolatorheadshop
-        </a>
-        <a href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6" target="_blank" rel="noopener" class="btn btn-vip btn-lg">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Entrar no Grupo VIP
-        </a>
-      </div>
-
-      <div class="hero-ship reveal d4">
-        <div class="hs-it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><strong>Entrega</strong> em Catalão</div>
-        <div class="hs-it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><strong>Retirada</strong> na loja</div>
-        <div class="hs-it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Aberto <strong>14h às 19h</strong></div>
-        <div class="hs-it"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Envios para todo o <strong>Brasil</strong></div>
-      </div>
+      <p>Escolha para onde quer ir — a headshop ou a galeria de arte artesanal.</p>
     </div>
-  </div>
-  <div class="hero-scroll" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>Role
-  </div>
-</section>
 
-<!-- ── CATEGORIAS ── -->
-<section id="categorias">
-  <div class="container">
-    <div class="sec-center" style="margin-bottom:32px;">
-      <div class="sec-label reveal" style="justify-content:center;">O que você procura?</div>
-      <h2 class="sec-title reveal d1">Nossas <span class="hi">Categorias</span></h2>
-    </div>
-    <div class="cat-grid">
-      <a href="#mais-vendidos" class="cat-card reveal">
-        <div class="cat-icon ice-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.17 6a3 3 0 1 0 5.66 0"/><path d="M12 2v4M7.17 10a5 5 0 1 0 9.66 0"/><path d="M12 15v7M8 22h8"/></svg></div>
-        <h3>Bongs &amp; Pipes</h3>
-        <span class="cat-arrow">Ver →</span>
+    <p class="prompt">Para onde você vai?</p>
+
+    <div class="choices">
+
+      <!-- ICE-O-LATOR -->
+      <a href="headshop/" class="choice-card card-ice" aria-label="Entrar na Ice-o-lator Headshop">
+        <div class="card-band ice-band"></div>
+        <div class="card-inner">
+          <div class="card-icon-wrap ice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2L12 22M2 12L22 12M4.93 4.93L19.07 19.07M19.07 4.93L4.93 19.07"/>
+            </svg>
+          </div>
+          <div class="card-title ice-title">
+            <span class="big">Ice-o-lator</span>
+            <span class="small">Headshop</span>
+          </div>
+          <p class="card-desc">Acessórios com curadoria, bongs, dichavadores, pipes e tudo para uma session de qualidade. Loja física em Catalão + envios para o Brasil.</p>
+          <div class="card-tags">
+            <span class="card-tag ice-tag">Bongs &amp; Pipes</span>
+            <span class="card-tag ice-tag">Dichavadores</span>
+            <span class="card-tag ice-tag">Acessórios</span>
+            <span class="card-tag ice-tag">Entrega Local</span>
+          </div>
+          <div class="card-cta ice-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg>
+            Entrar na Headshop
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
       </a>
-      <a href="#mais-vendidos" class="cat-card reveal d1">
-        <div class="cat-icon ice-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
-        <h3>Dichavadores</h3>
-        <span class="cat-arrow">Ver →</span>
+
+      <!-- MEDUSA ARTE -->
+      <a href="medusa/" class="choice-card card-med" aria-label="Entrar na Medusa Arte">
+        <div class="card-band med-band"></div>
+        <div class="wip-badge">
+          <span class="wip-dot" aria-hidden="true"></span>
+          Em construção
+        </div>
+        <div class="card-inner">
+          <div class="card-icon-wrap med-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"/>
+              <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+              <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          </div>
+          <div class="card-title med-title">
+            <span class="big">Medusa Arte</span>
+            <span class="small">Mandalas &amp; Artesanato</span>
+          </div>
+          <p class="card-desc">Arte artesanal exclusiva feita à mão — mandalas decorativas, brincos únicos, coleção Zodíaco e peças com boas energias. Site em desenvolvimento.</p>
+          <div class="card-tags">
+            <span class="card-tag med-tag">Mandalas</span>
+            <span class="card-tag med-tag">Brincos</span>
+            <span class="card-tag med-tag">Zodíaco</span>
+            <span class="card-tag wip-tag">Em breve</span>
+          </div>
+          <div class="card-cta med-cta">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            Ver Medusa Arte
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </div>
+        </div>
       </a>
-      <a href="#mais-vendidos" class="cat-card reveal d2">
-        <div class="cat-icon ice-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-        <h3>Acessórios</h3>
-        <span class="cat-arrow">Ver →</span>
-      </a>
-      <a href="#arte" class="cat-card med-c reveal d3">
-        <div class="cat-icon med-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
-        <h3>Mandalas</h3>
-        <span class="cat-arrow">Ver →</span>
-      </a>
-      <a href="#arte" class="cat-card med-c reveal d4">
-        <div class="cat-icon med-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-        <h3>Brincos &amp; Peças</h3>
-        <span class="cat-arrow">Ver →</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<div class="div-line" aria-hidden="true">
-  <svg viewBox="0 0 1000 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
-    <line x1="0" y1="12" x2="400" y2="12" stroke="rgba(0,180,216,0.14)" stroke-width="1"/>
-    <circle cx="420" cy="12" r="3" fill="rgba(0,180,216,0.5)"/>
-    <circle cx="438" cy="12" r="6" fill="none" stroke="rgba(0,180,216,0.35)" stroke-width="1.2"/>
-    <circle cx="458" cy="12" r="3" fill="rgba(155,93,229,0.7)"/>
-    <circle cx="476" cy="12" r="8" fill="none" stroke="rgba(0,180,216,0.24)" stroke-width="1"/>
-    <circle cx="500" cy="12" r="5" fill="rgba(0,180,216,0.55)"/>
-    <circle cx="524" cy="12" r="8" fill="none" stroke="rgba(155,93,229,0.24)" stroke-width="1"/>
-    <circle cx="542" cy="12" r="3" fill="rgba(155,93,229,0.7)"/>
-    <circle cx="562" cy="12" r="6" fill="none" stroke="rgba(0,180,216,0.35)" stroke-width="1.2"/>
-    <circle cx="580" cy="12" r="3" fill="rgba(0,180,216,0.5)"/>
-    <line x1="600" y1="12" x2="1000" y2="12" stroke="rgba(0,180,216,0.14)" stroke-width="1"/>
-  </svg>
-</div>
-
-<!-- ── MAIS VENDIDOS / HEADSHOP ── -->
-<section id="mais-vendidos" style="background:var(--bg-2);">
-  <div class="container">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:34px;">
-      <div>
-        <div class="sec-label reveal">Ice-o-lator Headshop</div>
-        <h2 class="sec-title reveal d1">Mais <span class="hi">Vendidos</span></h2>
-      </div>
-      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+o+cat%C3%A1logo+completo+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-ghost btn-sm reveal">Ver catálogo completo</a>
-    </div>
-    <div class="prod-grid">
-
-      <!-- Mini Bong Hello Kitty -->
-      <article class="prod-card reveal">
-        <div class="prod-img"><div class="prod-img-placeholder ice-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.17 6a3 3 0 1 0 5.66 0"/><path d="M12 2v4M7.17 10a5 5 0 1 0 9.66 0"/><path d="M12 15v7M8 22h8"/></svg></div><span class="prod-badge badge-new">Novidade</span></div>
-        <div class="prod-body">
-          <span class="prod-cat">Headshop</span>
-          <div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <h3>Mini Bong — Hello Kitty</h3>
-          <p>Criativo, beeem diferente e muito lindo. Um bong temático que é um presente perfeito.</p>
-          <div class="pricing"><span class="price">R$ 190,00</span><span class="pix">PIX disponível</span></div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Mini+Bong+Hello+Kitty+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar via WhatsApp</a>
-        </div>
-      </article>
-
-      <!-- Pipe Heat Cooler -->
-      <article class="prod-card reveal d1">
-        <div class="prod-img"><div class="prod-img-placeholder ice-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><span class="prod-badge badge-ice">Top Venda</span></div>
-        <div class="prod-body">
-          <span class="prod-cat">Pipes</span>
-          <div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <h3>Pipe Heat Cooler</h3>
-          <p>Aquele acessório indispensável para quem quer qualidade e estilo na session.</p>
-          <div class="pricing"><span class="price">R$ 60,00</span><span class="pix">PIX disponível</span></div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Pipe+Heat+Cooler+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar via WhatsApp</a>
-        </div>
-      </article>
-
-      <!-- Bandeja Papelito -->
-      <article class="prod-card reveal d2">
-        <div class="prod-img"><div class="prod-img-placeholder ice-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div></div>
-        <div class="prod-body">
-          <span class="prod-cat">Acessórios</span>
-          <div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <h3>Bandeja de Metal — Papelito</h3>
-          <p>Bandeja grande de metal da marca Papelito. Organização e estilo na sua mesa.</p>
-          <div class="pricing"><span class="price">R$ 85,00</span><span class="pix">PIX disponível</span></div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+a+Bandeja+Papelito+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar via WhatsApp</a>
-        </div>
-      </article>
-
-      <!-- Dichavador Pot Grinder Squadafum -->
-      <article class="prod-card reveal d3">
-        <div class="prod-img"><div class="prod-img-placeholder ice-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div></div>
-        <div class="prod-body">
-          <span class="prod-cat">Dichavadores</span>
-          <div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-          <h3>Dichavador Pot Grinder Squadafum</h3>
-          <p>O Pot Grinder é o seu parceiro ideal — prático, resistente e com várias cores disponíveis.</p>
-          <div class="pricing"><span class="price">R$ 30,00</span><span class="pix">PIX disponível</span></div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Dichavador+Pot+Grinder+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar via WhatsApp</a>
-        </div>
-      </article>
-
-      <!-- Container Silicone -->
-      <article class="prod-card reveal">
-        <div class="prod-img"><div class="prod-img-placeholder ice-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div></div>
-        <div class="prod-body">
-          <span class="prod-cat">Acessórios</span>
-          <h3>Container de Silicone — 120ml</h3>
-          <p>Procurando por uma solução resistente e prática? Esse é o container perfeito para o dia a dia.</p>
-          <div class="pricing"><span class="price">R$ 90,00</span><span class="pix">PIX disponível</span></div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Container+de+Silicone+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar via WhatsApp</a>
-        </div>
-      </article>
-
-      <!-- Bandeja Alex Senna -->
-      <article class="prod-card reveal d1">
-        <div class="prod-img"><div class="prod-img-placeholder ice-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div></div>
-        <div class="prod-body">
-          <span class="prod-cat">Acessórios</span>
-          <h3>Bandeja — Alex Senna</h3>
-          <p>Bandejas de metal Squadafum — Edição Alex Senna. Arte urbana e funcionalidade juntas.</p>
-          <div class="pricing"><span class="price">R$ 50,00</span><span class="pix">PIX disponível</span></div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+a+Bandeja+Alex+Senna+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar via WhatsApp</a>
-        </div>
-      </article>
-
-      <!-- Tabaqueira Papelito -->
-      <article class="prod-card reveal d2">
-        <div class="prod-img"><div class="prod-img-placeholder ice-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="21 8 21 21 3 21 3 8"/><rect x="1" y="3" width="22" height="5"/></svg></div></div>
-        <div class="prod-body">
-          <span class="prod-cat">Acessórios</span>
-          <h3>Tabaqueira Papelito</h3>
-          <p>A Carteira Tabaqueira de Bolso Papelito — prática, discreta e de qualidade para levar a sessão onde for.</p>
-          <div class="pricing"><span class="price">R$ 85,00</span><span class="pix">PIX disponível</span></div>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+a+Tabaqueira+Papelito+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar via WhatsApp</a>
-        </div>
-      </article>
 
     </div>
 
-    <div style="text-align:center;margin-top:40px;" class="reveal">
-      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+todos+os+produtos+da+Ice-o-lator+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-ice btn-lg">
+    <!-- Bottom quick links -->
+    <div class="bottom-links">
+      <a href="https://wa.me/5564999421040" target="_blank" rel="noopener" class="bl-item">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-        Ver Catálogo Completo no WhatsApp
+        (64) 99942-1040
+      </a>
+      <span class="bl-sep" aria-hidden="true"></span>
+      <a href="https://www.instagram.com/iceolatorheadshop" target="_blank" rel="noopener" class="bl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @iceolatorheadshop
+      </a>
+      <span class="bl-sep" aria-hidden="true"></span>
+      <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="bl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        @xmedusarte
+      </a>
+      <span class="bl-sep" aria-hidden="true"></span>
+      <a href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6" target="_blank" rel="noopener" class="bl-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Grupo VIP ❄️
       </a>
     </div>
-  </div>
-</section>
 
-<!-- ── MEDUSA ARTE ── -->
-<section id="arte" style="background:var(--bg);">
-  <div class="container">
-    <div class="arte-layout">
+  </main>
 
-      <div class="reveal rl">
-        <div class="mandala-wrap" style="margin-bottom:22px;" aria-hidden="true">
-          <div class="m-glow"></div>
-          <svg class="m-svg" viewBox="0 0 260 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="130" cy="130" r="126" stroke="rgba(155,93,229,0.16)" stroke-width="1"/>
-            <circle cx="130" cy="130" r="100" stroke="rgba(155,93,229,0.2)" stroke-width="1"/>
-            <circle cx="130" cy="130" r="74"  stroke="rgba(199,125,255,0.28)" stroke-width="1.2"/>
-            <circle cx="130" cy="130" r="48"  stroke="rgba(199,125,255,0.36)" stroke-width="1.5"/>
-            <circle cx="130" cy="130" r="22"  stroke="rgba(155,93,229,0.5)"   stroke-width="1.5"/>
-            <circle cx="130" cy="130" r="7"   fill="rgba(199,125,255,0.75)"/>
-            <g stroke="rgba(155,93,229,0.5)" stroke-width="1" fill="none">
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(0 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(30 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(60 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(90 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(120 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(150 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(180 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(210 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(240 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(270 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(300 130 130)"/>
-              <ellipse cx="130" cy="30" rx="8" ry="22" transform="rotate(330 130 130)"/>
-            </g>
-            <g fill="rgba(0,180,216,0.65)">
-              <circle cx="130" cy="6" r="2.2" transform="rotate(0 130 130)"/>
-              <circle cx="130" cy="6" r="2.2" transform="rotate(60 130 130)"/>
-              <circle cx="130" cy="6" r="2.2" transform="rotate(120 130 130)"/>
-              <circle cx="130" cy="6" r="2.2" transform="rotate(180 130 130)"/>
-              <circle cx="130" cy="6" r="2.2" transform="rotate(240 130 130)"/>
-              <circle cx="130" cy="6" r="2.2" transform="rotate(300 130 130)"/>
-            </g>
-          </svg>
-        </div>
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 <a href="headshop/">Ice-o-lator Headshop</a> &amp; <a href="medusa/">Medusa Arte</a> · Catalão, GO · Venda proibida para menores de 18 anos.</p>
+  </footer>
 
-        <!-- Medusa Arte products -->
-        <div class="prod-grid" style="grid-template-columns:1fr 1fr;">
-
-          <article class="prod-card med-card">
-            <div class="prod-img"><div class="prod-img-placeholder med-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><span class="prod-badge badge-new">Exclusivo</span></div>
-            <div class="prod-body">
-              <span class="prod-cat med-c">Medusa Arte</span>
-              <h3>Brinco Coleção Zodíaco — Aquário Mini 4cm</h3>
-              <p>Brinco mini — 4cm, na geometria de Aquário.</p>
-              <div class="pricing"><span class="price med-c">R$ 90,00</span></div>
-              <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Brinco+Zod%C3%ADaco+Aqu%C3%A1rio+Mini+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar</a>
-            </div>
-          </article>
-
-          <article class="prod-card med-card">
-            <div class="prod-img"><div class="prod-img-placeholder med-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div></div>
-            <div class="prod-body">
-              <span class="prod-cat med-c">Medusa Arte</span>
-              <h3>Brinco Olho Grego Verde Neon ✨</h3>
-              <p>Inspirado nas cores do olho grego, cheio de energia e proteção.</p>
-              <div class="pricing"><span class="price med-c">R$ 80,00</span></div>
-              <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Brinco+Olho+Grego+Verde+Neon+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar</a>
-            </div>
-          </article>
-
-          <article class="prod-card med-card">
-            <div class="prod-img"><div class="prod-img-placeholder med-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div></div>
-            <div class="prod-body">
-              <span class="prod-cat med-c">Medusa Arte</span>
-              <h3>Brincos Médios 6cm</h3>
-              <p>Geometria de 4 pontas, em 6cm. Elegantes e cheios de personalidade.</p>
-              <div class="pricing"><span class="price med-c">R$ 70,00</span></div>
-              <a href="https://wa.me/5564999421040?text=Oi%21+Quero+os+Brincos+M%C3%A9dios+6cm+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar</a>
-            </div>
-          </article>
-
-          <article class="prod-card med-card">
-            <div class="prod-img"><div class="prod-img-placeholder med-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/></svg></div></div>
-            <div class="prod-body">
-              <span class="prod-cat med-c">Medusa Arte</span>
-              <h3>Chaveiros 6cm</h3>
-              <p>Chaveirinhos na geometria de 4 pontas, em 6cm. Acessório artesanal exclusivo.</p>
-              <div class="pricing"><span class="price med-c">R$ 35,00</span></div>
-              <a href="https://wa.me/5564999421040?text=Oi%21+Quero+os+Chaveiros+6cm+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-sm btn-full" style="margin-top:9px;">Comprar</a>
-            </div>
-          </article>
-
-        </div>
-      </div>
-
-      <div class="reveal rr">
-        <div style="display:inline-block;background:linear-gradient(90deg,var(--med-d),var(--med));color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:4px 13px 5px;border-radius:4px;margin-bottom:12px;">Arte Artesanal</div>
-        <h2 class="sec-title" style="margin-bottom:12px;"><span class="med">Medusa Arte</span><br/>Mandalas &amp;<br/>Artesanato</h2>
-        <p class="sec-desc" style="margin-bottom:10px;">Arte autoral com estética mística e tropical — mandalas decorativas, brincos exclusivos feitos à mão, chaveiros e peças artesanais com muito significado e beleza.</p>
-        <p class="sec-desc" style="font-style:italic;color:var(--med-l);margin-bottom:0;">"Mais beleza, cor e boas energias pro seu dia a dia."</p>
-
-        <div class="arte-items-list">
-          <div class="arte-item"><div class="a-dot" aria-hidden="true"></div><span>Brincos Coleção Zodíaco — Aquário</span></div>
-          <div class="arte-item"><div class="a-dot" aria-hidden="true"></div><span>Brinco Olho Grego Verde Neon</span></div>
-          <div class="arte-item"><div class="a-dot" aria-hidden="true"></div><span>Brincos médios e mini — 4cm e 6cm</span></div>
-          <div class="arte-item"><div class="a-dot" aria-hidden="true"></div><span>Brinco com pingente 🌸</span></div>
-          <div class="arte-item"><div class="a-dot" aria-hidden="true"></div><span>Chaveiros artesanais — 6cm</span></div>
-          <div class="arte-item"><div class="a-dot" aria-hidden="true"></div><span>Mandalas decorativas autorais</span></div>
-        </div>
-
-        <div class="arte-showcase">
-          <div class="arte-box">
-            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;" aria-hidden="true">
-              <circle cx="22" cy="22" r="20" stroke="rgba(155,93,229,0.5)" stroke-width="1.5"/>
-              <circle cx="22" cy="22" r="12" stroke="rgba(199,125,255,0.4)" stroke-width="1"/>
-              <circle cx="22" cy="22" r="5" fill="rgba(199,125,255,0.75)"/>
-              <g stroke="rgba(155,93,229,0.55)" stroke-width="1" fill="none">
-                <ellipse cx="22" cy="5" rx="2.5" ry="6" transform="rotate(0 22 22)"/>
-                <ellipse cx="22" cy="5" rx="2.5" ry="6" transform="rotate(60 22 22)"/>
-                <ellipse cx="22" cy="5" rx="2.5" ry="6" transform="rotate(120 22 22)"/>
-                <ellipse cx="22" cy="5" rx="2.5" ry="6" transform="rotate(180 22 22)"/>
-                <ellipse cx="22" cy="5" rx="2.5" ry="6" transform="rotate(240 22 22)"/>
-                <ellipse cx="22" cy="5" rx="2.5" ry="6" transform="rotate(300 22 22)"/>
-              </g>
-            </svg>
-            <h4>Mandalas</h4>
-            <p>Decoração autoral</p>
-          </div>
-          <div class="arte-box">
-            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;" aria-hidden="true">
-              <path d="M22 4 L26 16 L40 16 L29 24 L33 38 L22 30 L11 38 L15 24 L4 16 L18 16 Z" stroke="rgba(199,125,255,0.7)" stroke-width="1.5" fill="rgba(155,93,229,0.1)"/>
-              <circle cx="22" cy="21" r="5" stroke="rgba(0,180,216,0.5)" stroke-width="1" fill="none"/>
-            </svg>
-            <h4>Zodíaco</h4>
-            <p>Coleção exclusiva</p>
-          </div>
-          <div class="arte-box">
-            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;" aria-hidden="true">
-              <path d="M22 4 C22 4 38 14 38 26 C38 34 31 42 22 42 C13 42 6 34 6 26 C6 14 22 4 22 4Z" stroke="rgba(155,93,229,0.5)" stroke-width="1.5" fill="rgba(155,93,229,0.05)"/>
-              <circle cx="22" cy="26" r="7" stroke="rgba(0,180,216,0.45)" stroke-width="1" fill="rgba(155,93,229,0.1)"/>
-            </svg>
-            <h4>Chaveiros</h4>
-            <p>Artesanais 6cm</p>
-          </div>
-          <div class="arte-box">
-            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;" aria-hidden="true">
-              <path d="M22 4.61a5.5 5.5 0 0 0-7.78 7.78l7.78 7.78 7.78-7.78A5.5 5.5 0 0 0 22 4.61z" stroke="rgba(199,125,255,0.7)" stroke-width="1.5" fill="rgba(155,93,229,0.1)" transform="translate(0 5)"/>
-              <circle cx="22" cy="32" r="4" fill="rgba(0,180,216,0.5)"/>
-            </svg>
-            <h4>Olho Grego</h4>
-            <p>Neon &amp; proteção</p>
-          </div>
-        </div>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;">
-          <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="btn btn-med">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:15px;height:15px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-            Ver @xmedusarte
-          </a>
-          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+pe%C3%A7as+da+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-ghost">Ver mais peças</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ── GRUPO VIP ── -->
-<section id="vip">
-  <div class="container">
-    <div class="vip-box reveal">
-      <div class="vip-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-      </div>
-      <h2>Entre para a <span>Família Ice</span> ❄️</h2>
-      <p class="desc">Grupo VIP da sua headshop favorita! Receba promoções exclusivas, descontos especiais, novidades em primeira mão, além de sorteios e brindes para os clientes fiéis.</p>
-      <div class="vip-perks">
-        <div class="vip-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Promoções exclusivas</div>
-        <div class="vip-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/></svg>Brindes especiais</div>
-        <div class="vip-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"/></svg>Novidades primeiro</div>
-        <div class="vip-perk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>Sorteios mensais</div>
-      </div>
-      <a href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6" target="_blank" rel="noopener" class="btn btn-vip btn-lg" style="position:relative;">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-        Entrar no Grupo VIP — Família Ice ❄️
-      </a>
-      <p style="font-size:.74rem;color:rgba(255,255,255,.45);margin-top:12px;position:relative;">Grupo fechado — somente a loja envia mensagens. Mensagens disponíveis por 7 dias. Venda proibida para menores de 18 anos.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── SOBRE ── -->
-<section id="sobre" style="background:var(--bg-3);">
-  <div class="container">
-    <div class="sobre-grid">
-      <div>
-        <div class="sec-label reveal">Nossa História</div>
-        <h2 class="sec-title reveal d1">Mais que uma loja —<br/><span class="hi">propósito</span> e <span class="med">comunidade</span>.</h2>
-        <p class="reveal d2" style="font-family:'Lora',serif;font-size:.95rem;color:var(--text-2);line-height:1.9;margin-bottom:12px;">A <strong>Ice-o-lator Headshop</strong> surgiu em Catalão, GO, em 2018, com uma missão clara: reunir acessórios de qualidade com curadoria criteriosa, informação responsável e cultura alternativa genuína.</p>
-        <p class="reveal d2" style="font-family:'Lora',serif;font-size:.95rem;color:var(--text-2);line-height:1.9;margin-bottom:12px;">A <strong>Medusa Arte | Mandalas</strong> é o braço artístico — peças autorais, mandalas vibrantes, brincos artesanais e decoração com alma, trazendo mais beleza e boas energias pro dia a dia.</p>
-        <p class="reveal d2" style="font-family:'Lora',serif;font-size:.95rem;color:var(--text-2);line-height:1.9;margin-bottom:0;">Atendemos na loja física (Rua Dezessete, 17 — Setor Universitário, das 14h às 19h), fazemos entregas em Catalão e enviamos para todo o Brasil.</p>
-        <div class="pilares">
-          <div class="pilar reveal d2"><div class="pilar-i ice-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><h4>Redução de Danos</h4><p>Informação responsável e produtos pensados para um consumo mais seguro e consciente.</p></div></div>
-          <div class="pilar reveal d3"><div class="pilar-i med-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div><div><h4 class="med-c">Arte &amp; Estética</h4><p>Medusa Arte — mandalas, brincos exclusivos e arte artesanal com identidade mística.</p></div></div>
-          <div class="pilar reveal d4"><div class="pilar-i ice-bg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><h4>Comunidade</h4><p>Grupo VIP, feiras, eventos e vínculos reais — a galera da Família Ice sabe disso.</p></div></div>
-        </div>
-      </div>
-      <div>
-        <div class="ctrs">
-          <div class="ctr reveal"><span class="ctr-n" data-target="2018" data-mode="year">2018</span><span class="ctr-l">Fundação</span></div>
-          <div class="ctr reveal d1"><span class="ctr-n" data-target="6" data-suffix="+">0</span><span class="ctr-l">Anos ativos</span></div>
-          <div class="ctr reveal d2"><span class="ctr-n" data-target="27" data-suffix=" UFs">0</span><span class="ctr-l">Estados atendidos</span></div>
-          <div class="ctr reveal d3"><span class="ctr-n med-c" data-target="14" data-suffix="–19h">0</span><span class="ctr-l">Horário loja</span></div>
-        </div>
-        <div class="sobre-quote reveal d4">
-          <blockquote>"Mais que uma loja, somos um espaço de cultura, arte e informação. Obrigada por fazer parte da família Ice! ❄️"</blockquote>
-          <cite>— Ice-o-lator Headshop · Catalão, GO · 2018</cite>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── REDUCAO DE DANOS ── -->
-<section id="reducao" style="background:var(--bg);">
-  <div class="container">
-    <div class="sec-center" style="margin-bottom:40px;">
-      <div class="sec-label reveal" style="justify-content:center;">Responsabilidade</div>
-      <h2 class="sec-title reveal d1">Redução de <span class="hi">Danos</span></h2>
-      <p class="sec-desc reveal d2">Consumo consciente começa com informação. Compartilhamos conhecimento honesto, acessível e sem julgamento.</p>
-    </div>
-    <div class="rd-grid">
-      <div class="rd-card reveal"><div class="rd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div><h3>Informação com Base</h3><p>Conteúdo fundamentado sobre substâncias, efeitos e formas mais seguras de uso. Sem sensacionalismo.</p></div>
-      <div class="rd-card reveal d1"><div class="rd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3>Curadoria de Qualidade</h3><p>Selecionamos acessórios que contribuem para um consumo mais seguro e responsável.</p></div>
-      <div class="rd-card reveal d2"><div class="rd-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div><h3>Respeito Mútuo</h3><p>Não compactuamos com violência. Nossa comunidade é espaço de respeito e acolhimento. Venda proibida para menores de 18 anos.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── DEPOIMENTOS ── -->
-<section id="depoimentos" class="compact" style="background:var(--bg-2);">
-  <div class="container">
-    <div class="sec-center" style="margin-bottom:32px;">
-      <div class="sec-label reveal" style="justify-content:center;">O que a galera diz</div>
-      <h2 class="sec-title reveal d1">Quem conhece, <span class="hi">recomenda</span></h2>
-    </div>
-    <div class="dep-grid">
-      <article class="dep-card reveal">
-        <div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <p class="dep-text">"Melhor headshop de Catalão! Produtos de qualidade, atendimento super atencioso e os brincos da Medusa Arte são lindíssimos. Recomendo demais!"</p>
-        <div class="dep-author"><div class="dep-av" aria-hidden="true">MA</div><div><div class="dep-name">Marina A.</div><div class="dep-city">Catalão, GO</div></div></div>
-      </article>
-      <article class="dep-card reveal d1">
-        <div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <p class="dep-text">"Pedi pelo WhatsApp e chegou rapidinho. Embalagem caprichada, produto exatamente como descrito. Já sou cliente fiel da Ice!"</p>
-        <div class="dep-author"><div class="dep-av" aria-hidden="true">RF</div><div><div class="dep-name">Rafael F.</div><div class="dep-city">Goiânia, GO</div></div></div>
-      </article>
-      <article class="dep-card reveal d2">
-        <div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
-        <p class="dep-text">"Os brincos da Medusa Arte são de outro nível! Comprei o Zodíaco Aquário e todo mundo pergunta onde achei. Arte de verdade!"</p>
-        <div class="dep-author"><div class="dep-av med-bg" aria-hidden="true">LC</div><div><div class="dep-name">Luísa C.</div><div class="dep-city">Brasília, DF</div></div></div>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- ── EVENTOS ── -->
-<section id="eventos" style="background:var(--bg-3);">
-  <div class="container">
-    <div class="sec-center" style="margin-bottom:40px;">
-      <div class="sec-label reveal" style="justify-content:center;">Presença Real</div>
-      <h2 class="sec-title reveal d1">Feiras &amp; <span class="hi">Eventos</span></h2>
-    </div>
-    <div class="ev-layout">
-      <div class="ev-feat reveal rl">
-        <h3>Fique por dentro</h3>
-        <p>A Ice-o-lator participa de feiras culturais, festivais e eventos em Catalão e região. É onde você experimenta os produtos, vê as peças da Medusa Arte de perto e faz parte da galera ao vivo.</p>
-        <p style="font-style:italic;font-size:.84rem;color:var(--text-m);">Acompanhe o Instagram @iceolatorheadshop para datas.</p>
-        <a href="https://www.instagram.com/iceolatorheadshop" target="_blank" rel="noopener" class="btn btn-ice" style="margin-top:18px;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:15px;height:15px;"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
-          @iceolatorheadshop
-        </a>
-      </div>
-      <div class="ev-list reveal rr">
-        <div class="ev-item"><div class="ev-dot" aria-hidden="true"></div><div><h4>Feiras Culturais</h4><p>Economia criativa, artesanato e cultura alternativa em Catalão e GO.</p></div></div>
-        <div class="ev-item"><div class="ev-dot" aria-hidden="true"></div><div><h4>Festivais &amp; Encontros</h4><p>Festivais de música, cultura urbana e eventos alternativos.</p></div></div>
-        <div class="ev-item"><div class="ev-dot" aria-hidden="true"></div><div><h4>Lançamentos Medusa Arte</h4><p>Apresentações de novas coleções de brincos, mandalas e peças artesanais.</p></div></div>
-        <p style="text-align:center;padding:12px;font-family:'Barlow Condensed',sans-serif;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-m);">📍 Próximas datas — siga @iceolatorheadshop</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── FAQ ── -->
-<section id="faq" style="background:var(--bg-2);">
-  <div class="container">
-    <div class="sec-center" style="margin-bottom:40px;">
-      <div class="sec-label reveal" style="justify-content:center;">Dúvidas Frequentes</div>
-      <h2 class="sec-title reveal d1">Perguntas <span class="hi">Frequentes</span></h2>
-    </div>
-    <div class="faq-list">
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Qual o horário de funcionamento?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Das 14h às 19h. Também aceitamos pedidos pelo WhatsApp fora do horário — respondemos assim que abrirmos!</div></div>
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Onde fica a loja física?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Rua Dezessete, número 17 — Setor Universitário, Catalão, GO. Também atendemos por WhatsApp e fazemos entregas!</div></div>
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Como funciona a entrega?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Entregamos na cidade de Catalão e enviamos para todo o Brasil pelos Correios. Manda mensagem no WhatsApp (64) 99942-1040 para calcular frete!</div></div>
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Posso retirar na loja?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Sim! Retirada disponível no endereço físico — Rua Dezessete, 17, Setor Universitário, das 14h às 19h. Sem custo de frete!</div></div>
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Quais formas de pagamento?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">PIX, dinheiro na retirada e cartão. Para envios, trabalhamos principalmente com PIX — rápido e sem custo adicional.</div></div>
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">Como faço um pedido?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Pelo WhatsApp! Manda mensagem para (64) 99942-1040, diz o que você quer, a gente confirma disponibilidade, combina pagamento e entrega. Simples assim!</div></div>
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">O que é o Grupo VIP "Família Ice"?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">É o grupo VIP da Ice-o-lator no WhatsApp! Você recebe promoções exclusivas, novidades em primeira mão, descontos especiais e participa de sorteios e brindes. Grupo fechado — só a loja envia mensagens, sem spam. <a href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6" target="_blank" rel="noopener" style="color:var(--ice-l);">Entrar no grupo →</a></div></div>
-      <div class="faq-item"><div class="faq-q" role="button" tabindex="0" aria-expanded="false">As peças da Medusa Arte são personalizáveis?<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></div><div class="faq-a">Sim! Entre em contato pelo WhatsApp ou Instagram @xmedusarte para encomendas personalizadas. Consulte disponibilidade e prazos de produção.</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- ── NEWSLETTER ── -->
-<section id="newsletter" class="compact" style="background:var(--bg);">
-  <div class="container">
-    <div class="nl-box reveal">
-      <h2>Fique por dentro das <span style="color:var(--ice-l);">novidades ❄️</span></h2>
-      <p>Promoções, lançamentos da Medusa Arte e dicas de redução de danos direto no seu e-mail.</p>
-      <form class="nl-form" onsubmit="handleNL(event)" novalidate>
-        <input type="email" placeholder="Seu melhor e-mail" aria-label="E-mail para newsletter" required />
-        <button type="submit" class="btn btn-ice">Quero receber</button>
-      </form>
-      <p class="nl-note">Sem spam. Cancele quando quiser.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ── CONTATO ── -->
-<section id="contato" style="background:var(--bg-2);">
-  <div class="container">
-    <div class="ct-layout">
-      <div>
-        <div class="sec-label reveal">Fale com a gente</div>
-        <h2 class="sec-title reveal d1">Vem <span class="hi">conhecer</span><br/>a Ice-o-lator</h2>
-        <p class="sec-desc reveal d2" style="margin-bottom:22px;">Atendimento presencial de 14h às 19h, entregas em Catalão e envios para todo o Brasil. A gente responde rápido no WhatsApp!</p>
-        <div style="display:flex;flex-direction:column;gap:10px;" class="reveal d2">
-
-          <a href="https://wa.me/5564999421040?text=Oi%21+Vi+o+site+e+quero+saber+mais+%F0%9F%8C%BF" target="_blank" rel="noopener" class="ci">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></div>
-            <div><span class="ci-lbl">WhatsApp</span><span class="ci-val">(64) 99942-1040</span></div>
-          </a>
-
-          <a href="https://www.instagram.com/iceolatorheadshop" target="_blank" rel="noopener" class="ci">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            <div><span class="ci-lbl">Instagram Headshop</span><span class="ci-val">@iceolatorheadshop</span></div>
-          </a>
-
-          <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="ci">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
-            <div><span class="ci-lbl">Instagram Arte</span><span class="ci-val">@xmedusarte</span></div>
-          </a>
-
-          <a href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6" target="_blank" rel="noopener" class="ci">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></div>
-            <div><span class="ci-lbl">Grupo VIP — Família Ice ❄️</span><span class="ci-val">Entrar no grupo de vantagens</span></div>
-          </a>
-
-          <div class="ci" style="cursor:default;">
-            <div class="ci-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-            <div><span class="ci-lbl">Endereço</span><span class="ci-val">Rua Dezessete, 17 — Setor Universitário, Catalão GO · 14h às 19h</span></div>
-          </div>
-
-        </div>
-      </div>
-      <div class="ct-box reveal rr">
-        <h3>Tá afim de pedir<br/>ou tem dúvida?</h3>
-        <p>Fala direto no WhatsApp! Atendimento rápido e humano — te ajudamos com produtos da headshop, peças da Medusa Arte, cálculo de frete ou qualquer dúvida.</p>
-        <a href="https://wa.me/5564999421040?text=Oi%21+Vi+o+site+da+Ice-o-lator+e+quero+saber+mais+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn btn-wa btn-lg">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-          (64) 99942-1040
-        </a>
-        <a href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6" target="_blank" rel="noopener" class="btn btn-vip">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Entrar no Grupo VIP ❄️
-        </a>
-        <p class="hint">Loja: Rua Dezessete, 17 — Setor Universitário · 14h às 19h</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-</main>
-
-<!-- ── FOOTER ── -->
-<footer>
-  <div class="container">
-    <div class="ft-grid">
-      <div class="ft-brand">
-        <div class="ft-brand-title">
-          <div class="ft-ice">ICE-O-LATOR HEADSHOP</div>
-          <div class="ft-med">MEDUSA ARTE | MANDALAS</div>
-        </div>
-        <p>Produtos únicos, arte artesanal e boas energias desde 2018 em Catalão, GO. A família Ice te espera!</p>
-        <div class="soc-row">
-          <a href="https://www.instagram.com/iceolatorheadshop" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram Ice-o-lator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram Medusa Arte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-          <a href="https://wa.me/5564999421040" target="_blank" rel="noopener" class="soc-btn" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg></a>
-          <a href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6" target="_blank" rel="noopener" class="soc-btn" aria-label="Grupo VIP WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></a>
-        </div>
-        <div class="pay-row">
-          <span class="pay-ic">PIX</span>
-          <span class="pay-ic">Dinheiro</span>
-          <span class="pay-ic">Cartão</span>
-        </div>
-      </div>
-      <div class="ft-col">
-        <h4>Navegação</h4>
-        <ul>
-          <li><a href="#inicio">Início</a></li>
-          <li><a href="#categorias">Categorias</a></li>
-          <li><a href="#mais-vendidos">Produtos</a></li>
-          <li><a href="#arte">Medusa Arte</a></li>
-          <li><a href="#vip">Grupo VIP</a></li>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#reducao">Redução de Danos</a></li>
-          <li><a href="#eventos">Eventos</a></li>
-          <li><a href="#faq">FAQ</a></li>
-        </ul>
-      </div>
-      <div class="ft-col">
-        <h4>Loja</h4>
-        <ul>
-          <li><a href="#faq">Como Comprar</a></li>
-          <li><a href="#faq">Entregas e Envios</a></li>
-          <li><a href="#faq">Retirada na Loja</a></li>
-          <li><a href="#faq">Formas de Pagamento</a></li>
-          <li><a href="#vip">Grupo VIP</a></li>
-          <li><a href="#newsletter">Newsletter</a></li>
-          <li><a href="#contato">Fale Conosco</a></li>
-        </ul>
-      </div>
-      <div class="ft-col">
-        <h4>Contato</h4>
-        <div style="display:flex;flex-direction:column;gap:8px;">
-          <span style="display:flex;align-items:flex-start;gap:7px;font-size:.81rem;color:var(--text-m);"><svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;color:var(--ice-l);flex-shrink:0;margin-top:3px;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>(64) 99942-1040</span>
-          <span style="display:flex;align-items:flex-start;gap:7px;font-size:.81rem;color:var(--text-m);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;color:var(--ice-l);flex-shrink:0;margin-top:3px;" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Rua Dezessete, 17<br/>Setor Universitário, Catalão GO</span>
-          <span style="display:flex;align-items:flex-start;gap:7px;font-size:.81rem;color:var(--text-m);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;color:var(--ice-l);flex-shrink:0;margin-top:3px;" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>14h às 19h</span>
-          <span style="display:flex;align-items:flex-start;gap:7px;font-size:.81rem;color:var(--text-m);"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;color:var(--ice-l);flex-shrink:0;margin-top:3px;" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>@iceolatorheadshop · @xmedusarte</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="ft-trust">
-      <div class="ft-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Compra Segura</div>
-      <div class="ft-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Entrega em Catalão</div>
-      <div class="ft-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Envios para o Brasil</div>
-      <div class="ft-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>Retirada na Loja</div>
-      <div class="ft-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Grupo VIP Família Ice</div>
-      <div class="ft-ti"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Aberto 14h–19h</div>
-    </div>
-
-    <div class="ft-bottom">
-      <p>© 2026 <strong>Ice-o-lator Headshop</strong> &amp; <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener">Medusa Arte</a>. Todos os direitos reservados. Venda proibida para menores de 18 anos.</p>
-      <p>Feito com boas energias ❄️ Catalão, GO</p>
-    </div>
-  </div>
-</footer>
-
-<script>
-(function(){
-  'use strict';
-  var rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function onScroll(fn){var t=false;window.addEventListener('scroll',function(){if(!t){requestAnimationFrame(function(){fn();t=false;});t=true;}},{passive:true});}
-
-  var rObs=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){e.target.classList.add('visible');rObs.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){rObs.observe(el);});
-
-  var hdr=document.getElementById('hdr');
-  onScroll(function(){hdr.classList.toggle('scrolled',window.scrollY>20);});
-
-  var fw=document.getElementById('fw'),bt=document.getElementById('bt');
-  var shown=false,tmr=setTimeout(function(){fw.classList.add('show');shown=true;},2400);
-  onScroll(function(){var y=window.scrollY;if(!shown&&y>180){clearTimeout(tmr);fw.classList.add('show');shown=true;}bt.classList.toggle('show',y>600);fw.style.bottom=y>600?'74px':'26px';});
-
-  var hbg=document.getElementById('hbg'),mob=document.getElementById('mob');
-  hbg.addEventListener('click',function(){var o=mob.classList.toggle('open');hbg.classList.toggle('open',o);hbg.setAttribute('aria-expanded',o);document.body.style.overflow=o?'hidden':'';});
-  window.cm=function(){mob.classList.remove('open');hbg.classList.remove('open');hbg.setAttribute('aria-expanded','false');document.body.style.overflow='';};
-  window.addEventListener('resize',function(){if(window.innerWidth>900)cm();},{passive:true});
-
-  function aC(el){var tg=parseInt(el.dataset.target,10),sfx=el.dataset.suffix||'',mode=el.dataset.mode||'';if(mode==='year'){el.textContent=tg;return;}var dur=1500,st=null;function step(ts){if(!st)st=ts;var p=Math.min((ts-st)/dur,1),e=1-Math.pow(1-p,3);el.textContent=Math.floor(e*tg)+sfx;if(p<1)requestAnimationFrame(step);else el.textContent=tg+sfx;}requestAnimationFrame(step);}
-  var cObs=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){aC(e.target);cObs.unobserve(e.target);}});},{threshold:.6});
-  document.querySelectorAll('.ctr-n[data-target]').forEach(function(el){cObs.observe(el);});
-
-  document.querySelectorAll('.faq-q').forEach(function(q){
-    function tog(){var it=q.parentElement,op=it.classList.toggle('open');q.setAttribute('aria-expanded',op);document.querySelectorAll('.faq-item.open').forEach(function(o){if(o!==it){o.classList.remove('open');o.querySelector('.faq-q').setAttribute('aria-expanded','false');}});}
-    q.addEventListener('click',tog);q.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog();}});
-  });
-
-  window.handleNL=function(e){e.preventDefault();var inp=e.target.querySelector('input');if(inp&&inp.value){inp.value='';var btn=e.target.querySelector('button'),orig=btn.textContent;btn.textContent='Inscrito! ✓';btn.disabled=true;setTimeout(function(){btn.textContent=orig;btn.disabled=false;},3000);}};
-
-  if(!rm){
-    var cv=document.getElementById('cv');
-    if(cv){
-      var ctx=cv.getContext('2d'),pts=[],MAX=48,rf;
-      function rs(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;}
-      var colors=['0,180,216','144,224,239','155,93,229','199,125,255','57,255,20'];
-      function mk(){return{x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.7+.4,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,a:Math.random()*.4+.07,c:colors[Math.floor(Math.random()*colors.length)]};}
-      rs();for(var i=0;i<MAX;i++)pts.push(mk());
-      var rtmr;window.addEventListener('resize',function(){clearTimeout(rtmr);rtmr=setTimeout(rs,200);},{passive:true});
-      function draw(){ctx.clearRect(0,0,cv.width,cv.height);pts.forEach(function(p){p.x+=p.vx;p.y+=p.vy;if(p.x<-4)p.x=cv.width+4;if(p.x>cv.width+4)p.x=-4;if(p.y<-4)p.y=cv.height+4;if(p.y>cv.height+4)p.y=-4;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle='rgba('+p.c+','+p.a+')';ctx.fill();});rf=requestAnimationFrame(draw);}
-      draw();
-      document.addEventListener('visibilitychange',function(){if(document.hidden)cancelAnimationFrame(rf);else draw();});
+  <script>
+  (function(){
+    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!rm){
+      var cv = document.getElementById('cv');
+      if(cv){
+        var ctx = cv.getContext('2d'), pts = [], MAX = 50, rf;
+        var colors = ['0,180,216','144,224,239','155,93,229','199,125,255','57,255,20','0,119,182','106,13,173'];
+        function rs(){ cv.width = cv.offsetWidth; cv.height = cv.offsetHeight; }
+        function mk(){ return { x:Math.random()*cv.width, y:Math.random()*cv.height, r:Math.random()*1.7+.4, vx:(Math.random()-.5)*.28, vy:(Math.random()-.5)*.28, a:Math.random()*.36+.07, c:colors[Math.floor(Math.random()*colors.length)] }; }
+        rs();
+        for(var i=0;i<MAX;i++) pts.push(mk());
+        var rtmr; window.addEventListener('resize',function(){ clearTimeout(rtmr); rtmr=setTimeout(rs,200); },{passive:true});
+        function draw(){
+          ctx.clearRect(0,0,cv.width,cv.height);
+          pts.forEach(function(p){
+            p.x+=p.vx; p.y+=p.vy;
+            if(p.x<-4) p.x=cv.width+4; if(p.x>cv.width+4) p.x=-4;
+            if(p.y<-4) p.y=cv.height+4; if(p.y>cv.height+4) p.y=-4;
+            ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+            ctx.fillStyle='rgba('+p.c+','+p.a+')'; ctx.fill();
+          });
+          rf = requestAnimationFrame(draw);
+        }
+        draw();
+        document.addEventListener('visibilitychange',function(){ if(document.hidden) cancelAnimationFrame(rf); else draw(); });
+      }
     }
-  }
+  }());
+  </script>
 
-  var secs=document.querySelectorAll('main section[id]'),nls=document.querySelectorAll('nav.desk .nl');
-  var sObs=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var id=e.target.id;nls.forEach(function(l){l.style.color=l.getAttribute('href')==='#'+id?'var(--ice-l)':'';});}});},{threshold:.35});
-  secs.forEach(function(s){sObs.observe(s);});
-}());
-</script>
 </body>
 </html>
