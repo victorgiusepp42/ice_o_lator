@@ -4,667 +4,924 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#080808" />
-  <title>Medusa Arte | Mandalas — Em Breve</title>
-  <meta name="description" content="Medusa Arte | Mandalas — Arte artesanal exclusiva: mandalas, brincos, decoração e boas energias. Em breve em Catalão, GO." />
+  <title>Medusa Arte | Mandalas — Catalão, GO</title>
+  <meta name="description" content="Medusa Arte | Mandalas — arte artesanal exclusiva: mandalas, brincos, chaveiros e decoração com boas energias. Catalão, GO." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Lora:ital,wght@0,400;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <style>
-    /* ═══ TOKENS ════════════════════════════════════════ */
+    /* ═══ TOKENS ═════════════════════════════════════════════ */
     :root {
-      --med:     #9b5de5;
-      --med-l:   #c77dff;
-      --med-d:   #6a0dad;
-      --ice:     #00b4d8;
-      --neon:    #39ff14;
-      --bg:      #080808;
-      --text:    #f0f0f0;
-      --gap:     1.2vw;
+      --med:    #9b5de5;
+      --med-l:  #c77dff;
+      --med-d:  #6a0dad;
+      --neon:   #39ff14;
+      --gold:   #f4b942;
+      --bg:     #080808;
+      --bg2:    #0d0d0d;
+      --s1:     #111;
+      --s2:     #181818;
+      --border: rgba(155,93,229,.18);
+      --t1:     #f0f0f0;
+      --t2:     #aaa;
+      --tm:     #444;
+      --gap:    1px; /* linha de separação entre cards */
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; }
+    html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
-      color: var(--text);
+      color: var(--t1);
       font-family: 'Barlow Condensed', sans-serif;
-      cursor: none; /* cursor customizado */
-      user-select: none;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    ::selection { background: var(--med-d); color: #fff; }
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    }
-
-    /* ═══ CURSOR CUSTOMIZADO (lerp + mix-blend-mode) ═════════════ */
-    #cursor {
-      position: fixed;
-      top: 0; left: 0;
-      width: 3vw; height: 3vw;
-      margin-top: -1.5vw; margin-left: -1.5vw;
-      border: 1px solid var(--med-l);
-      border-radius: 50%;
-      pointer-events: none;
-      mix-blend-mode: difference;
-      z-index: 9999;
-      transform: translateZ(0);
-      transition: width .3s, height .3s, margin .3s, opacity .3s, border-color .3s;
-      opacity: 0;
-    }
-    #cursor.visible { opacity: 1; }
-    #cursor.big {
-      width: 6vw; height: 6vw;
-      margin-top: -3vw; margin-left: -3vw;
-      border-color: var(--neon);
-    }
-    #cursor-dot {
-      position: fixed;
-      top: 0; left: 0;
-      width: 6px; height: 6px;
-      margin-top: -3px; margin-left: -3px;
-      background: var(--med-l);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      opacity: 0;
-      transition: opacity .3s, background .3s;
-    }
-    #cursor-dot.visible { opacity: 1; }
-    #cursor-label {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: .55vw;
-      font-weight: 700;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: #fff;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity .3s;
-    }
-    body:hover #cursor-label { opacity: 0; }
-
-    /* ═══ OVERLAY MULTIPLY (gradiente misturado) ══════════════════ */
-    #overlay-grad {
-      position: fixed; inset: 0;
-      z-index: 1;
-      pointer-events: none;
-      mix-blend-mode: multiply;
-      background: radial-gradient(ellipse 80% 80% at 50% 50%,
-        rgba(106,13,173,.45) 0%,
-        rgba(8,8,8,.8) 70%,
-        #000 100%);
-    }
-
-    /* ═══ NOISE TEXTURE ══════════════════════════════════════════ */
-    #noise {
-      position: fixed; inset: 0; z-index: 2;
-      pointer-events: none; opacity: .04;
+    /* noise */
+    body::after {
+      content: ''; position: fixed; inset: 0; z-index: 9999;
+      pointer-events: none; opacity: .022;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
       background-size: 256px;
     }
 
-    /* ═══ PAINÉIS LATERAIS (pala / slide-in frames) ══════════════ */
-    #frames {
-      position: fixed; inset: 0;
-      z-index: 3;
-      pointer-events: none;
+    /* ═══ HEADER ══════════════════════════════════════════════ */
+    #site-header {
+      position: sticky; top: 0; z-index: 100;
+      height: 60px;
+      background: rgba(8,8,8,.92);
+      backdrop-filter: blur(16px) saturate(140%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
     }
-    .frame-line {
-      position: absolute;
-      background: transparent;
-      transition: transform 1.4s cubic-bezier(.77,0,.18,1);
-    }
-    /* Linha vertical esquerda */
-    #fl { top: 7vw; left: 4vw; width: 1px; height: calc(100vh - 12vw); background: rgba(155,93,229,.35); transform: scaleY(0); transform-origin: top; }
-    /* Linha vertical direita */
-    #fr { top: 7vw; right: 4vw; width: 1px; height: calc(100vh - 12vw); background: rgba(155,93,229,.35); transform: scaleY(0); transform-origin: top; }
-    /* Linha horizontal topo */
-    #ft { top: 7vw; left: 4vw; right: 4vw; height: 1px; background: rgba(155,93,229,.35); transform: scaleX(0); transform-origin: left; }
-    /* Linha horizontal base */
-    #fb { bottom: 5vw; left: 4vw; right: 4vw; height: 1px; background: rgba(155,93,229,.35); transform: scaleX(0); transform-origin: left; }
-    /* Estado "on" — animado */
-    #fl.on, #fr.on { transform: scaleY(1); transition-delay: .3s; }
-    #ft.on, #fb.on { transform: scaleX(1); transition-delay: .6s; }
-
-    /* ═══ ISOTIPO (logo flip 3D infinito) ════════════════════════ */
-    #isotipo-l, #isotipo-r {
-      position: fixed;
-      bottom: .5vw;
-      z-index: 10;
-      perspective: 10vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: .6vw;
-    }
-    #isotipo-l { left: 0; }
-    #isotipo-r { right: 0; }
-    #isotipo-l img, #isotipo-r img {
-      height: 3vw;
-      width: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 0 8px rgba(155,93,229,.6));
-      animation: isotipo-flip 2.5s linear infinite;
-    }
-    #isotipo-r img { animation-delay: -1.25s; }
-    @keyframes isotipo-flip {
-      0%   { transform: rotateY(-90deg); opacity: 0; }
-      15%  { opacity: 1; }
-      85%  { opacity: 1; }
-      100% { transform: rotateY(90deg); opacity: 0; }
-    }
-
-    /* ═══ TEXTO VERTICAL LATERAL (marquees) ═════════════════════ */
-    #text-left, #text-right {
-      position: fixed;
-      top: 0; bottom: 0;
-      z-index: 10;
-      width: 4vw;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    #text-left  { left: 0; }
-    #text-right { right: 0; }
-    .txt-marquee {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: .75vw;
-      font-weight: 700;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: rgba(155,93,229,.45);
-      white-space: nowrap;
-      display: flex;
-      flex-direction: column;
-      gap: 2.2vw;
-    }
-    #text-left  .txt-marquee { animation: txt-up   10s linear infinite; transform: rotate(-90deg); }
-    #text-right .txt-marquee { animation: txt-down 10s linear infinite; transform: rotate(90deg); }
-    @keyframes txt-up   { 0% { transform: rotate(-90deg) translateX(0); } 100% { transform: rotate(-90deg) translateX(-50%); } }
-    @keyframes txt-down { 0% { transform: rotate(90deg) translateX(-50%); } 100% { transform: rotate(90deg) translateX(0); } }
-
-    /* ═══ TEXTO CENTRAL GRANDE (screentext) ══════════════════════ */
-    #screentext {
-      position: fixed;
-      bottom: 14vw; left: 0; right: 0;
-      text-align: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 7.5vw;
-      letter-spacing: .04em;
-      line-height: 1;
-      color: transparent;
-      -webkit-text-stroke: 1px rgba(155,93,229,.3);
-      z-index: 5;
-      pointer-events: none;
-      transition: opacity .8s ease;
-      opacity: 0;
-    }
-    #screentext.on { opacity: 1; }
-
-    /* ═══ BLUR FRAMES (cantos com backdrop-filter) ════════════════ */
-    .blurred {
-      transition: backdrop-filter 1.4s ease, -webkit-backdrop-filter 1.4s ease, opacity .8s ease;
-      -webkit-backdrop-filter: blur(0);
-      backdrop-filter: blur(0);
-      opacity: 0;
-    }
-    .blurred.on {
-      -webkit-backdrop-filter: blur(1vw);
-      backdrop-filter: blur(1vw);
-      opacity: 1;
-    }
-    #blur-top {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      height: 7vw;
-      z-index: 8;
-      pointer-events: none;
-    }
-    #blur-bot {
-      position: fixed;
-      bottom: 0; left: 0; right: 0;
-      height: 5vw;
-      z-index: 8;
-      pointer-events: none;
-    }
-
-    /* ═══ HEADER (fixo, minimalista) ═════════════════════════════ */
-    header {
-      position: fixed;
-      top: 0; left: 4vw; right: 4vw;
-      height: 7vw;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .hdr-inner {
+      width: 100%; max-width: 1440px; margin: 0 auto;
+      padding: 0 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 16px;
     }
     .hdr-logo img {
-      height: 3.5vw;
-      width: auto;
-      object-fit: contain;
+      height: 36px; width: auto; object-fit: contain;
       filter: drop-shadow(0 0 10px rgba(155,93,229,.5));
+      transition: filter .3s;
     }
-    .hdr-logo img:not([src]), .hdr-logo img[src=""] { display: none; }
-    .hdr-tag {
-      font-size: .72vw;
-      font-weight: 700;
-      letter-spacing: .18em;
+    .hdr-logo:hover img { filter: drop-shadow(0 0 18px rgba(155,93,229,.8)); }
+    .hdr-logo img[src=""], .hdr-logo img:not([src]) { display: none; }
+    .hdr-logo-fb {
+      font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+      letter-spacing: .06em; color: var(--med-l);
+      text-shadow: 0 0 12px rgba(155,93,229,.5);
+    }
+
+    .hdr-nav { display: flex; align-items: center; gap: 4px; }
+    .hdr-nav a {
+      font-size: .78rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--tm);
+      padding: 6px 12px; border-radius: 6px;
+      transition: color .2s, background .2s;
+    }
+    .hdr-nav a:hover { color: var(--med-l); background: rgba(155,93,229,.08); }
+    .hdr-nav a.active { color: var(--t1); }
+
+    .hdr-right { display: flex; align-items: center; gap: 12px; }
+    .hdr-ig {
+      display: flex; align-items: center; gap: 6px;
+      font-size: .72rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--tm);
+      transition: color .2s;
+    }
+    .hdr-ig:hover { color: var(--med-l); }
+    .hdr-ig svg { width: 14px; height: 14px; }
+    .hdr-wa {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .72rem; font-weight: 700; letter-spacing: .1em;
       text-transform: uppercase;
-      color: rgba(155,93,229,.5);
+      padding: 7px 14px; border-radius: 6px;
+      background: rgba(155,93,229,.12);
+      border: 1px solid var(--border);
+      color: var(--med-l);
+      transition: background .2s, border-color .2s, transform .2s;
     }
-    .hdr-back {
-      display: flex; align-items: center; gap: .5vw;
-      font-size: .72vw; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-      color: rgba(155,93,229,.5);
-      cursor: pointer;
-      text-decoration: none;
-      transition: color .3s;
-    }
-    .hdr-back:hover { color: var(--med-l); }
-    .hdr-back svg { width: 1vw; height: 1vw; }
+    .hdr-wa:hover { background: var(--med); border-color: var(--med); color: #fff; transform: translateY(-1px); }
+    .hdr-wa svg { width: 14px; height: 14px; }
 
-    /* ═══ CONTEÚDO CENTRAL ════════════════════════════════════════ */
-    #center {
-      position: fixed;
-      inset: 7vw 4vw 5vw;
-      z-index: 6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      gap: 2vw;
+    .hbg { display: none; flex-direction: column; gap: 5px; padding: 4px; }
+    .hbg span { display: block; width: 22px; height: 2px; background: var(--t1); border-radius: 2px; transition: transform .3s, opacity .3s; }
+    .hbg.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hbg.open span:nth-child(2) { opacity: 0; }
+    .hbg.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .mob-nav {
+      position: fixed; top: 60px; inset: auto 0 0; z-index: 99;
+      background: rgba(8,8,8,.98); backdrop-filter: blur(20px);
+      display: flex; flex-direction: column; padding: 8px 0 24px;
+      transform: translateX(100%); transition: transform .3s;
     }
+    .mob-nav.open { transform: none; }
+    .mob-nav a { font-size: 1.1rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--t2); padding: 12px 24px; border-bottom: 1px solid var(--border); transition: color .2s; }
+    .mob-nav a:hover { color: var(--med-l); }
 
-    /* Mandala como centro visual */
-    #mandala-center {
+    /* ═══ HERO / BANNER ═══════════════════════════════════════ */
+    #shop-hero {
       position: relative;
-      width: 18vw;
-      height: 18vw;
-      flex-shrink: 0;
+      height: 28vw; min-height: 200px; max-height: 380px;
+      background: var(--bg2);
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
     }
-    #mandala-center svg {
-      width: 100%; height: 100%;
-      animation: spin-slow 44s linear infinite;
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 100% 100% at 50% 0%,
+        rgba(106,13,173,.22), rgba(8,8,8,.6) 70%, var(--bg2) 100%);
     }
-    #mandala-center svg.inner {
-      position: absolute; inset: 25%;
-      width: 50%; height: 50%;
-      animation: spin-slow 22s linear infinite reverse;
-    }
-    #mandala-glow {
-      position: absolute; inset: -10%;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(155,93,229,.25), transparent 70%);
-      animation: m-glow 4s ease-in-out infinite;
+    /* Mandala watermark no hero */
+    .hero-mandala {
+      position: absolute; right: -4vw; top: -4vw;
+      width: 36vw; max-width: 420px;
+      opacity: .07;
+      animation: spin-slow 60s linear infinite;
+      pointer-events: none;
     }
     @keyframes spin-slow { to { transform: rotate(360deg); } }
-    @keyframes m-glow { 0%,100%{opacity:.5;transform:scale(1);} 50%{opacity:1;transform:scale(1.1);} }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 0 32px 28px; width: 100%;
+      display: flex; align-items: flex-end; justify-content: space-between;
+    }
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+      letter-spacing: .03em; color: #fff; line-height: .95;
+    }
+    .hero-title span { display: block; color: var(--med-l); }
+    .hero-tag {
+      font-size: .72rem; font-weight: 700; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--med-l);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .hero-tag::before { content: ''; display: inline-block; width: 16px; height: 1px; background: var(--med); }
 
-    /* Badge em construção */
-    #wip-badge {
-      display: inline-flex; align-items: center; gap: .6vw;
-      background: rgba(155,93,229,.1);
-      border: 1px solid rgba(155,93,229,.25);
-      border-radius: 100vw;
-      padding: .4vw 1.2vw;
-      font-size: .7vw;
-      font-weight: 700;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--med-l);
-      opacity: 0;
-      transform: translateY(1vw);
-      transition: opacity .8s ease .9s, transform .8s ease .9s;
+    /* ═══ FILTER BAR ══════════════════════════════════════════ */
+    #filter-bar {
+      position: sticky; top: 60px; z-index: 50;
+      background: rgba(8,8,8,.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
+      display: flex; align-items: center; gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-    #wip-badge.on { opacity: 1; transform: none; }
-    .wip-dot { width: .45vw; height: .45vw; border-radius: 50%; background: var(--neon); animation: wip-blink 1.8s ease infinite; }
-    @keyframes wip-blink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
+    #filter-bar::-webkit-scrollbar { display: none; }
+    .filter-btn {
+      font-size: .72rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--tm);
+      padding: 14px 20px; border: none; background: none;
+      cursor: pointer; white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .filter-btn:hover { color: var(--t1); }
+    .filter-btn.active { color: var(--med-l); border-bottom-color: var(--med); }
+    .filter-sep { width: 1px; height: 14px; background: var(--border); flex-shrink: 0; }
+    .filter-count { margin-left: auto; font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--tm); padding-left: 20px; white-space: nowrap; }
 
-    /* Tagline */
-    #tagline {
-      font-family: 'Lora', serif;
-      font-style: italic;
-      font-size: 1.1vw;
-      color: rgba(155,93,229,.6);
-      letter-spacing: .06em;
-      opacity: 0;
-      transform: translateY(1vw);
-      transition: opacity .8s ease 1.1s, transform .8s ease 1.1s;
+    /* ═══ PRODUCT GRID ════════════════════════════════════════ */
+    /*
+      Layout AZERO: flex-wrap, cada card tem borda na base,
+      imagem dominante, título absoluto na base da foto,
+      seletor + preço revelados com hover.
+    */
+    #product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--border);
     }
-    #tagline.on { opacity: 1; transform: none; }
 
-    /* CTAs */
-    #ctas {
-      display: flex; gap: 1vw; align-items: center;
-      opacity: 0; transform: translateY(1vw);
-      transition: opacity .8s ease 1.3s, transform .8s ease 1.3s;
+    /* ── CARD ── */
+    .pcard {
+      position: relative;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      background: var(--bg);
+      transition: background .3s;
+      overflow: hidden;
     }
-    #ctas.on { opacity: 1; transform: none; }
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: .5vw;
-      padding: .65vw 1.4vw;
-      border-radius: .5vw;
-      font-size: .78vw;
-      font-weight: 700;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s;
-      text-decoration: none;
+    .pcard:nth-child(3n) { border-right: none; }
+    .pcard:hover { background: var(--s1); }
+
+    /* Imagem */
+    .pcard-img {
+      position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      background: var(--s2);
+      display: flex; align-items: center; justify-content: center;
     }
-    .cta-btn svg { width: 1.1vw; height: 1.1vw; }
-    .cta-med {
-      background: linear-gradient(135deg, var(--med), var(--med-d));
+    .pcard-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform .6s cubic-bezier(.4,0,.2,1), filter .4s;
+    }
+    .pcard:hover .pcard-img img {
+      transform: scale(1.04);
+    }
+    /* Placeholder quando não há foto */
+    .pcard-ph {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--s2), var(--s1));
+    }
+    .pcard-ph svg { width: 20%; height: 20%; color: rgba(155,93,229,.2); }
+
+    /* Badge (Exclusivo, Novidade, etc.) */
+    .pcard-badge {
+      position: absolute; top: 14px; left: 14px;
+      font-size: .6rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 3px; z-index: 2;
+    }
+    .badge-new  { background: var(--neon); color: #000; }
+    .badge-med  { background: var(--med); color: #fff; }
+    .badge-hot  { background: #e53e3e; color: #fff; }
+
+    /* Título sobre a foto (absoluto na base) — AZERO style */
+    .pcard-title-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 40px 16px 14px;
+      background: linear-gradient(to top, rgba(8,8,8,.85) 40%, transparent);
+      z-index: 2;
+    }
+    .pcard-title-overlay h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1rem, 1.8vw, 1.5rem);
+      letter-spacing: .04em;
       color: #fff;
-      box-shadow: 0 .3vw 1.5vw rgba(155,93,229,.35);
+      line-height: 1.1;
     }
-    .cta-med:hover { transform: translateY(-.2vw); box-shadow: 0 .6vw 2vw rgba(155,93,229,.55); }
-    .cta-ghost {
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.7);
-      border: 1px solid rgba(255,255,255,.1);
+    .pcard-title-overlay .pcat {
+      font-size: .6rem; font-weight: 700; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--med-l);
+      margin-bottom: 4px; display: block;
     }
-    .cta-ghost:hover { border-color: var(--med); color: var(--med-l); transform: translateY(-.2vw); }
 
-    /* Preview tags */
-    #preview-tags {
-      display: flex; flex-wrap: wrap; gap: .6vw; justify-content: center;
-      opacity: 0; transform: translateY(1vw);
-      transition: opacity .8s ease 1.5s, transform .8s ease 1.5s;
+    /* Painel inferior — revelado com hover */
+    .pcard-bottom {
+      padding: 12px 16px 16px;
+      border-top: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 10px;
     }
-    #preview-tags.on { opacity: 1; transform: none; }
-    .ptag {
-      font-size: .65vw; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
-      padding: .3vw .8vw;
-      border-radius: .3vw;
+
+    /* Preço */
+    .pcard-price {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.55rem; letter-spacing: .03em;
+      color: var(--med-l); line-height: 1;
+      display: flex; align-items: baseline; gap: 8px;
+    }
+    .pcard-price .pix-note {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--neon);
+      background: rgba(57,255,20,.07);
+      border: 1px solid rgba(57,255,20,.18);
+      border-radius: 4px; padding: 2px 7px;
+    }
+
+    /* Variantes */
+    .pcard-variants {
+      display: flex; gap: 6px; flex-wrap: wrap;
+    }
+    .var-btn {
+      font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--t2);
+      background: transparent;
+      cursor: pointer;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+    .var-btn:hover, .var-btn.active {
+      border-color: var(--med); color: var(--med-l);
       background: rgba(155,93,229,.1);
-      border: 1px solid rgba(155,93,229,.2);
+    }
+
+    /* Botão adicionar ao carrinho */
+    .pcard-cta {
+      display: flex; gap: 8px;
+    }
+    .btn-add {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
+      padding: 10px 14px; border-radius: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .8rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+      background: rgba(155,93,229,.12); border: 1px solid var(--border);
       color: var(--med-l);
+      transition: background .2s, border-color .2s, color .2s, transform .2s cubic-bezier(.34,1.56,.64,1);
     }
+    .btn-add:hover { background: var(--med); border-color: var(--med); color: #fff; transform: translateY(-1px); }
+    .btn-add:active { transform: scale(.97); }
+    .btn-add.added { background: rgba(57,255,20,.1); border-color: rgba(57,255,20,.3); color: var(--neon); }
+    .btn-add svg { width: 13px; height: 13px; flex-shrink: 0; }
+    .btn-wa-sm {
+      width: 40px; height: 40px; border-radius: 6px;
+      background: rgba(37,211,102,.12); border: 1px solid rgba(37,211,102,.2);
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s, border-color .2s;
+    }
+    .btn-wa-sm:hover { background: #25d366; border-color: #25d366; }
+    .btn-wa-sm svg { width: 15px; height: 15px; color: #25d366; }
+    .btn-wa-sm:hover svg { color: #fff; }
 
-    /* ═══ FOOTER FIXO ════════════════════════════════════════════ */
-    footer {
-      position: fixed;
-      bottom: 0; left: 4vw; right: 4vw;
-      height: 5vw;
-      z-index: 20;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    /* ═══ CART DRAWER (herdado do headshop, simplificado) ════════ */
+    #cart-overlay { position: fixed; inset: 0; z-index: 900; background: rgba(0,0,0,.6); opacity: 0; pointer-events: none; transition: opacity .3s; }
+    #cart-overlay.open { opacity: 1; pointer-events: auto; }
+    #cart-drawer {
+      position: fixed; top: 0; right: 0; bottom: 0; z-index: 901;
+      width: 100%; max-width: 400px;
+      background: var(--bg2); border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
     }
-    .ft-copy {
-      font-size: .6vw; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-      color: rgba(155,93,229,.35);
-    }
-    .ft-links { display: flex; gap: 1.5vw; }
-    .ft-links a {
-      font-size: .6vw; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-      color: rgba(155,93,229,.35);
-      text-decoration: none;
-      transition: color .3s;
-    }
-    .ft-links a:hover { color: var(--med-l); }
+    #cart-drawer.open { transform: none; }
+    .cdh { display: flex; align-items: center; justify-content: space-between; padding: 18px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .cdh h2 { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; letter-spacing: .05em; color: #fff; }
+    .cd-close { width: 34px; height: 34px; border-radius: 7px; background: var(--s2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background .2s; }
+    .cd-close:hover { background: rgba(239,68,68,.15); border-color: rgba(239,68,68,.3); }
+    .cd-close svg { width: 14px; height: 14px; color: var(--t2); }
+    #cart-items { flex: 1; overflow-y: auto; padding: 14px 20px; display: flex; flex-direction: column; gap: 10px; }
+    .cart-empty-msg { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; padding: 40px 20px; flex: 1; }
+    .cart-empty-msg svg { width: 44px; height: 44px; color: var(--tm); opacity: .5; }
+    .cart-empty-msg p { font-family: 'Lora', serif; font-size: .88rem; color: var(--t2); }
+    .ci { display: flex; gap: 10px; align-items: flex-start; background: var(--s2); border: 1px solid var(--border); border-radius: 10px; padding: 10px; }
+    .ci-img { width: 52px; height: 52px; border-radius: 6px; background: var(--s1); flex-shrink: 0; overflow: hidden; }
+    .ci-img img { width: 100%; height: 100%; object-fit: cover; }
+    .ci-body { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+    .ci-name { font-family: 'Barlow Condensed', sans-serif; font-size: .85rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: #fff; line-height: 1.2; }
+    .ci-price { font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem; color: var(--med-l); letter-spacing: .03em; }
+    .ci-qty { display: flex; align-items: center; gap: 7px; }
+    .ci-q-btn { width: 22px; height: 22px; border-radius: 5px; background: var(--s1); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: .88rem; color: var(--t2); transition: background .2s, border-color .2s, color .2s; }
+    .ci-q-btn:hover { background: var(--med); border-color: var(--med); color: #fff; }
+    .ci-q-n { font-family: 'Barlow Condensed', sans-serif; font-size: .85rem; font-weight: 700; color: #fff; min-width: 14px; text-align: center; }
+    .ci-rm { font-size: .62rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--tm); background: none; border: none; cursor: pointer; transition: color .2s; }
+    .ci-rm:hover { color: #fca5a5; }
+    .cdf { padding: 16px 20px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .cd-total { display: flex; justify-content: space-between; align-items: baseline; }
+    .cd-total span:first-child { font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--t2); }
+    .cd-total-val { font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem; color: var(--med-l); letter-spacing: .03em; line-height: 1; }
+    .btn-cko { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; border-radius: 9px; font-family: 'Barlow Condensed', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #fff; cursor: pointer; border: none; background: linear-gradient(135deg, var(--med), var(--med-d)); box-shadow: 0 4px 18px rgba(155,93,229,.3); transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s; }
+    .btn-cko:hover { transform: translateY(-2px); box-shadow: 0 8px 26px rgba(155,93,229,.5); }
+    .btn-cko:disabled { opacity: .4; cursor: not-allowed; transform: none !important; }
+    .btn-cko svg { width: 17px; height: 17px; }
+    .cd-wa { text-align: center; font-size: .72rem; color: var(--tm); font-family: 'Lora', serif; }
+    .cd-wa a { color: #25d366; }
 
-    /* ═══ MOBILE fallback ════════════════════════════════════════ */
-    @media (max-width: 768px) {
-      html, body { overflow: auto; }
-      #cursor, #cursor-dot, #isotipo-l, #isotipo-r, #text-left, #text-right, #screentext { display: none; }
-      body { cursor: auto; }
-      #center { position: relative; inset: auto; padding: 120px 24px 80px; min-height: 100vh; }
-      #mandala-center { width: 60vw; height: 60vw; }
-      header { left: 24px; right: 24px; height: 72px; }
-      .hdr-logo img { height: 36px; }
-      .hdr-tag, .hdr-back { font-size: 10px; }
-      footer { left: 24px; right: 24px; height: 56px; }
-      .ft-copy, .ft-links a { font-size: 10px; }
-      #wip-badge { font-size: 10px; padding: 6px 16px; }
-      #tagline { font-size: 14px; }
-      .cta-btn { font-size: 12px; padding: 10px 20px; }
-      .cta-btn svg { width: 14px; height: 14px; }
-      .ptag { font-size: 10px; padding: 4px 10px; }
-      #frames { display: none; }
-      #blur-top, #blur-bot { display: none; }
+    /* ── Cart button header ── */
+    .cart-hdr-btn {
+      position: relative; display: flex; align-items: center; gap: 6px;
+      background: var(--s2); border: 1px solid var(--border);
+      border-radius: 7px; padding: 6px 13px;
+      font-family: 'Barlow Condensed', sans-serif; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--t2);
+      cursor: pointer; transition: border-color .2s, color .2s;
+    }
+    .cart-hdr-btn:hover { border-color: var(--med); color: var(--med-l); }
+    .cart-hdr-btn svg { width: 15px; height: 15px; }
+    .cart-badge { position: absolute; top: -5px; right: -5px; min-width: 16px; height: 16px; padding: 0 3px; border-radius: 100px; background: var(--med); color: #fff; font-family: 'Bebas Neue', sans-serif; font-size: .65rem; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(.6); transition: opacity .25s, transform .25s cubic-bezier(.34,1.56,.64,1); }
+    .cart-badge.show { opacity: 1; transform: scale(1); }
+
+    /* Checkout em construção */
+    #ck-page { display: none; position: fixed; inset: 0; z-index: 950; background: var(--bg); flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 32px; }
+    #ck-page.open { display: flex; }
+    .ck-back-btn { position: absolute; top: 24px; left: 24px; display: flex; align-items: center; gap: 7px; font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--t2); cursor: pointer; background: none; border: none; transition: color .2s; }
+    .ck-back-btn:hover { color: var(--med-l); }
+    .ck-back-btn svg { width: 14px; height: 14px; }
+    .ck-icon { width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, rgba(155,93,229,.2), rgba(106,13,173,.1)); border: 1px solid rgba(155,93,229,.25); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .ck-icon svg { width: 28px; height: 28px; color: var(--med-l); }
+    #ck-page h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(1.8rem,4vw,3rem); color: #fff; margin-bottom: 10px; }
+    #ck-page h2 span { color: var(--med-l); }
+    #ck-page .ck-desc { font-family: 'Lora', serif; font-size: .93rem; color: var(--t2); max-width: 400px; line-height: 1.8; margin-bottom: 24px; }
+    .ck-wip-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(244,185,66,.1); border: 1px solid rgba(244,185,66,.25); border-radius: 100px; padding: 6px 16px; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .ck-wip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); animation: wblink 1.6s ease infinite; }
+    @keyframes wblink { 0%,100%{opacity:1;}50%{opacity:.2;} }
+    .ck-summary { background: var(--s2); border: 1px solid var(--border); border-radius: 12px; padding: 18px 22px; max-width: 360px; width: 100%; margin-bottom: 22px; }
+    .ck-row { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--t2); padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .ck-row:last-child { border-bottom: none; }
+    .ck-row.total { color: #fff; font-size: .9rem; }
+    .ck-row.total span:last-child { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--med-l); letter-spacing: .03em; }
+
+    /* ═══ FOOTER ═════════════════════════════════════════════ */
+    #site-footer { background: var(--s1); border-top: 1px solid var(--border); padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .ft-brand { display: flex; align-items: center; gap: 12px; }
+    .ft-brand img { height: 26px; width: auto; object-fit: contain; filter: drop-shadow(0 0 6px rgba(155,93,229,.4)); }
+    .ft-copy { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--tm); }
+    .ft-soc { display: flex; gap: 8px; }
+    .ft-soc a { width: 34px; height: 34px; border-radius: 7px; background: var(--s2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; transition: border-color .2s, background .2s; }
+    .ft-soc a:hover { border-color: var(--med); background: rgba(155,93,229,.1); }
+    .ft-soc a svg { width: 14px; height: 14px; color: var(--tm); transition: color .2s; }
+    .ft-soc a:hover svg { color: var(--med-l); }
+
+    /* ═══ REVEAL ══════════════════════════════════════════════ */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity .55s cubic-bezier(.4,0,.2,1), transform .55s cubic-bezier(.4,0,.2,1); }
+    .rv.on { opacity: 1; transform: none; }
+    .d1{transition-delay:.06s} .d2{transition-delay:.12s} .d3{transition-delay:.18s} .d4{transition-delay:.24s}
+
+    /* ═══ RESPONSIVE ══════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .hdr-nav, .hdr-ig { display: none; }
+      .hbg { display: flex; }
+      #product-grid { grid-template-columns: repeat(2, 1fr); }
+      .pcard:nth-child(3n) { border-right: 1px solid var(--border); }
+      .pcard:nth-child(2n) { border-right: none; }
+      #shop-hero { height: 40vw; }
+    }
+    @media (max-width: 600px) {
+      #product-grid { grid-template-columns: 1fr; }
+      .pcard:nth-child(2n) { border-right: 1px solid var(--border); }
+      .pcard { border-right: none !important; }
+      #shop-hero { height: 52vw; }
+      .hdr-inner { padding: 0 16px; }
+      #filter-bar { padding: 0 16px; }
+      .hero-content { padding: 0 16px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:.01ms!important; transition-duration:.01ms!important; }
+      .rv { opacity: 1; transform: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ── CURSOR CUSTOMIZADO ─────────────────────────────── -->
-  <div id="cursor"><span id="cursor-label"></span></div>
-  <div id="cursor-dot"></div>
-
-  <!-- ── OVERLAY MULTIPLY ───────────────────────────────── -->
-  <div id="overlay-grad" aria-hidden="true"></div>
-  <div id="noise" aria-hidden="true"></div>
-
-  <!-- ── BLUR FRAMES ────────────────────────────────────── -->
-  <div id="blur-top" class="blurred" aria-hidden="true"></div>
-  <div id="blur-bot" class="blurred" aria-hidden="true"></div>
-
-  <!-- ── PAINÉIS / FRAMES BORDAS ───────────────────────── -->
-  <div id="frames" aria-hidden="true">
-    <div class="frame-line" id="ft"></div>
-    <div class="frame-line" id="fb"></div>
-    <div class="frame-line" id="fl"></div>
-    <div class="frame-line" id="fr"></div>
+<!-- ── CART OVERLAY + DRAWER ─────────────────────────────── -->
+<div id="cart-overlay" onclick="closeCart()" aria-hidden="true"></div>
+<div id="cart-drawer" role="dialog" aria-label="Carrinho" aria-modal="true">
+  <div class="cdh">
+    <h2>Carrinho</h2>
+    <button class="cd-close" onclick="closeCart()" aria-label="Fechar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
   </div>
-
-  <!-- ── TEXTO VERTICAL LATERAL ────────────────────────── -->
-  <div id="text-left" aria-hidden="true">
-    <div class="txt-marquee">
-      <span>Medusa Arte</span><span>Mandalas</span><span>Boas Energias</span>
-      <span>Artesanal</span><span>Exclusivo</span><span>Catalão GO</span>
-      <span>Medusa Arte</span><span>Mandalas</span><span>Boas Energias</span>
-      <span>Artesanal</span><span>Exclusivo</span><span>Catalão GO</span>
+  <div id="cart-items"></div>
+  <div class="cdf">
+    <div class="cd-total">
+      <span>Total</span>
+      <span class="cd-total-val" id="cd-total">R$ 0,00</span>
     </div>
+    <button class="btn-cko" id="btn-cko" onclick="openCko()" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+      Ir para o Pagamento
+    </button>
+    <p class="cd-wa">Prefere pelo WhatsApp? <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+pe%C3%A7as+da+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener">Falar agora</a></p>
   </div>
-  <div id="text-right" aria-hidden="true">
-    <div class="txt-marquee">
-      <span>Em Breve</span><span>Brincos</span><span>Zodíaco</span>
-      <span>Decoração</span><span>Presentes</span><span>xmedusarte</span>
-      <span>Em Breve</span><span>Brincos</span><span>Zodíaco</span>
-      <span>Decoração</span><span>Presentes</span><span>xmedusarte</span>
-    </div>
-  </div>
+</div>
 
-  <!-- ── ISOTIPO (logo flip 3D cantos) ─────────────────── -->
-  <div id="isotipo-l" aria-hidden="true">
-    <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png" alt="" />
-  </div>
-  <div id="isotipo-r" aria-hidden="true">
-    <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png" alt="" />
-  </div>
+<!-- ── CHECKOUT EM CONSTRUÇÃO ────────────────────────────── -->
+<div id="ck-page" role="dialog" aria-modal="true">
+  <button class="ck-back-btn" onclick="closeCko()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    Voltar ao carrinho
+  </button>
+  <div class="ck-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+  <h2>Pagamento online <span>em breve</span></h2>
+  <div class="ck-wip-badge"><span class="ck-wip-dot" aria-hidden="true"></span>Em Implementação</div>
+  <p class="ck-desc">Estamos integrando o pagamento com cartão e PIX. Por enquanto, finalize pelo WhatsApp — a gente responde na hora!</p>
+  <div class="ck-summary" id="ck-summary"></div>
+  <a id="ck-wa-btn" href="https://wa.me/5564999421040" target="_blank" rel="noopener"
+     style="display:inline-flex;align-items:center;gap:9px;padding:14px 26px;border-radius:9px;background:#25d366;color:#fff;font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 4px 18px rgba(37,211,102,.32);transition:transform .25s,box-shadow .25s;"
+     onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 26px rgba(37,211,102,.5)'"
+     onmouseout="this.style.transform='';this.style.boxShadow='0 4px 18px rgba(37,211,102,.32)'">
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    Finalizar pelo WhatsApp
+  </a>
+</div>
 
-  <!-- ── TEXTO GRANDE CENTRAL ──────────────────────────── -->
-  <div id="screentext" aria-hidden="true">Em Breve</div>
-
-  <!-- ── HEADER ─────────────────────────────────────────── -->
-  <header>
-    <div class="hdr-logo">
-      <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png"
-           alt="Medusa Arte | Mandalas"
-           onerror="this.style.display='none'" />
-    </div>
-    <span class="hdr-tag">Mandalas &amp; Artesanato · Catalão GO</span>
-    <a href="../" class="hdr-back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      Início
+<!-- ── HEADER ─────────────────────────────────────────────── -->
+<header id="site-header">
+  <div class="hdr-inner">
+    <a href="../" class="hdr-logo" aria-label="Medusa Arte | Mandalas">
+      <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png" alt="Medusa Arte | Mandalas" onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+      <span class="hdr-logo-fb" style="display:none;">MEDUSA ARTE</span>
     </a>
-  </header>
 
-  <!-- ── CONTEÚDO CENTRAL ───────────────────────────────── -->
-  <main id="center">
+    <nav class="hdr-nav" aria-label="Navegação">
+      <a href="#todos" class="active" onclick="setFilter('todos',this)">Todos</a>
+      <a href="#brincos" onclick="setFilter('brincos',this)">Brincos</a>
+      <a href="#mandalas" onclick="setFilter('mandalas',this)">Mandalas</a>
+      <a href="#chaveiros" onclick="setFilter('chaveiros',this)">Chaveiros</a>
+    </nav>
 
-    <!-- Mandala animada SVG -->
-    <div id="mandala-center" aria-hidden="true">
-      <div id="mandala-glow"></div>
-      <!-- Mandala externa girando -->
-      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="100" cy="100" r="96" stroke="rgba(155,93,229,0.18)" stroke-width="1"/>
-        <circle cx="100" cy="100" r="76" stroke="rgba(155,93,229,0.22)" stroke-width="1"/>
-        <circle cx="100" cy="100" r="56" stroke="rgba(199,125,255,0.3)" stroke-width="1.2"/>
-        <circle cx="100" cy="100" r="36" stroke="rgba(199,125,255,0.38)" stroke-width="1.5"/>
-        <circle cx="100" cy="100" r="18" stroke="rgba(155,93,229,0.55)" stroke-width="1.5"/>
-        <circle cx="100" cy="100" r="6" fill="rgba(199,125,255,0.8)"/>
-        <g stroke="rgba(155,93,229,0.5)" stroke-width="1" fill="none">
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(0 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(30 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(60 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(90 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(120 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(150 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(180 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(210 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(240 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(270 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(300 100 100)"/>
-          <ellipse cx="100" cy="24" rx="7" ry="20" transform="rotate(330 100 100)"/>
-        </g>
-        <g fill="rgba(57,255,20,0.65)">
-          <circle cx="100" cy="5" r="2" transform="rotate(0 100 100)"/>
-          <circle cx="100" cy="5" r="2" transform="rotate(60 100 100)"/>
-          <circle cx="100" cy="5" r="2" transform="rotate(120 100 100)"/>
-          <circle cx="100" cy="5" r="2" transform="rotate(180 100 100)"/>
-          <circle cx="100" cy="5" r="2" transform="rotate(240 100 100)"/>
-          <circle cx="100" cy="5" r="2" transform="rotate(300 100 100)"/>
-        </g>
-      </svg>
-      <!-- Mandala interna girando ao contrário -->
-      <svg class="inner" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" stroke="rgba(199,125,255,0.25)" stroke-width="1"/>
-        <circle cx="50" cy="50" r="30" stroke="rgba(155,93,229,0.35)" stroke-width="1"/>
-        <circle cx="50" cy="50" r="14" stroke="rgba(199,125,255,0.5)" stroke-width="1.5"/>
-        <circle cx="50" cy="50" r="4" fill="rgba(155,93,229,0.7)"/>
-        <g stroke="rgba(199,125,255,0.4)" stroke-width="0.8" fill="none">
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(0 50 50)"/>
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(45 50 50)"/>
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(90 50 50)"/>
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(135 50 50)"/>
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(180 50 50)"/>
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(225 50 50)"/>
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(270 50 50)"/>
-          <ellipse cx="50" cy="12" rx="3.5" ry="9" transform="rotate(315 50 50)"/>
-        </g>
-      </svg>
-    </div>
-
-    <!-- Badge Em Construção -->
-    <div id="wip-badge">
-      <span class="wip-dot" aria-hidden="true"></span>
-      Em Construção
-    </div>
-
-    <!-- Tagline -->
-    <p id="tagline">"Mais beleza, cor e boas energias pro seu dia a dia."</p>
-
-    <!-- CTAs -->
-    <div id="ctas">
-      <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="cta-btn cta-med">
+    <div class="hdr-right">
+      <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" class="hdr-ig">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         @xmedusarte
       </a>
-      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+pe%C3%A7as+da+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener" class="cta-btn cta-ghost">
+      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+pe%C3%A7as+da+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener" class="hdr-wa">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
         WhatsApp
       </a>
+      <button class="cart-hdr-btn" onclick="openCart()" aria-label="Carrinho">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-badge" id="cart-badge">0</span>
+      </button>
+      <button class="hbg" id="hbg" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </div>
+</header>
 
-    <!-- Preview das categorias -->
-    <div id="preview-tags">
-      <span class="ptag">Mandalas Decorativas</span>
-      <span class="ptag">Brincos Zodíaco</span>
-      <span class="ptag">Olho Grego</span>
-      <span class="ptag">Chaveiros</span>
-      <span class="ptag">Arte Têxtil</span>
-      <span class="ptag">Presentes</span>
+<nav class="mob-nav" id="mob-nav" aria-label="Menu mobile">
+  <a href="#todos"     onclick="setFilter('todos',this);closeMob()">Todos</a>
+  <a href="#brincos"  onclick="setFilter('brincos',this);closeMob()">Brincos</a>
+  <a href="#mandalas" onclick="setFilter('mandalas',this);closeMob()">Mandalas</a>
+  <a href="#chaveiros" onclick="setFilter('chaveiros',this);closeMob()">Chaveiros</a>
+  <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" onclick="closeMob()">Instagram @xmedusarte</a>
+  <a href="../" onclick="closeMob()">← Página inicial</a>
+</nav>
+
+<main>
+  <!-- ── HERO ────────────────────────────────────────────── -->
+  <section id="shop-hero" aria-label="Medusa Arte — Coleção">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <!-- Mandala watermark decorativa -->
+    <svg class="hero-mandala" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="100" cy="100" r="96" stroke="white" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="72" stroke="white" stroke-width="0.5"/>
+      <circle cx="100" cy="100" r="48" stroke="white" stroke-width="0.8"/>
+      <circle cx="100" cy="100" r="24" stroke="white" stroke-width="0.8"/>
+      <g stroke="white" stroke-width="0.6" fill="none">
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(0 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(30 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(60 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(90 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(120 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(150 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(180 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(210 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(240 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(270 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(300 100 100)"/>
+        <ellipse cx="100" cy="20" rx="8" ry="22" transform="rotate(330 100 100)"/>
+      </g>
+    </svg>
+    <div class="hero-content">
+      <div>
+        <h1 class="hero-title">
+          Medusa Arte<br/>
+          <span>Coleção Artesanal</span>
+        </h1>
+      </div>
+      <span class="hero-tag">Catalão, GO · @xmedusarte</span>
     </div>
+  </section>
 
-  </main>
+  <!-- ── FILTER BAR ──────────────────────────────────────── -->
+  <div id="filter-bar" role="navigation" aria-label="Filtros">
+    <button class="filter-btn active" onclick="setFilter('todos',this)">Todos</button>
+    <div class="filter-sep" aria-hidden="true"></div>
+    <button class="filter-btn" onclick="setFilter('brincos',this)">Brincos</button>
+    <div class="filter-sep" aria-hidden="true"></div>
+    <button class="filter-btn" onclick="setFilter('mandalas',this)">Mandalas</button>
+    <div class="filter-sep" aria-hidden="true"></div>
+    <button class="filter-btn" onclick="setFilter('chaveiros',this)">Chaveiros</button>
+    <div class="filter-sep" aria-hidden="true"></div>
+    <button class="filter-btn" onclick="setFilter('presentes',this)">Presentes</button>
+    <span class="filter-count" id="filter-count">6 peças</span>
+  </div>
 
-  <!-- ── FOOTER ──────────────────────────────────────────── -->
-  <footer>
+  <!-- ── PRODUCT GRID ────────────────────────────────────── -->
+  <div id="product-grid" aria-label="Produtos Medusa Arte">
+
+    <!-- Brinco Zodíaco Aquário Mini -->
+    <article class="pcard rv" data-cat="brincos">
+      <div class="pcard-img">
+        <div class="pcard-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <span class="pcard-badge badge-new">Exclusivo</span>
+        <div class="pcard-title-overlay">
+          <span class="pcat">Brincos · Zodíaco</span>
+          <h3>Brinco Aquário Mini — 4cm</h3>
+        </div>
+      </div>
+      <div class="pcard-bottom">
+        <div class="pcard-price">
+          R$ 90,00
+          <span class="pix-note">PIX</span>
+        </div>
+        <div class="pcard-variants">
+          <button class="var-btn active">4cm</button>
+          <button class="var-btn" onclick="this.closest('.pcard').querySelector('.pcard-price').firstChild.textContent='R$ 140,00 ';this.parentElement.querySelectorAll('.var-btn').forEach(b=>b.classList.remove('active'));this.classList.add('active')">6cm — R$140</button>
+        </div>
+        <div class="pcard-cta">
+          <button class="btn-add" onclick="addToCartMed(this)"
+                  data-name="Brinco Zodíaco Aquário Mini"
+                  data-price="90.00"
+                  data-img="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar
+          </button>
+          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Brinco+Zod%C3%ADaco+Aqu%C3%A1rio+Mini+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn-wa-sm" aria-label="Pedir pelo WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Brinco Olho Grego Verde Neon -->
+    <article class="pcard rv d1" data-cat="brincos">
+      <div class="pcard-img">
+        <div class="pcard-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <span class="pcard-badge badge-med">Artesanal</span>
+        <div class="pcard-title-overlay">
+          <span class="pcat">Brincos · Proteção</span>
+          <h3>Olho Grego Verde Neon ✨</h3>
+        </div>
+      </div>
+      <div class="pcard-bottom">
+        <div class="pcard-price">R$ 80,00 <span class="pix-note">PIX</span></div>
+        <div class="pcard-cta">
+          <button class="btn-add" onclick="addToCartMed(this)" data-name="Brinco Olho Grego Verde Neon" data-price="80.00" data-img="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar
+          </button>
+          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Brinco+Olho+Grego+Verde+Neon+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn-wa-sm" aria-label="Pedir pelo WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Brincos Médios 6cm -->
+    <article class="pcard rv d2" data-cat="brincos">
+      <div class="pcard-img">
+        <div class="pcard-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="pcard-title-overlay">
+          <span class="pcat">Brincos · Geométrico</span>
+          <h3>Brincos Médios — 6cm</h3>
+        </div>
+      </div>
+      <div class="pcard-bottom">
+        <div class="pcard-price">R$ 70,00 <span class="pix-note">PIX</span></div>
+        <div class="pcard-cta">
+          <button class="btn-add" onclick="addToCartMed(this)" data-name="Brincos Médios 6cm" data-price="70.00" data-img="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar
+          </button>
+          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+os+Brincos+M%C3%A9dios+6cm+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn-wa-sm" aria-label="Pedir pelo WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Brinco com Pingente -->
+    <article class="pcard rv d1" data-cat="brincos presentes">
+      <div class="pcard-img">
+        <div class="pcard-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <span class="pcard-badge badge-hot">♥</span>
+        <div class="pcard-title-overlay">
+          <span class="pcat">Brincos · Presente</span>
+          <h3>Brinco com Pingente 🌸</h3>
+        </div>
+      </div>
+      <div class="pcard-bottom">
+        <div class="pcard-price">R$ 60,00 <span class="pix-note">PIX</span></div>
+        <div class="pcard-cta">
+          <button class="btn-add" onclick="addToCartMed(this)" data-name="Brinco com Pingente 🌸" data-price="60.00" data-img="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar
+          </button>
+          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+o+Brinco+com+Pingente+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn-wa-sm" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Chaveiros 6cm -->
+    <article class="pcard rv d2" data-cat="chaveiros">
+      <div class="pcard-img">
+        <div class="pcard-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        </div>
+        <div class="pcard-title-overlay">
+          <span class="pcat">Chaveiros · Artesanal</span>
+          <h3>Chaveiros — 6cm</h3>
+        </div>
+      </div>
+      <div class="pcard-bottom">
+        <div class="pcard-price">R$ 35,00 <span class="pix-note">PIX</span></div>
+        <div class="pcard-cta">
+          <button class="btn-add" onclick="addToCartMed(this)" data-name="Chaveiros 6cm" data-price="35.00" data-img="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar
+          </button>
+          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+os+Chaveiros+6cm+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn-wa-sm" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Mandala Decorativa -->
+    <article class="pcard rv d3" data-cat="mandalas">
+      <div class="pcard-img">
+        <div class="pcard-ph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </div>
+        <span class="pcard-badge badge-med">Autoral</span>
+        <div class="pcard-title-overlay">
+          <span class="pcat">Mandalas · Decoração</span>
+          <h3>Mandala Decorativa Autoral</h3>
+        </div>
+      </div>
+      <div class="pcard-bottom">
+        <div class="pcard-price">R$ 75,00 <span class="pix-note">PIX</span></div>
+        <div class="pcard-cta">
+          <button class="btn-add" onclick="addToCartMed(this)" data-name="Mandala Decorativa Autoral" data-price="75.00" data-img="">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Adicionar
+          </button>
+          <a href="https://wa.me/5564999421040?text=Oi%21+Quero+a+Mandala+Decorativa+%F0%9F%8C%BF" target="_blank" rel="noopener" class="btn-wa-sm" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+          </a>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /#product-grid -->
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────── -->
+<footer id="site-footer">
+  <div class="ft-brand">
+    <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png" alt="Medusa Arte" onerror="this.style.display='none'" />
     <span class="ft-copy">© 2026 Medusa Arte | Mandalas · Catalão, GO</span>
-    <div class="ft-links">
-      <a href="../headshop/">Ice-o-lator Headshop</a>
-      <a href="../">Início</a>
-    </div>
-  </footer>
+  </div>
+  <div class="ft-soc">
+    <a href="https://www.instagram.com/xmedusarte" target="_blank" rel="noopener" aria-label="Instagram @xmedusarte">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="https://wa.me/5564999421040" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+    </a>
+    <a href="../" aria-label="Página inicial">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    </a>
+  </div>
+</footer>
 
-  <script>
-  (function(){
-    'use strict';
-    var rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+<script>
+(function(){
+  'use strict';
 
-    // ── Cursor lerp ─────────────────────────────────────
-    if (!rm && window.innerWidth > 768) {
-      var cur = document.getElementById('cursor');
-      var dot = document.getElementById('cursor-dot');
-      var tx = 0, ty = 0, cx = 0, cy = 0;
+  // ── CART ──────────────────────────────────────────────
+  var cart = JSON.parse(localStorage.getItem('med_cart') || '[]');
+  function save(){ localStorage.setItem('med_cart', JSON.stringify(cart)); }
+  function fmt(v){ return 'R$ ' + v.toFixed(2).replace('.', ','); }
+  function total(){ return cart.reduce(function(s,i){ return s + i.price * i.qty; }, 0); }
 
-      document.addEventListener('mousemove', function(e){
-        tx = e.clientX; ty = e.clientY;
-        if (dot) { dot.style.transform = 'translate3d('+tx+'px,'+ty+'px,0)'; }
-        if (cur) cur.classList.add('visible');
-        if (dot) dot.classList.add('visible');
-      }, { passive: true });
-
-      (function lerp(){
-        cx += (tx - cx) * 0.1;
-        cy += (ty - cy) * 0.1;
-        if (cur) cur.style.transform = 'translate3d('+cx+'px,'+cy+'px,0)';
-        requestAnimationFrame(lerp);
-      })();
-
-      // Ampliar cursor em elementos interativos
-      var interactives = document.querySelectorAll('a, button, .cta-btn');
-      interactives.forEach(function(el){
-        el.addEventListener('mouseenter', function(){ if(cur) cur.classList.add('big'); });
-        el.addEventListener('mouseleave', function(){ if(cur) cur.classList.remove('big'); });
-      });
+  function updateBadge(){
+    var qty = cart.reduce(function(s,i){ return s + i.qty; }, 0);
+    var b = document.getElementById('cart-badge');
+    if (!b) return;
+    b.textContent = qty;
+    b.classList.toggle('show', qty > 0);
+  }
+  function updateTotal(){
+    var el = document.getElementById('cd-total');
+    if (el) el.textContent = fmt(total());
+    var btn = document.getElementById('btn-cko');
+    if (btn) btn.disabled = cart.length === 0;
+  }
+  function renderCart(){
+    var c = document.getElementById('cart-items');
+    if (!c) return;
+    if (!cart.length) {
+      c.innerHTML = '<div class="cart-empty-msg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><p>Carrinho vazio.<br/>Adicione peças para continuar.</p></div>';
+      return;
     }
+    c.innerHTML = cart.map(function(item, idx){
+      return '<div class="ci">'+
+        '<div class="ci-img">'+(item.img?'<img src="'+item.img+'" alt="'+item.name+'" loading="lazy"/>':'')+'</div>'+
+        '<div class="ci-body">'+
+          '<div class="ci-name">'+item.name+'</div>'+
+          '<div class="ci-price">'+fmt(item.price*item.qty)+'</div>'+
+          '<div class="ci-qty">'+
+            '<button class="ci-q-btn" onclick="chg('+idx+',-1)">−</button>'+
+            '<span class="ci-q-n">'+item.qty+'</span>'+
+            '<button class="ci-q-btn" onclick="chg('+idx+',1)">+</button>'+
+            '<button class="ci-rm" onclick="rm('+idx+')">Remover</button>'+
+          '</div>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  }
+  function refresh(){ renderCart(); updateTotal(); updateBadge(); save(); }
 
-    // ── Entry animation ─────────────────────────────────
-    function runEntry(){
-      // 1. Frames das bordas
-      ['ft','fb','fl','fr'].forEach(function(id){
-        var el = document.getElementById(id);
-        if (el) setTimeout(function(){ el.classList.add('on'); }, 100);
-      });
-      // 2. Blur frames
-      ['blur-top','blur-bot'].forEach(function(id){
-        var el = document.getElementById(id);
-        if (el) setTimeout(function(){ el.classList.add('on'); }, 700);
-      });
-      // 3. Screentext
-      var st = document.getElementById('screentext');
-      if (st) setTimeout(function(){ st.classList.add('on'); }, 900);
-      // 4. Conteúdo central
-      ['wip-badge','tagline','ctas','preview-tags'].forEach(function(id){
-        var el = document.getElementById(id);
-        if (el) setTimeout(function(){ el.classList.add('on'); }, 100);
-      });
-    }
+  window.addToCartMed = function(btn){
+    var name  = btn.getAttribute('data-name');
+    var price = parseFloat(btn.getAttribute('data-price'));
+    var img   = btn.getAttribute('data-img') || '';
+    var ex = cart.find(function(i){ return i.name === name; });
+    if (ex) ex.qty++; else cart.push({ name:name, price:price, img:img, qty:1 });
+    var orig = btn.innerHTML;
+    btn.classList.add('added');
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><polyline points="20 6 9 17 4 12"/></svg> Adicionado!';
+    btn.disabled = true;
+    setTimeout(function(){ btn.innerHTML = orig; btn.classList.remove('added'); btn.disabled = false; }, 1800);
+    refresh(); openCart();
+  };
+  window.chg = function(idx, dir){ cart[idx].qty += dir; if(cart[idx].qty < 1) cart.splice(idx,1); refresh(); };
+  window.rm  = function(idx){ cart.splice(idx,1); refresh(); };
 
-    if (rm) {
-      // sem animação — tudo visível imediatamente
-      document.querySelectorAll('.frame-line,.blurred,#screentext,#wip-badge,#tagline,#ctas,#preview-tags').forEach(function(el){
-        el.classList.add('on');
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      });
-    } else {
-      window.addEventListener('load', runEntry);
-      setTimeout(runEntry, 300);
-    }
+  window.openCart = function(){
+    document.getElementById('cart-drawer').classList.add('open');
+    document.getElementById('cart-overlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    renderCart(); updateTotal();
+  };
+  window.closeCart = function(){
+    document.getElementById('cart-drawer').classList.remove('open');
+    document.getElementById('cart-overlay').classList.remove('open');
+    document.body.style.overflow = '';
+  };
+  window.openCko = function(){
+    closeCart();
+    var sum = document.getElementById('ck-summary');
+    if (sum) sum.innerHTML = cart.map(function(i){ return '<div class="ck-row"><span>'+i.name+' × '+i.qty+'</span><span>'+fmt(i.price*i.qty)+'</span></div>'; }).join('')+'<div class="ck-row total"><span>Total</span><span>'+fmt(total())+'</span></div>';
+    var wa = document.getElementById('ck-wa-btn');
+    if (wa){ var msg='Oi! Quero finalizar meu pedido Medusa Arte 🌿\n\n'; cart.forEach(function(i){ msg+='• '+i.name+' × '+i.qty+' = '+fmt(i.price*i.qty)+'\n'; }); msg+='\nTotal: '+fmt(total()); wa.href='https://wa.me/5564999421040?text='+encodeURIComponent(msg); }
+    document.getElementById('ck-page').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
+  window.closeCko = function(){ document.getElementById('ck-page').classList.remove('open'); document.body.style.overflow = ''; openCart(); };
 
-  }());
-  </script>
+  // ── FILTER ────────────────────────────────────────────
+  window.setFilter = function(cat, el){
+    document.querySelectorAll('.filter-btn, .hdr-nav a').forEach(function(b){ b.classList.remove('active'); });
+    if (el) el.classList.add('active');
+    // sync both navs
+    document.querySelectorAll('[onclick*="setFilter(\''+cat+'\'"]').forEach(function(b){ b.classList.add('active'); });
+    var cards = document.querySelectorAll('.pcard');
+    var count = 0;
+    cards.forEach(function(card){
+      var cats = card.getAttribute('data-cat') || '';
+      var show = cat === 'todos' || cats.includes(cat);
+      card.style.display = show ? '' : 'none';
+      if (show) count++;
+    });
+    var fc = document.getElementById('filter-count');
+    if (fc) fc.textContent = count + ' ' + (count === 1 ? 'peça' : 'peças');
+  };
+
+  // ── MOBILE NAV ────────────────────────────────────────
+  var hbg = document.getElementById('hbg'), mob = document.getElementById('mob-nav');
+  if (hbg) hbg.addEventListener('click', function(){
+    var o = mob.classList.toggle('open');
+    hbg.classList.toggle('open', o);
+    hbg.setAttribute('aria-expanded', o);
+    document.body.style.overflow = o ? 'hidden' : '';
+  });
+  window.closeMob = function(){ mob.classList.remove('open'); hbg.classList.remove('open'); hbg.setAttribute('aria-expanded','false'); document.body.style.overflow = ''; };
+  window.addEventListener('resize', function(){ if(window.innerWidth>900) closeMob(); }, {passive:true});
+
+  // ── REVEAL ────────────────────────────────────────────
+  var rObs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('on'); rObs.unobserve(e.target); } });
+  }, { threshold:.1, rootMargin:'0px 0px -40px 0px' });
+  document.querySelectorAll('.rv').forEach(function(el){ rObs.observe(el); });
+
+  // ── KEYBOARD ──────────────────────────────────────────
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    if (document.getElementById('ck-page').classList.contains('open')) { closeCko(); return; }
+    closeCart();
+  });
+
+  // ── INIT ──────────────────────────────────────────────
+  refresh();
+  var fc = document.getElementById('filter-count');
+  if (fc) fc.textContent = document.querySelectorAll('.pcard').length + ' peças';
+
+}());
+</script>
 </body>
 </html>
