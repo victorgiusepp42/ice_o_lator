@@ -63,6 +63,22 @@
       background-size: 256px;
     }
 
+    /* Orb drift keyframes (nuvens) */
+    @keyframes orb-d1 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(3vw,-2vw) scale(1.06); }
+      66%      { transform: translate(-2vw,3vw) scale(.94); }
+    }
+    @keyframes orb-d2 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      40%      { transform: translate(-3vw,2vw) scale(1.08); }
+      70%      { transform: translate(2vw,-2vw) scale(.96); }
+    }
+    @keyframes orb-d3 {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%      { transform: translate(4vw,-3vw) scale(1.05); }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
     }
@@ -553,6 +569,34 @@
   <div id="cursor" aria-hidden="true"></div>
   <div id="cursor-dot" aria-hidden="true"></div>
 
+  <!-- Canvas de partículas (estrelas flutuando) -->
+  <canvas id="med-cv" aria-hidden="true"
+    style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+
+  <!-- Orbs / nuvens coloridas no fundo -->
+  <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;z-index:0;">
+    <!-- Nuvem superior esquerda — roxo escuro grande -->
+    <div style="position:absolute;width:55vw;height:55vw;border-radius:50%;
+                background:var(--med-d);filter:blur(90px);opacity:.18;
+                top:-18vw;left:-18vw;
+                animation:orb-d1 18s ease-in-out infinite;"></div>
+    <!-- Nuvem superior direita — roxo médio -->
+    <div style="position:absolute;width:38vw;height:38vw;border-radius:50%;
+                background:var(--med);filter:blur(80px);opacity:.14;
+                top:5%;right:-10vw;
+                animation:orb-d2 15s ease-in-out infinite;"></div>
+    <!-- Nuvem inferior — mais leve -->
+    <div style="position:absolute;width:32vw;height:32vw;border-radius:50%;
+                background:rgba(106,13,173,.7);filter:blur(100px);opacity:.12;
+                bottom:-8vw;left:20%;
+                animation:orb-d3 20s ease-in-out infinite;"></div>
+    <!-- Nuvem central pequena — ciano sutil -->
+    <div style="position:absolute;width:18vw;height:18vw;border-radius:50%;
+                background:rgba(0,180,216,.5);filter:blur(70px);opacity:.07;
+                top:35%;left:55%;
+                animation:orb-d2 12s ease-in-out infinite reverse;"></div>
+  </div>
+
   <!-- Logo Medusa watermark de fundo — mesmo efeito da Ice-o-lator -->
   <img src="https://i.ibb.co/ZRg21zkR/Medusa-Arte-Marca-Branca.png"
        aria-hidden="true"
@@ -784,6 +828,27 @@
   <!-- Hero da loja -->
   <div id="shop-hero">
     <div class="shop-hero-bg" aria-hidden="true"></div>
+
+    <!-- Orbs / nuvens no hero da loja -->
+    <div aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:hidden;">
+      <div style="position:absolute;width:50%;height:200%;border-radius:50%;
+                  background:var(--med-d);filter:blur(80px);opacity:.2;
+                  top:-60%;left:-15%;
+                  animation:orb-d1 18s ease-in-out infinite;"></div>
+      <div style="position:absolute;width:35%;height:180%;border-radius:50%;
+                  background:var(--med);filter:blur(70px);opacity:.14;
+                  top:-40%;right:-10%;
+                  animation:orb-d2 14s ease-in-out infinite;"></div>
+      <div style="position:absolute;width:20%;height:120%;border-radius:50%;
+                  background:rgba(0,180,216,.4);filter:blur(60px);opacity:.08;
+                  top:-20%;left:50%;
+                  animation:orb-d3 20s ease-in-out infinite reverse;"></div>
+    </div>
+
+    <!-- Canvas partículas no hero da loja -->
+    <canvas id="shop-cv" aria-hidden="true"
+      style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;"></canvas>
+
     <svg class="shop-hero-mandala" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <circle cx="100" cy="100" r="96" stroke="white" stroke-width="0.5"/>
       <circle cx="100" cy="100" r="72" stroke="white" stroke-width="0.5"/>
@@ -1117,6 +1182,65 @@
     if(document.getElementById('ck-page').classList.contains('open')){ closeCko(); return; }
     closeCart();
   });
+
+  // ── CANVAS PARTÍCULAS (estrelas flutuando) ─────────────
+  function initCanvas(id, parentEl) {
+    var cv = document.getElementById(id);
+    if (!cv || rm) return;
+    // Tamanho do pai
+    function resize() {
+      cv.width  = parentEl ? parentEl.offsetWidth  : window.innerWidth;
+      cv.height = parentEl ? parentEl.offsetHeight : window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', function(){ clearTimeout(cv._rt); cv._rt = setTimeout(resize, 200); }, { passive: true });
+
+    var ctx = cv.getContext('2d');
+    // Paleta da Medusa Arte: roxo, lavanda, ciano, neon, branco
+    var colors = ['155,93,229','199,125,255','106,13,173','0,180,216','57,255,20','255,255,255'];
+    var pts = [];
+    var MAX = 60;
+
+    function mkP() {
+      return {
+        x:  Math.random() * cv.width,
+        y:  Math.random() * cv.height,
+        r:  Math.random() * 1.5 + 0.3,
+        vx: (Math.random() - 0.5) * 0.25,
+        vy: (Math.random() - 0.5) * 0.25,
+        a:  Math.random() * 0.45 + 0.06,
+        c:  colors[Math.floor(Math.random() * colors.length)]
+      };
+    }
+    for (var i = 0; i < MAX; i++) pts.push(mkP());
+
+    var rf;
+    function draw() {
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      pts.forEach(function(p) {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < -4) p.x = cv.width + 4;
+        if (p.x > cv.width + 4) p.x = -4;
+        if (p.y < -4) p.y = cv.height + 4;
+        if (p.y > cv.height + 4) p.y = -4;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + p.c + ',' + p.a + ')';
+        ctx.fill();
+      });
+      rf = requestAnimationFrame(draw);
+    }
+    draw();
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) cancelAnimationFrame(rf); else draw();
+    });
+    cv._stop = function() { cancelAnimationFrame(rf); };
+  }
+
+  // Landing canvas
+  initCanvas('med-cv', document.getElementById('section-landing'));
+  // Hero da loja canvas
+  initCanvas('shop-cv', document.getElementById('shop-hero'));
 
   // ── INIT ──────────────────────────────────────────────
   refresh();
