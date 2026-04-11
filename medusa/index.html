@@ -174,16 +174,8 @@
     @keyframes txt-down { 0% { transform: rotate(90deg) translateX(-50%); } 100% { transform: rotate(90deg) translateX(0); } }
 
     /* Screentext ghost */
-    #screentext {
-      /* Fica atrás do conteúdo (z-index 2, abaixo do center z-index 6) */
-      position: absolute; bottom: 0; left: 0; right: 0; text-align: center;
-      font-family: 'Bebas Neue', sans-serif; font-size: 9vw; letter-spacing: .04em; line-height: 1;
-      color: transparent; -webkit-text-stroke: 1px rgba(155,93,229,.12);
-      z-index: 2; pointer-events: none;
-      transition: opacity .8s ease; opacity: 0;
-      padding-bottom: 2vw;
-    }
-    #screentext.on { opacity: 1; }
+    /* screentext desativado — removido do layout */
+    #screentext { display: none !important; }
 
     /* Blur frames */
     .blurred { transition: backdrop-filter 1.4s ease, -webkit-backdrop-filter 1.4s ease, opacity .8s ease; -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0); opacity: 0; }
@@ -213,7 +205,7 @@
 
     /* Mandala — clicável para ir à loja */
     #mandala-center {
-      position: relative; width: 13vw; height: 13vw; flex-shrink: 0;
+      position: relative; width: 22vw; height: 22vw; flex-shrink: 0;
       cursor: pointer;
       transition: transform .4s cubic-bezier(.34,1.56,.64,1);
     }
@@ -235,24 +227,24 @@
 
     /* Badge em construção — removido pois agora tem loja */
     #wip-badge {
-      display: inline-flex; align-items: center; gap: .5vw;
+      display: inline-flex; align-items: center; gap: .6vw;
       background: rgba(155,93,229,.1); border: 1px solid rgba(155,93,229,.25);
-      border-radius: 100vw; padding: .35vw 1vw;
-      font-size: .65vw; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--med-l);
+      border-radius: 100vw; padding: .45vw 1.3vw;
+      font-size: .75vw; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--med-l);
       opacity: 0; transform: translateY(1vw);
       transition: opacity .8s ease .9s, transform .8s ease .9s;
     }
     #wip-badge.on { opacity: 1; transform: none; }
-    .wip-dot { width: .4vw; height: .4vw; border-radius: 50%; background: var(--neon); animation: wblink 1.8s ease infinite; }
+    .wip-dot { width: .48vw; height: .48vw; border-radius: 50%; background: var(--neon); animation: wblink 1.8s ease infinite; }
     @keyframes wblink { 0%,100%{opacity:1;} 50%{opacity:.2;} }
 
-    #tagline { font-family: 'Lora', serif; font-style: italic; font-size: .95vw; color: rgba(155,93,229,.6); letter-spacing: .06em; opacity: 0; transform: translateY(1vw); transition: opacity .8s ease 1.1s, transform .8s ease 1.1s; }
+    #tagline { font-family: 'Lora', serif; font-style: italic; font-size: 1.15vw; color: rgba(155,93,229,.6); letter-spacing: .06em; opacity: 0; transform: translateY(1vw); transition: opacity .8s ease 1.1s, transform .8s ease 1.1s; }
     #tagline.on { opacity: 1; transform: none; }
 
-    #ctas { display: flex; gap: .8vw; align-items: center; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(1vw); transition: opacity .8s ease 1.3s, transform .8s ease 1.3s; }
+    #ctas { display: flex; gap: 1vw; align-items: center; flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(1vw); transition: opacity .8s ease 1.3s, transform .8s ease 1.3s; }
     #ctas.on { opacity: 1; transform: none; }
-    .cta-btn { display: inline-flex; align-items: center; gap: .45vw; padding: .6vw 1.3vw; border-radius: .5vw; font-size: .74vw; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s; text-decoration: none; }
-    .cta-btn svg { width: 1vw; height: 1vw; }
+    .cta-btn { display: inline-flex; align-items: center; gap: .5vw; padding: .7vw 1.5vw; border-radius: .5vw; font-size: .82vw; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .25s; text-decoration: none; }
+    .cta-btn svg { width: 1.1vw; height: 1.1vw; }
     .cta-med { background: linear-gradient(135deg, var(--med), var(--med-d)); color: #fff; box-shadow: 0 .3vw 1.5vw rgba(155,93,229,.35); }
     .cta-med:hover { transform: translateY(-.2vw); box-shadow: 0 .6vw 2vw rgba(155,93,229,.55); }
     .cta-ghost { background: rgba(255,255,255,.04); color: rgba(255,255,255,.7); border: 1px solid rgba(255,255,255,.1); }
@@ -260,7 +252,7 @@
     .cta-shop {
       background: linear-gradient(135deg, var(--med-l), var(--med));
       color: #fff; box-shadow: 0 .4vw 2vw rgba(155,93,229,.45);
-      font-size: .8vw; padding: .75vw 1.6vw;
+      font-size: .9vw; padding: .85vw 1.9vw;
       animation: shop-pulse 3s ease infinite;
     }
     @keyframes shop-pulse {
@@ -269,9 +261,9 @@
     }
     .cta-shop:hover { transform: translateY(-.3vw) scale(1.03); }
 
-    #preview-tags { display: flex; flex-wrap: wrap; gap: .5vw; justify-content: center; opacity: 0; transform: translateY(1vw); transition: opacity .8s ease 1.5s, transform .8s ease 1.5s; max-width: 60vw; }
+    #preview-tags { display: flex; flex-wrap: wrap; gap: .6vw; justify-content: center; opacity: 0; transform: translateY(1vw); transition: opacity .8s ease 1.5s, transform .8s ease 1.5s; max-width: 65vw; }
     #preview-tags.on { opacity: 1; transform: none; }
-    .ptag { font-size: .6vw; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .28vw .75vw; border-radius: .3vw; background: rgba(155,93,229,.1); border: 1px solid rgba(155,93,229,.2); color: var(--med-l); }
+    .ptag { font-size: .68vw; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; padding: .32vw .85vw; border-radius: .3vw; background: rgba(155,93,229,.1); border: 1px solid rgba(155,93,229,.2); color: var(--med-l); }
 
     /* Indicador de scroll para baixo */
     #scroll-hint {
@@ -744,7 +736,12 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
         @xmedusarte
       </a>
-      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+pe%C3%A7as+da+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener" class="cta-btn cta-ghost">
+      <a href="https://wa.me/5564999421040?text=Oi%21+Quero+ver+as+pe%C3%A7as+da+Medusa+Arte+%F0%9F%8C%BF" target="_blank" rel="noopener"
+         class="cta-btn"
+         style="background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;box-shadow:0 .3vw 1.5vw rgba(37,211,102,.35);"
+         onmouseover="this.style.transform='translateY(-.2vw)';this.style.boxShadow='0 .6vw 2vw rgba(37,211,102,.55)'"
+         onmouseout="this.style.transform='';this.style.boxShadow='0 .3vw 1.5vw rgba(37,211,102,.35)'">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="width:1.1vw;height:1.1vw;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
         WhatsApp
       </a>
     </div>
