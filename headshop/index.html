@@ -56,6 +56,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 15px; line-height: 1.7; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* Seções com fundo semi-transparente para os orbs/partículas aparecerem levemente */
+    section,
+    #mais-vendidos, #curadoria, #sobre, #arte, #reducao,
+    #depoimentos, #eventos, #faq, #newsletter, #contato,
+    #fidelidade, #vip, #prova, #como-comprar {
+      background: rgba(8,8,8,.82) !important;
+    }
+    section[style*="bg-2"], .compact[style*="bg-2"] { background: rgba(13,13,13,.82) !important; }
+    section[style*="bg-3"], .compact[style*="bg-3"] { background: rgba(17,17,17,.82) !important; }
+    #inicio { background: transparent !important; }
     img { display: block; max-width: 100%; }
     a  { color: inherit; text-decoration: none; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; }
@@ -184,9 +195,10 @@
 
     /* ── HERO ── */
     #inicio { position: relative; min-height: 93vh; display: flex; align-items: center; overflow: hidden; background: var(--bg); }
-    #cv { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
-    .orbs { position: absolute; inset: 0; pointer-events: none; }
-    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .15; animation: orb-d 16s ease-in-out infinite; }
+    /* Canvas e orbs FIXOS — acompanham o scroll por toda a página */
+    #cv { position: fixed; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+    .orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .orb { position: absolute; border-radius: 50%; filter: blur(90px); opacity: .14; animation: orb-d 16s ease-in-out infinite; }
     .o1 { width: 500px; height: 500px; background: var(--ice-d); top: -120px; left: -160px; animation-delay: 0s; }
     .o2 { width: 340px; height: 340px; background: var(--ice); top: 30%; right: -80px; animation-delay: -5s; }
     .o3 { width: 260px; height: 260px; background: var(--med-d); bottom: -60px; left: 25%; animation-delay: -10s; }
@@ -786,23 +798,24 @@
   </nav>
 </header>
 
-<main>
+<main style="position:relative;z-index:1;">
+
+<!-- ── CANVAS + ORBS GLOBAIS (fixos, acompanham o scroll) ── -->
+<canvas id="cv" aria-hidden="true"></canvas>
+<div class="orbs" aria-hidden="true">
+  <div class="orb o1"></div><div class="orb o2"></div>
+  <div class="orb o3"></div><div class="orb o4"></div>
+</div>
+
+<!-- Logo watermark de fundo (fixa também) -->
+<img src="https://i.ibb.co/bMKb9Khq/logo-ice.png"
+     aria-hidden="true"
+     style="position:fixed;bottom:-40px;right:-60px;width:520px;height:auto;
+            object-fit:contain;opacity:.04;pointer-events:none;z-index:0;
+            filter:blur(2px) brightness(2);user-select:none;" />
 
 <!-- ── HERO ── -->
 <section id="inicio" aria-label="Apresentação">
-  <canvas id="cv" aria-hidden="true"></canvas>
-
-  <!-- Logo watermark de fundo no hero -->
-  <img src="https://i.ibb.co/bMKb9Khq/logo-ice.png"
-       aria-hidden="true"
-       style="position:absolute;bottom:-40px;right:-60px;width:520px;height:auto;
-              object-fit:contain;opacity:.04;pointer-events:none;z-index:1;
-              filter:blur(2px) brightness(2);user-select:none;" />
-
-  <div class="orbs" aria-hidden="true">
-    <div class="orb o1"></div><div class="orb o2"></div>
-    <div class="orb o3"></div><div class="orb o4"></div>
-  </div>
   <div class="container">
     <div class="hero-body">
 
@@ -1635,7 +1648,7 @@
     var cv=document.getElementById('cv');
     if(cv){
       var ctx=cv.getContext('2d'),pts=[],MAX=48,rf;
-      function rs(){cv.width=cv.offsetWidth;cv.height=cv.offsetHeight;}
+      function rs(){cv.width=window.innerWidth;cv.height=window.innerHeight;}
       var colors=['0,180,216','144,224,239','155,93,229','199,125,255','57,255,20'];
       function mk(){return{x:Math.random()*cv.width,y:Math.random()*cv.height,r:Math.random()*1.7+.4,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,a:Math.random()*.4+.07,c:colors[Math.floor(Math.random()*colors.length)]};}
       rs();for(var i=0;i<MAX;i++)pts.push(mk());
