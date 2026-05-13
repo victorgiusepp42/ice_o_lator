@@ -1,0 +1,8 @@
+{
+  "name": "ice-o-lator-workspace",
+  "private": true,
+  "description": "Servidor local mínimo para preview de HTML (cartões, landing).",
+  "scripts": {
+    "preview": "npx --yes serve@14.2.4 . -p 3000 --no-clipboard"
+  }
+}
