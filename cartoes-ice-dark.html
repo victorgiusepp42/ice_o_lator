@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#080808" />
-  <title>Cartões Ice-o-lator — tema dark (preview)</title>
+  <title>Cartões Ice-o-lator — tema dark</title>
   <meta name="description" content="Cartões de boas-vindas, VIP e agradecimento — Ice-o-lator Headshop, Catalão GO." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -82,49 +82,6 @@
       html { scroll-behavior: auto; }
     }
 
-    /* Barra só no ecrã — some na impressão */
-    .preview-bar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 12px 20px;
-      padding: 12px 18px;
-      background: rgba(8, 8, 8, 0.92);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-    }
-    .preview-bar strong {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.15rem;
-      letter-spacing: 0.12em;
-      color: var(--ice-l);
-    }
-    .preview-bar code {
-      font-size: 0.78rem;
-      background: var(--surface);
-      padding: 2px 8px;
-      border-radius: 6px;
-      color: var(--gold);
-      border: 1px solid var(--border);
-    }
-    .preview-bar .hint { font-size: 0.8rem; color: var(--text-2); max-width: 520px; }
-    .preview-bar .nav-links {
-      margin-left: auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px 16px;
-      font-family: 'Barlow Condensed', sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-    .preview-bar .nav-links a { color: var(--ice); }
-    .preview-bar .nav-links a:hover { color: var(--ice-l); }
-
     .studio {
       position: relative;
       z-index: 1;
@@ -134,8 +91,6 @@
       gap: 48px;
       padding: 36px 16px 64px;
     }
-
-    .card-anchor { scroll-margin-top: 72px; }
 
     /* Cartão base */
     .card {
@@ -336,7 +291,7 @@
 
     @media print {
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-      .preview-bar, .bg-orbs { display: none !important; }
+      .bg-orbs { display: none !important; }
       body::after { opacity: 0.015; }
       body { background: #0a0a0a; }
       .studio { gap: 0; padding: 0; }
@@ -354,27 +309,10 @@
 
   <div class="bg-orbs" aria-hidden="true"><span class="o1"></span><span class="o2"></span><span class="o3"></span></div>
 
-  <nav class="preview-bar" aria-label="Preview e navegação">
-    <strong>ICE-O-LATOR · CARTÕES</strong>
-    <p class="hint">
-      <strong>Erro “refused to connect”?</strong> O endereço só funciona com o servidor ligado.
-      No Cursor: abra <strong>Run and Debug</strong> (ícone play na barra lateral ou <kbd>F5</kbd>) e escolha
-      <code>Ice: cartões — servidor + Simple Browser</code> — sobe o <code>npm run preview</code> e abre o preview sozinho.
-      Alternativa: terminal na raiz com <code>npm run preview</code> a correr, depois
-      <a href="http://127.0.0.1:3000/cartoes-ice-dark.html" target="_blank" rel="noopener">127.0.0.1:3000/cartoes-ice-dark.html</a>.
-      Com extensão Live Preview: Command Palette → “Live Preview: Start Server”.
-    </p>
-    <div class="nav-links">
-      <a href="#cartao-boasvindas">Boas-vindas</a>
-      <a href="#cartao-vip">VIP</a>
-      <a href="#cartao-obrigado">Obrigado</a>
-    </div>
-  </nav>
-
   <main class="studio">
 
     <!-- ═══ CARTÃO 1 ═══ -->
-    <section id="cartao-boasvindas" class="card-anchor card-sheet">
+    <section id="cartao-boasvindas" class="card-sheet">
       <article class="card" aria-labelledby="t-bv">
         <div class="card-ribbon" aria-hidden="true"></div>
         <div class="card-inner">
@@ -407,7 +345,7 @@
     </section>
 
     <!-- ═══ CARTÃO 2 ═══ -->
-    <section id="cartao-vip" class="card-anchor card-sheet">
+    <section id="cartao-vip" class="card-sheet">
       <article class="card" aria-labelledby="t-vip">
         <div class="card-ribbon" aria-hidden="true"></div>
         <div class="card-inner">
@@ -452,7 +390,7 @@
     </section>
 
     <!-- ═══ CARTÃO 3 ═══ -->
-    <section id="cartao-obrigado" class="card-anchor card-sheet">
+    <section id="cartao-obrigado" class="card-sheet">
       <article class="card" aria-labelledby="t-th">
         <div class="card-ribbon" aria-hidden="true"></div>
         <div class="card-inner">
