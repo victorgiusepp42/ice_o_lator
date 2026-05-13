@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card Boas-vindas — Ice-o-lator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Nunito', sans-serif;
+      padding: 32px 16px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      width: 100%;
+      max-width: 520px;
+      background: #2d5a27;
+      border-radius: 18px;
+      border: 2px dashed rgba(255,255,255,.25);
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,.5);
+    }
+
+    /* ── HEADER ── */
+    .card-header {
+      background: #2d5a27;
+      padding: 28px 32px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 2px solid #7ec850;
+    }
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+    .logo-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: .08em;
+      color: #fff;
+      line-height: 1;
+    }
+    .logo-sub {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.75);
+      margin-top: 3px;
+    }
+
+    /* ── BODY ── */
+    .card-body {
+      background: #2d5a27;
+      padding: 32px 36px 28px;
+      position: relative;
+      text-align: center;
+    }
+
+    /* Watermark logo no fundo */
+    .card-body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Ctext x='50%25' y='55%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-size='120' fill='rgba(255,255,255,0.04)'%3E❄%3C/text%3E%3C/svg%3E");
+      background-size: 280px;
+      background-repeat: no-repeat;
+      background-position: center 60%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .card-body > * { position: relative; z-index: 1; }
+
+    .greeting {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+    .greeting .emoji { font-style: normal; }
+
+    .message {
+      font-size: 1rem;
+      color: rgba(255,255,255,.9);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .ps {
+      font-size: .95rem;
+      color: rgba(255,255,255,.9);
+      line-height: 1.75;
+      margin-bottom: 28px;
+    }
+
+    .sign {
+      font-size: 1rem;
+      color: rgba(255,255,255,.9);
+      line-height: 1.7;
+    }
+    .sign strong { font-weight: 700; color: #fff; }
+
+    /* ── FOOTER VIP ── */
+    .card-footer {
+      background: #1e3d1a;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .qr-wrap {
+      background: #fff;
+      border-radius: 10px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .qr-wrap:hover {
+      transform: scale(1.03);
+      box-shadow: 0 4px 14px rgba(0,0,0,.3);
+    }
+    .qr-wrap img {
+      display: block;
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+    }
+
+    .vip-text {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .vip-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.55rem;
+      letter-spacing: .08em;
+      color: #7ec850;
+      line-height: 1;
+    }
+    .vip-ig {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: .03em;
+    }
+
+    /* ── BOTTOM STRIP ── */
+    .card-strip {
+      background: #2d5a27;
+      border-top: 1px solid rgba(255,255,255,.15);
+      padding: 10px 28px;
+      text-align: center;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.55);
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- HEADER -->
+  <div class="card-header">
+    <div class="logo-row">
+      <!-- Ícone de floco de neve -->
+      <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="24" cy="24" r="23" fill="#7ec850" stroke="#fff" stroke-width="1.5"/>
+        <!-- Floco de neve simplificado -->
+        <g stroke="#fff" stroke-width="2.5" stroke-linecap="round">
+          <line x1="24" y1="10" x2="24" y2="38"/>
+          <line x1="10" y1="24" x2="38" y2="24"/>
+          <line x1="13.9" y1="13.9" x2="34.1" y2="34.1"/>
+          <line x1="34.1" y1="13.9" x2="13.9" y2="34.1"/>
+          <!-- Ramificações -->
+          <line x1="24" y1="10" x2="20" y2="14"/>
+          <line x1="24" y1="10" x2="28" y2="14"/>
+          <line x1="24" y1="38" x2="20" y2="34"/>
+          <line x1="24" y1="38" x2="28" y2="34"/>
+          <line x1="10" y1="24" x2="14" y2="20"/>
+          <line x1="10" y1="24" x2="14" y2="28"/>
+          <line x1="38" y1="24" x2="34" y2="20"/>
+          <line x1="38" y1="24" x2="34" y2="28"/>
+        </g>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-name">ICE-O-LATOR</span>
+        <span class="logo-sub">Headshop e Tabacaria</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="card-body">
+
+    <p class="greeting">
+      Oiê, seja bem-vindo à família ICE! <span class="emoji">💚</span>
+    </p>
+
+    <p class="message">
+      Aqui é só o começo. Você acabou de entrar numa comunidade
+      que se importa de verdade. Ter você com a gente é um prazer
+      imenso! Boa sessão ✨
+    </p>
+
+    <p class="ps">
+      Pssiu... tem um grupo onde você recebe dicas, promoções e
+      conteúdo exclusivo antes de todo mundo. Acesse pelo QR code
+      😉
+    </p>
+
+    <p class="sign">
+      Com carinho,<br/>
+      <strong>Grazi 💚</strong>
+    </p>
+
+  </div>
+
+  <!-- FOOTER VIP -->
+  <div class="card-footer">
+
+    <!-- QR real do grupo VIP (clique também abre o convite) -->
+    <a class="qr-wrap"
+       href="https://chat.whatsapp.com/IpjO7vtI0SOJunFBafbMd6"
+       target="_blank" rel="noopener noreferrer"
+       aria-label="Abrir convite do grupo VIP no WhatsApp">
+      <img
+        src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&amp;data=https%3A%2F%2Fchat.whatsapp.com%2FIpjO7vtI0SOJunFBafbMd6"
+        alt="QR Code — grupo VIP Ice-o-lator"
+        width="120" height="120"
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+
+    <div class="vip-text">
+      <span class="vip-title">ENTRE NO GRUPO VIP</span>
+      <span class="vip-ig">@iceolatorheadshop</span>
+    </div>
+
+  </div>
+
+  <!-- STRIP -->
+  <div class="card-strip">
+    iceolatorheadshop · catalão, go
+  </div>
+
+</div>
+
+</body>
+</html>
