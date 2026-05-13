@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Ice: cartões — servidor + Simple Browser",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run preview",
+      "cwd": "${workspaceFolder}",
+      "serverReadyAction": {
+        "pattern": "Accepting connections at (https?://[^\\s]+)",
+        "uriFormat": "%s/cartoes-ice-dark.html",
+        "action": "openSimpleBrowser",
+        "killOnServerStop": true
+      }
+    },
+    {
+      "name": "Ice: cartões — servidor + Chrome",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://127.0.0.1:5000/cartoes-ice-dark.html",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "ice: serve preview (background)"
+    }
+  ]
+}
