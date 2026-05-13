@@ -9,7 +9,7 @@
       "cwd": "${workspaceFolder}",
       "serverReadyAction": {
         "pattern": "Accepting connections at (https?://[^\\s]+)",
-        "uriFormat": "%s/cartoes-ice-dark.html",
+        "uriFormat": "http://127.0.0.1:3000/cartoes-ice-dark.html",
         "action": "openSimpleBrowser",
         "killOnServerStop": true
       }
@@ -18,7 +18,7 @@
       "name": "Ice: cartões — servidor + Chrome",
       "type": "chrome",
       "request": "launch",
-      "url": "http://127.0.0.1:5000/cartoes-ice-dark.html",
+      "url": "http://127.0.0.1:3000/cartoes-ice-dark.html",
       "webRoot": "${workspaceFolder}",
       "preLaunchTask": "ice: serve preview (background)"
     }

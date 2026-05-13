@@ -1,6 +1,6 @@
 {
   "task.allowAutomaticTasks": "on",
-  "livePreview.portNumber": 5000,
+  "livePreview.portNumber": 3000,
   "livePreview.defaultPreviewPath": "/cartoes-ice-dark.html",
   "livePreview.openPreviewTarget": "Embedded Preview",
   "livePreview.hostIP": "127.0.0.1"
